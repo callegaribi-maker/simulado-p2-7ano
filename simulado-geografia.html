@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simulado Geografia – P2 7º Ano</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#0f172a;min-height:100vh;color:#1e293b}
+header{background:linear-gradient(135deg,#065f46,#047857);color:white;text-align:center;padding:2rem 1rem;}
+header h1{font-size:2rem;font-weight:900;}
+header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
+.back-link{display:inline-block;margin-top:.8rem;color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;border:1px solid rgba(255,255,255,.3);padding:.3rem .9rem;border-radius:50px}
+.back-link:hover{background:rgba(255,255,255,.15)}
+
+.progress-wrap{background:#1e293b;padding:1rem 1.5rem;position:sticky;top:0;z-index:100;border-bottom:1px solid #334155}
+.progress-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;color:white;font-size:.85rem}
+.progress-bar-bg{background:#334155;border-radius:50px;height:8px}
+.progress-bar{background:linear-gradient(90deg,#047857,#065f46);height:8px;border-radius:50px;width:0%;transition:width .4s ease}
+
+.container{max-width:780px;margin:0 auto;padding:1.5rem 1rem 4rem}
+
+.section-header{display:flex;align-items:center;gap:.8rem;margin:2rem 0 1rem;padding:.8rem 1.2rem;border-radius:12px;font-weight:800;font-size:1.1rem;color:white}
+.section-facil{background:linear-gradient(135deg,#065f46,#047857)}
+.section-medio{background:linear-gradient(135deg,#92400e,#b45309)}
+.section-dificil{background:linear-gradient(135deg,#7f1d1d,#dc2626)}
+.section-desc{font-size:.8rem;font-weight:400;opacity:.85}
+
+.question-card{background:white;border-radius:16px;padding:1.3rem;margin-bottom:1rem;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+.q-header{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.9rem}
+.q-num{background:#047857;color:white;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;flex-shrink:0;margin-top:2px}
+.q-text{font-weight:600;font-size:.95rem;line-height:1.5;color:#1e293b}
+.diff-badge{display:inline-block;font-size:.7rem;font-weight:700;padding:.15rem .55rem;border-radius:50px;margin-left:.5rem;vertical-align:middle}
+.badge-facil{background:#dcfce7;color:#166534}
+.badge-medio{background:#fef3c7;color:#92400e}
+.badge-dificil{background:#fee2e2;color:#991b1b}
+
+.options{display:flex;flex-direction:column;gap:.5rem}
+.opt-btn{width:100%;text-align:left;padding:.7rem 1rem;border:2px solid #e2e8f0;border-radius:10px;cursor:pointer;font-size:.9rem;background:white;transition:all .2s;color:#1e293b;line-height:1.4}
+.opt-btn:hover:not(:disabled){border-color:#047857;background:#f8f7ff}
+.opt-btn.correct{background:#dcfce7;border-color:#16a34a;color:#166534;font-weight:700}
+.opt-btn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.opt-btn:disabled{cursor:default}
+.feedback{margin-top:.7rem;font-size:.85rem;font-weight:600;display:none;padding:.5rem .8rem;border-radius:8px}
+.feedback.show{display:block}
+.feedback.ok{background:#dcfce7;color:#166534}
+.feedback.err{background:#fee2e2;color:#991b1b}
+
+#submit-section{display:none;text-align:center;padding:2rem;background:white;border-radius:20px;margin-top:2rem;box-shadow:0 4px 20px rgba(0,0,0,.15)}
+#submit-section h2{font-size:1.3rem;color:#1e293b;margin-bottom:.5rem}
+#submit-section p{color:#64748b;margin-bottom:1.2rem;font-size:.9rem}
+.submit-btn{background:linear-gradient(135deg,#047857,#065f46);color:white;border:none;padding:1rem 2.5rem;border-radius:50px;font-size:1.05rem;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.2)}
+.submit-btn:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.3)}
+
+/* Modal */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1000;align-items:center;justify-content:center;padding:1rem}
+.modal-overlay.show{display:flex}
+.modal{background:white;border-radius:24px;padding:2rem;max-width:480px;width:100%;text-align:center;max-height:90vh;overflow-y:auto}
+.modal-emoji{font-size:3rem;margin-bottom:.5rem}
+.modal h2{font-size:1.4rem;font-weight:900;margin-bottom:.5rem;color:#1e293b}
+.score-big{font-size:3rem;font-weight:900;color:#047857;margin:.5rem 0}
+.score-details{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:1rem 0}
+.score-box{padding:.8rem .5rem;border-radius:12px;font-size:.8rem;font-weight:700}
+.score-box .num{font-size:1.4rem;font-weight:900;display:block}
+.box-facil{background:#dcfce7;color:#166534}
+.box-medio{background:#fef3c7;color:#92400e}
+.box-dificil{background:#fee2e2;color:#991b1b}
+.modal-msg{font-size:.9rem;color:#64748b;margin:.5rem 0 1.2rem}
+.modal-close{background:#f1f5f9;border:none;padding:.7rem 2rem;border-radius:50px;cursor:pointer;font-weight:700;color:#475569;margin-top:.5rem}
+.email-status{margin-top:1rem;font-size:.85rem;color:#64748b;min-height:20px}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🗺️ Simulado – Geografia</h1>
+  <p>P2 • 7º Ano • 20 questões • Fácil / Média / Difícil</p>
+  <a href="index.html" class="back-link">← Voltar ao início</a>
+</header>
+
+<div class="progress-wrap">
+  <div class="progress-info">
+    <span>Progresso</span>
+    <span id="prog-text">0 / 20 respondidas</span>
+  </div>
+  <div class="progress-bar-bg"><div class="progress-bar" id="prog-bar"></div></div>
+</div>
+
+<div class="container">
+  <div class="section-header section-facil">🟢 Questões Fáceis <span class="section-desc">&nbsp;(7 questões • 1 ponto cada)</span></div>
+  <div id="facil-questions"></div>
+
+  <div class="section-header section-medio">🟡 Questões Médias <span class="section-desc">&nbsp;(7 questões • 1 ponto cada)</span></div>
+  <div id="medio-questions"></div>
+
+  <div class="section-header section-dificil">🔴 Questões Difíceis <span class="section-desc">&nbsp;(6 questões • 1 ponto cada)</span></div>
+  <div id="dificil-questions"></div>
+
+  <div id="submit-section">
+    <h2>🎉 Simulado concluído!</h2>
+    <p>Clique abaixo para ver seu resultado e enviar o relatório para o e-mail.</p>
+    <button class="submit-btn" onclick="showResults()">📊 Ver Resultado & Enviar Relatório</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal">
+  <div class="modal">
+    <div class="modal-emoji" id="m-emoji"></div>
+    <h2 id="m-title"></h2>
+    <div class="score-big" id="m-score"></div>
+    <div class="score-details">
+      <div class="score-box box-facil">🟢 Fácil<span class="num" id="m-facil"></span></div>
+      <div class="score-box box-medio">🟡 Médias<span class="num" id="m-medio"></span></div>
+      <div class="score-box box-dificil">🔴 Difíceis<span class="num" id="m-dificil"></span></div>
+    </div>
+    <p class="modal-msg" id="m-msg"></p>
+    <div class="email-status" id="email-status">📧 Enviando relatório...</div>
+    <button class="modal-close" onclick="document.getElementById('modal').classList.remove('show')">Fechar</button>
+  </div>
+</div>
+
+<script>
+const SUBJECT = "Geografia";
+const COLOR = "#047857";
+
+const questions = [{"d": "facil", "q": "Extrativismo é a atividade de:", "opts": ["Plantar culturas em larga escala", "Retirar recursos da natureza sem cultivo prévio", "Fabricar produtos industrializados", "Prestar serviços ao público"], "c": 1}, {"d": "facil", "q": "O setor primário da economia inclui:", "opts": ["Fábricas e indústrias", "Bancos e seguradoras", "Agricultura, pecuária e extrativismo", "Comércio e turismo"], "c": 2}, {"d": "facil", "q": "O setor terciário é composto por:", "opts": ["Mineração e extração", "Agropecuária", "Indústria de transformação", "Serviços como comércio, saúde e educação"], "c": 3}, {"d": "facil", "q": "PIB significa:", "opts": ["Produto Industrial Brasileiro", "Produto Interno Bruto", "Planejamento de Investimento Básico", "Produto de Importação do Brasil"], "c": 1}, {"d": "facil", "q": "O extrativismo predatório é aquele que:", "opts": ["Preserva o meio ambiente", "Degrada e não repõe os recursos naturais", "Planta árvores nativas", "É praticado de forma sustentável"], "c": 1}, {"d": "facil", "q": "O extrativismo vegetal inclui a extração de:", "opts": ["Minério de ferro", "Petróleo", "Madeira e borracha", "Carne bovina"], "c": 2}, {"d": "facil", "q": "A agropecuária une as atividades de:", "opts": ["Agricultura e mineração", "Agricultura e pecuária", "Pesca e mineração", "Indústria e serviços"], "c": 1}, {"d": "medio", "q": "O que o IDH mede em um país?", "opts": ["Apenas a renda per capita", "Força militar e exportações", "Renda, saúde e educação", "Tamanho territorial e população"], "c": 2}, {"d": "medio", "q": "O extrativismo mineral inclui a extração de:", "opts": ["Madeira e borracha", "Frutos silvestres", "Petróleo, ouro e minério de ferro", "Animais selvagens"], "c": 2}, {"d": "medio", "q": "O setor secundário transforma matéria-prima em:", "opts": ["Serviços especializados", "Recursos naturais brutos", "Produtos industrializados", "Alimentos in natura"], "c": 2}, {"d": "medio", "q": "O extrativismo sustentável é aquele que:", "opts": ["Esgota todos os recursos disponíveis", "Retira recursos sem comprometer sua renovação natural", "Não utiliza tecnologia alguma", "É proibido pela legislação brasileira"], "c": 1}, {"d": "medio", "q": "O Brasil é grande produtor e exportador mundial de:", "opts": ["Trigo", "Arroz", "Soja", "Batata"], "c": 2}, {"d": "medio", "q": "A atividade pesqueira é um tipo de extrativismo:", "opts": ["Mineral", "Vegetal", "Animal", "Industrial"], "c": 2}, {"d": "medio", "q": "Qual região do Brasil concentra maior atividade industrial?", "opts": ["Norte", "Nordeste", "Sudeste", "Centro-Oeste"], "c": 2}, {"d": "dificil", "q": "A diferença entre recursos renováveis e não renováveis é:", "opts": ["Custo de extração", "Localização geográfica", "Renováveis se regeneram naturalmente; não renováveis não se regeneram", "Utilidade para a indústria"], "c": 2}, {"d": "dificil", "q": "Por que o agronegócio brasileiro é tão importante para a economia nacional?", "opts": ["Porque emprega mais que toda a indústria", "Porque é o principal gerador de exportações e divisas para o país", "Porque é totalmente isento de impostos", "Porque não causa impacto ambiental"], "c": 1}, {"d": "dificil", "q": "Um país com alto PIB necessariamente tem alto IDH?", "opts": ["Sim, sempre que o PIB cresce o IDH também cresce", "Sim, pois PIB e IDH medem a mesma coisa", "Não, pois IDH considera também educação e saúde, não só renda", "Não, pois IDH nunca considera a renda"], "c": 2}, {"d": "dificil", "q": "O extrativismo mineral é classificado como recurso não renovável porque:", "opts": ["É muito caro extrair", "Precisa de tecnologia avançada", "Levou milhões de anos para se formar e não se regenera em escala humana", "É importado de outros países"], "c": 2}, {"d": "dificil", "q": "A relação entre desmatamento e extrativismo predatório é:", "opts": ["Não existe nenhuma relação", "O extrativismo predatório frequentemente causa desmatamento", "O desmatamento sempre protege os recursos naturais", "São atividades completamente independentes"], "c": 1}, {"d": "dificil", "q": "A \"desindustrialização\" de um país significa:", "opts": ["Aumento do número de fábricas", "Redução da participação da indústria no PIB nacional", "Crescimento acelerado do setor primário", "Expansão do comércio internacional"], "c": 1}];
+
+let answered = 0;
+let userAnswers = {};
+
+function buildQuestions() {
+  ['facil','medio','dificil'].forEach(diff => {
+    const container = document.getElementById(diff + '-questions');
+    questions.filter(q => q.d === diff).forEach((q, idx) => {
+      const globalIdx = questions.indexOf(q);
+      const badge = diff === 'facil' ? 'badge-facil' : diff === 'medio' ? 'badge-medio' : 'badge-dificil';
+      const badgeLabel = diff === 'facil' ? 'Fácil' : diff === 'medio' ? 'Média' : 'Difícil';
+      const num = globalIdx + 1;
+      const opts = q.opts.map((o, i) => `<button class="opt-btn" onclick="choose(${globalIdx}, ${i}, this)">${String.fromCharCode(65+i)}. ${o}</button>`).join('');
+      container.innerHTML += `
+        <div class="question-card" id="card-${globalIdx}">
+          <div class="q-header">
+            <div class="q-num">${num}</div>
+            <div class="q-text">${q.q} <span class="diff-badge ${badge}">${badgeLabel}</span></div>
+          </div>
+          <div class="options">${opts}</div>
+          <div class="feedback" id="fb-${globalIdx}"></div>
+        </div>`;
+    });
+  });
+}
+
+function choose(qIdx, optIdx, btn) {
+  if (userAnswers[qIdx] !== undefined) return;
+  userAnswers[qIdx] = optIdx;
+  answered++;
+
+  const card = document.getElementById('card-' + qIdx);
+  const allBtns = card.querySelectorAll('.opt-btn');
+  const fb = document.getElementById('fb-' + qIdx);
+  allBtns.forEach(b => b.disabled = true);
+
+  const correct = questions[qIdx].c;
+  if (optIdx === correct) {
+    btn.classList.add('correct');
+    fb.textContent = '✅ Correto!';
+    fb.className = 'feedback show ok';
+  } else {
+    btn.classList.add('wrong');
+    allBtns[correct].classList.add('correct');
+    fb.textContent = '❌ Errado! Resposta certa: ' + String.fromCharCode(65 + correct) + '. ' + questions[qIdx].opts[correct];
+    fb.className = 'feedback show err';
+  }
+
+  document.getElementById('prog-text').textContent = answered + ' / 20 respondidas';
+  document.getElementById('prog-bar').style.width = (answered / 20 * 100) + '%';
+
+  if (answered === 20) {
+    document.getElementById('submit-section').style.display = 'block';
+    document.getElementById('submit-section').scrollIntoView({behavior:'smooth', block:'center'});
+  }
+}
+
+function showResults() {
+  let facil = 0, medio = 0, dificil = 0;
+  let facil_t = 0, medio_t = 0, dificil_t = 0;
+  questions.forEach((q, i) => {
+    if (q.d === 'facil') facil_t++;
+    else if (q.d === 'medio') medio_t++;
+    else dificil_t++;
+    if (userAnswers[i] === q.c) {
+      if (q.d === 'facil') facil++;
+      else if (q.d === 'medio') medio++;
+      else dificil++;
+    }
+  });
+  const total = facil + medio + dificil;
+  const pct = Math.round(total / 20 * 100);
+
+  let emoji = '😔', title = 'Continue estudando!', msg = 'Revise o conteúdo e tente novamente. Você consegue!';
+  if (pct >= 90) { emoji = '🏆'; title = 'Excelente!'; msg = 'Resultado incrível! Você está super preparada para a P2!'; }
+  else if (pct >= 70) { emoji = '🌟'; title = 'Muito bem!'; msg = 'Ótimo resultado! Revise os pontos que errou e arrase na prova!'; }
+  else if (pct >= 50) { emoji = '📚'; title = 'Bom esforço!'; msg = 'Resultado razoável. Foque nas questões difíceis e médias!'; }
+
+  document.getElementById('m-emoji').textContent = emoji;
+  document.getElementById('m-title').textContent = title;
+  document.getElementById('m-score').textContent = total + '/20 (' + pct + '%)';
+  document.getElementById('m-facil').textContent = facil + '/' + facil_t;
+  document.getElementById('m-medio').textContent = medio + '/' + medio_t;
+  document.getElementById('m-dificil').textContent = dificil + '/' + dificil_t;
+  document.getElementById('m-msg').textContent = msg;
+  document.getElementById('modal').classList.add('show');
+
+  sendEmail(total, facil, facil_t, medio, medio_t, dificil, dificil_t, pct);
+}
+
+function sendEmail(total, facil, ft, medio, mt, dificil, dt, pct) {
+  const statusEl = document.getElementById('email-status');
+  statusEl.textContent = '📧 Enviando relatório...';
+
+  const fd = new FormData();
+  fd.append('_subject', '📊 Relatório Simulado P2 – ' + SUBJECT + ' | Bia 7º Ano');
+  fd.append('_template', 'table');
+  fd.append('Aluna', 'Bia – 7º Ano');
+  fd.append('Matéria', SUBJECT);
+  fd.append('Data', new Date().toLocaleDateString('pt-BR'));
+  fd.append('Pontuação Total', total + '/20 (' + pct + '%)');
+  fd.append('Questões Fáceis (7)', facil + '/' + ft);
+  fd.append('Questões Médias (7)', medio + '/' + mt);
+  fd.append('Questões Difíceis (6)', dificil + '/' + dt);
+  fd.append('Desempenho', pct >= 70 ? '✅ Aprovada' : '⚠️ Precisa revisar');
+  fd.append('_replyto', 'callegaribi@gmail.com');
+
+  fetch('https://formsubmit.co/callegaribi@gmail.com', {
+    method: 'POST',
+    body: fd
+  }).then(r => {
+    if (r.ok) statusEl.textContent = '✅ Relatório enviado para callegaribi@gmail.com!';
+    else statusEl.textContent = '⚠️ Não foi possível enviar. Tente novamente.';
+  }).catch(() => {
+    statusEl.textContent = '⚠️ Erro de conexão. Verifique a internet.';
+  });
+}
+
+buildQuestions();
+</script>
+</body>
+</html>
