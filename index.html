@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📚 Simulado P2 – 7º Ano | Bia</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: #0f172a; min-height: 100vh; }
+
+  header {
+    background: linear-gradient(135deg, #1e1b4b, #312e81, #4c1d95);
+    color: white;
+    text-align: center;
+    padding: 3rem 1rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(139,92,246,0.3) 0%, transparent 70%);
+  }
+  .stars { position: absolute; inset: 0; overflow: hidden; }
+  .star { position: absolute; width: 3px; height: 3px; background: white; border-radius: 50%; animation: twinkle 2s infinite; }
+  @keyframes twinkle { 0%,100% { opacity: 0.3; } 50% { opacity: 1; } }
+  header h1 { font-size: 2.5rem; font-weight: 900; position: relative; text-shadow: 0 2px 20px rgba(139,92,246,0.5); }
+  header h1 span { color: #a78bfa; }
+  header p { font-size: 1.1rem; opacity: 0.85; margin-top: 0.6rem; position: relative; }
+  .exam-date {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, #7c3aed, #6d28d9);
+    border: 2px solid #a78bfa;
+    color: white;
+    font-weight: 700;
+    padding: 0.6rem 1.5rem;
+    border-radius: 50px;
+    margin-top: 1rem;
+    font-size: 1rem;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(124,58,237,0.4);
+  }
+
+  .countdown-bar {
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+    text-align: center;
+    color: white;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  .countdown-bar .label { font-size: 0.8rem; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.1em; }
+  .countdown-bar .days { font-size: 2rem; font-weight: 900; color: #fbbf24; line-height: 1; }
+
+  .grid {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1.2rem;
+  }
+
+  .subject-card {
+    border-radius: 20px;
+    padding: 1.8rem;
+    color: white;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.25s, box-shadow 0.25s;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+  }
+  .subject-card:hover { transform: translateY(-6px); box-shadow: 0 16px 48px rgba(0,0,0,0.4); }
+  .subject-card::before { content: ''; position: absolute; top: -50%; right: -50%; width: 100%; height: 100%; border-radius: 50%; background: rgba(255,255,255,0.07); }
+  .subject-card .emoji { font-size: 2.5rem; }
+  .subject-card h2 { font-size: 1.3rem; font-weight: 800; }
+  .subject-card .topics { font-size: 0.82rem; opacity: 0.85; line-height: 1.6; }
+  .subject-card .arrow { margin-top: auto; font-size: 0.85rem; opacity: 0.8; display: flex; align-items: center; gap: 0.3rem; }
+
+  .card-pt { background: linear-gradient(135deg, #5b21b6, #7c3aed); }
+  .card-en { background: linear-gradient(135deg, #0369a1, #0284c7); }
+  .card-hi { background: linear-gradient(135deg, #92400e, #b45309); }
+  .card-ge { background: linear-gradient(135deg, #065f46, #047857); }
+  .card-ci { background: linear-gradient(135deg, #0e7490, #0891b2); }
+  .card-ma { background: linear-gradient(135deg, #991b1b, #dc2626); }
+
+  .tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+  }
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    color: rgba(255,255,255,0.4);
+    font-size: 0.85rem;
+  }
+  footer span { color: #a78bfa; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="stars" id="stars"></div>
+  <h1>📚 Simulado <span>P2</span></h1>
+  <p>7º Ano – Resumos interativos para estudar</p>
+  <div class="exam-date">🗓️ Prova: 25 de junho de 2026</div>
+</header>
+
+<div class="countdown-bar">
+  <div class="label">Dias restantes para a prova</div>
+  <div class="days" id="countdown">...</div>
+</div>
+
+<div class="grid">
+
+  <a href="portugues.html" class="subject-card card-pt">
+    <div class="emoji">📖</div>
+    <h2>Língua Portuguesa</h2>
+    <span class="tag">Simulado</span>
+    <p class="topics">Poesia · Classes gramaticais · Preposição e seus sentidos · Figuras de linguagem (metáfora, hipérbole, ironia, antítese, eufemismo, comparação) · Os porquês</p>
+    <div class="arrow">Acessar resumo →</div>
+  </a>
+
+  <a href="ingles.html" class="subject-card card-en">
+    <div class="emoji">🌍</div>
+    <h2>Inglês</h2>
+    <span class="tag">Simulado</span>
+    <p class="topics">Unit 5: Dream Houses (furniture, chores, as…as, enough, have to) · Unit 6: Hidden Danger (accidents, body parts, should/must, conditionals) · Reading</p>
+    <div class="arrow">Access study guide →</div>
+  </a>
+
+  <a href="historia.html" class="subject-card card-hi">
+    <div class="emoji">🏛️</div>
+    <h2>História</h2>
+    <span class="tag">Simulado</span>
+    <p class="topics">Cap. 7: O processo de colonização na América · Chegada dos europeus · Exploração econômica · Escravidão · Resistência indígena e africana</p>
+    <div class="arrow">Acessar resumo →</div>
+  </a>
+
+  <a href="geografia.html" class="subject-card card-ge">
+    <div class="emoji">🌍</div>
+    <h2>Geografia</h2>
+    <span class="tag">Simulado</span>
+    <p class="topics">GEO 1 – Cap. 8: Extrativismo e recursos naturais · Tipos e sustentabilidade · GEO 2 – Cap. 6: Economia e setores econômicos no Brasil</p>
+    <div class="arrow">Acessar resumo →</div>
+  </a>
+
+  <a href="ciencias.html" class="subject-card card-ci">
+    <div class="emoji">🔬</div>
+    <h2>Ciências</h2>
+    <span class="tag">Simulado</span>
+    <p class="topics">Cap. 7: Vírus e viroses (dengue, gripe, HIV, COVID) · Cap. 8: Doenças microbianas · Prevenção · Saneamento básico · Vacinas e saúde</p>
+    <div class="arrow">Acessar resumo →</div>
+  </a>
+
+  <a href="matematica.html" class="subject-card card-ma">
+    <div class="emoji">📐</div>
+    <h2>Matemática</h2>
+    <span class="tag">Simulado</span>
+    <p class="topics">Cap. 6: Geometria Plana · Cap. 7: Noções de área e volume · Cap. 8: Transformações geométricas (translação, rotação, reflexão, homotetia)</p>
+    <div class="arrow">Acessar resumo →</div>
+  </a>
+
+</div>
+
+<footer>
+  Feito com 💜 para a <span>Bia</span> arrasar na P2! • 7º Ano 2026
+</footer>
+
+<script>
+// Stars
+const starsEl = document.getElementById('stars');
+for (let i = 0; i < 60; i++) {
+  const s = document.createElement('div');
+  s.className = 'star';
+  s.style.left = Math.random() * 100 + '%';
+  s.style.top = Math.random() * 100 + '%';
+  s.style.animationDelay = Math.random() * 3 + 's';
+  s.style.opacity = Math.random() * 0.5;
+  starsEl.appendChild(s);
+}
+
+// Countdown
+function updateCountdown() {
+  const examDate = new Date('2026-06-25');
+  const today = new Date();
+  today.setHours(0,0,0,0);
+  const diff = Math.ceil((examDate - today) / (1000*60*60*24));
+  const el = document.getElementById('countdown');
+  if (diff > 0) el.textContent = diff + (diff === 1 ? ' dia' : ' dias');
+  else if (diff === 0) el.textContent = '🎉 É hoje!';
+  else el.textContent = 'Prova já passou!';
+}
+updateCountdown();
+</script>
+</body>
+</html>

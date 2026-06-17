@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📚 Português P2 – 7º Ano</title>
+<style>
+  :root {
+    --primary: #7c3aed;
+    --secondary: #a78bfa;
+    --accent: #fbbf24;
+    --bg: #faf5ff;
+    --card: #ffffff;
+    --text: #1e1b4b;
+    --muted: #6b7280;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); }
+
+  header {
+    background: linear-gradient(135deg, #7c3aed, #4f46e5);
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem 3rem;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.07'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  header h1 { font-size: 2.2rem; font-weight: 800; position: relative; }
+  header p { font-size: 1.1rem; opacity: 0.9; margin-top: 0.5rem; position: relative; }
+  .badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #1e1b4b;
+    font-weight: 700;
+    padding: 0.3rem 1rem;
+    border-radius: 50px;
+    margin-top: 0.8rem;
+    font-size: 0.9rem;
+    position: relative;
+  }
+
+  .nav-pills {
+    display: flex; flex-wrap: wrap; gap: 0.5rem;
+    justify-content: center;
+    padding: 1rem;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    position: sticky; top: 0; z-index: 100;
+  }
+  .nav-pills a {
+    background: #ede9fe;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 0.4rem 1rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .nav-pills a:hover { background: var(--primary); color: white; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem; }
+
+  .section {
+    background: var(--card);
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 4px 16px rgba(124,58,237,0.08);
+    overflow: hidden;
+  }
+  .section-header {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: white;
+    padding: 1rem 1.5rem;
+    display: flex; align-items: center; gap: 0.75rem;
+    cursor: pointer;
+    user-select: none;
+  }
+  .section-header .icon { font-size: 1.5rem; }
+  .section-header h2 { font-size: 1.2rem; font-weight: 700; flex: 1; }
+  .section-header .arrow { font-size: 1rem; transition: transform 0.3s; }
+  .section-header.open .arrow { transform: rotate(180deg); }
+  .section-body { padding: 1.5rem; display: none; }
+  .section-body.open { display: block; }
+
+  .card {
+    background: #faf5ff;
+    border-left: 4px solid var(--primary);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .card h3 { color: var(--primary); font-size: 1rem; margin-bottom: 0.5rem; }
+
+  .highlight { background: #fef9c3; border-radius: 6px; padding: 0.8rem 1rem; margin: 0.8rem 0; border-left: 4px solid #fbbf24; }
+  .highlight strong { color: #92400e; }
+
+  .example-box {
+    background: #f0fdf4;
+    border: 2px dashed #4ade80;
+    border-radius: 10px;
+    padding: 1rem;
+    margin: 0.8rem 0;
+  }
+  .example-box .label { font-size: 0.75rem; font-weight: 700; color: #16a34a; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.4rem; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .tag {
+    display: inline-block;
+    background: #ede9fe;
+    color: var(--primary);
+    border-radius: 50px;
+    padding: 0.2rem 0.7rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0.2rem;
+  }
+
+  .quiz-box { background: linear-gradient(135deg, #4f46e5, #7c3aed); color: white; border-radius: 14px; padding: 1.5rem; margin-top: 1rem; }
+  .quiz-box h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+  .quiz-question { margin-bottom: 1.5rem; }
+  .quiz-question p { margin-bottom: 0.6rem; font-weight: 500; }
+  .quiz-option {
+    display: block;
+    background: rgba(255,255,255,0.15);
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    padding: 0.6rem 1rem;
+    margin-bottom: 0.4rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    width: 100%;
+    text-align: left;
+    color: white;
+    font-size: 0.95rem;
+  }
+  .quiz-option:hover { background: rgba(255,255,255,0.25); }
+  .quiz-option.correct { background: #16a34a; border-color: #4ade80; }
+  .quiz-option.wrong { background: #dc2626; border-color: #f87171; }
+  .quiz-feedback { font-size: 0.85rem; margin-top: 0.4rem; padding: 0.4rem 0.7rem; border-radius: 6px; display: none; }
+  .quiz-feedback.show { display: block; background: rgba(255,255,255,0.2); }
+
+  .figure-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .figure-table th { background: var(--primary); color: white; padding: 0.6rem 1rem; text-align: left; }
+  .figure-table td { padding: 0.6rem 1rem; border-bottom: 1px solid #ede9fe; vertical-align: top; }
+  .figure-table tr:nth-child(even) td { background: #faf5ff; }
+  .figure-table .fig-name { font-weight: 700; color: var(--primary); }
+
+  .porque-box { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  @media (max-width: 500px) { .porque-box { grid-template-columns: 1fr; } }
+  .porque-item { background: white; border-radius: 12px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.07); border-top: 4px solid; }
+  .porque-item:nth-child(1) { border-color: #7c3aed; }
+  .porque-item:nth-child(2) { border-color: #0ea5e9; }
+  .porque-item:nth-child(3) { border-color: #f59e0b; }
+  .porque-item:nth-child(4) { border-color: #10b981; }
+  .porque-item h4 { font-size: 1rem; margin-bottom: 0.4rem; }
+  .porque-item code { background: #f3f4f6; padding: 0.1rem 0.4rem; border-radius: 4px; font-size: 0.85rem; color: #374151; }
+
+  footer { text-align: center; padding: 2rem; color: var(--muted); font-size: 0.85rem; }
+  footer a { color: var(--primary); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📖 Língua Portuguesa</h1>
+  <p>Resumo P2 – 7º Ano</p>
+  <span class="badge">🗓 Simulado – 25 de junho</span>
+</header>
+
+<nav class="nav-pills">
+  <a href="#poesia">Poesia</a>
+  <a href="#classes">Classes Gramaticais</a>
+  <a href="#preposicao">Preposição</a>
+  <a href="#figuras">Figuras de Linguagem</a>
+  <a href="#porques">Os Porquês</a>
+  <a href="#quiz">Quiz</a>
+</nav>
+
+<div class="container">
+
+  <!-- CONTEÚDO P2 CONFORME PDF -->
+  <div style="background:linear-gradient(135deg,#ede9fe,#faf5ff);border:2px solid #a78bfa;border-radius:14px;padding:1.2rem 1.5rem;margin-bottom:1.5rem">
+    <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.7rem">
+      <span style="font-size:1.3rem">📋</span>
+      <strong style="color:#5b21b6;font-size:1rem">Conteúdo P2 – conforme Comunicado 07 (PDF)</strong>
+    </div>
+    <ul style="list-style:none;font-size:0.9rem;color:#374151;line-height:1.9">
+      <li>📖 Interpretação de texto</li>
+      <li>🎭 Gênero textual: <strong>Poesia</strong></li>
+      <li>🔤 Identificação das classes gramaticais estudadas (conteúdo recursivo)</li>
+      <li>🔗 <strong>Preposição</strong> e seus sentidos</li>
+      <li>🎨 Figuras de linguagem: <strong>metáfora, comparação, eufemismo, hipérbole, antítese e ironia</strong></li>
+      <li>❓ Ortografia: <strong>uso dos porquês</strong></li>
+    </ul>
+    <p style="font-size:0.8rem;color:#6b7280;margin-top:0.5rem">📚 Referência: SME, caderno Marista Mais, anotações no caderno, fichas, material complementar no Teams</p>
+  </div>
+
+  <!-- POESIA -->
+  <div class="section" id="poesia">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🎭</span>
+      <h2>Gênero Textual: Poesia</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="card">
+        <h3>O que é poesia?</h3>
+        <p>A poesia é um gênero literário que expressa sentimentos, ideias e emoções por meio de uma linguagem artística, geralmente organizada em <strong>versos</strong> e <strong>estrofes</strong>.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>📐 Elementos da Poesia</h3>
+          <p><strong>Verso:</strong> cada linha do poema<br>
+          <strong>Estrofe:</strong> conjunto de versos<br>
+          <strong>Rima:</strong> sons iguais ou semelhantes no final dos versos<br>
+          <strong>Ritmo:</strong> musicalidade do poema<br>
+          <strong>Eu lírico:</strong> quem "fala" no poema (≠ autor)</p>
+        </div>
+        <div class="card">
+          <h3>🔤 Tipos de Estrofe</h3>
+          <p><strong>Monóstico:</strong> 1 verso<br>
+          <strong>Dístico:</strong> 2 versos<br>
+          <strong>Terceto:</strong> 3 versos<br>
+          <strong>Quarteto/Quadra:</strong> 4 versos<br>
+          <strong>Quintilha:</strong> 5 versos</p>
+        </div>
+      </div>
+      <div class="example-box">
+        <div class="label">Exemplo de poema analisado</div>
+        <p><em>"Amor é fogo que arde sem se ver,<br>
+        É ferida que dói e não se sente."</em><br>
+        <small>— Camões</small></p>
+        <p style="margin-top:0.6rem"><strong>Análise:</strong> Dístico (2 versos) • Rima: ver/sente (toante) • Figura: <span class="tag">Antítese</span> (arde/não se sente)</p>
+      </div>
+      <div class="highlight">
+        <strong>⚠️ Atenção!</strong> Na poesia, a linguagem é <strong>figurada</strong> (usa figuras de linguagem). Diferente da notícia, que tem linguagem objetiva.
+      </div>
+    </div>
+  </div>
+
+  <!-- CLASSES GRAMATICAIS -->
+  <div class="section" id="classes">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🔤</span>
+      <h2>Classes Gramaticais (conteúdo recursivo)</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="grid-2">
+        <div class="card">
+          <h3>🔠 Palavras Variáveis</h3>
+          <p><strong>Substantivo:</strong> nomeia seres (casa, amor)<br>
+          <strong>Artigo:</strong> antecede o substantivo (o, a, um, uma)<br>
+          <strong>Adjetivo:</strong> caracteriza o substantivo (bonito, grande)<br>
+          <strong>Numeral:</strong> indica quantidade (dois, primeiro)<br>
+          <strong>Pronome:</strong> substitui/acompanha o substantivo (eu, meu)<br>
+          <strong>Verbo:</strong> ação, estado ou fenômeno (correr, ser)</p>
+        </div>
+        <div class="card">
+          <h3>🔡 Palavras Invariáveis</h3>
+          <p><strong>Advérbio:</strong> modifica verbo/adj (rapidamente, não, aqui)<br>
+          <strong>Preposição:</strong> liga palavras (de, em, para, com)<br>
+          <strong>Conjunção:</strong> liga orações (e, mas, porque, quando)<br>
+          <strong>Interjeição:</strong> expressa emoção (Ah!, Ufa!)<br>
+          <strong>✨ Preposição</strong> é destaque desta P2!</p>
+        </div>
+      </div>
+      <div class="highlight">
+        <strong>💡 Dica para identificar advérbio:</strong> Pergunte "como?", "quando?", "onde?", "quanto?" ao verbo. Se a resposta for a palavra suspeita → é advérbio!
+      </div>
+    </div>
+  </div>
+
+  <!-- PREPOSIÇÃO -->
+  <div class="section" id="preposicao">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🔗</span>
+      <h2>Preposição e seus sentidos</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="card">
+        <h3>O que é preposição?</h3>
+        <p>Preposição é uma palavra invariável que <strong>liga termos</strong> dentro de uma oração, estabelecendo uma relação de sentido entre eles.</p>
+      </div>
+      <table class="figure-table">
+        <tr><th>Preposição</th><th>Sentido / Relação</th><th>Exemplo</th></tr>
+        <tr><td class="fig-name">a</td><td>direção, destino, modo</td><td><em>Fui <u>a</u> escola a pé.</em></td></tr>
+        <tr><td class="fig-name">de</td><td>origem, posse, assunto, matéria</td><td><em>Livro <u>de</u> João; copo <u>de</u> vidro</em></td></tr>
+        <tr><td class="fig-name">em</td><td>lugar, tempo, estado</td><td><em>Estou <u>em</u> casa <u>em</u> paz.</em></td></tr>
+        <tr><td class="fig-name">para</td><td>finalidade, destino, beneficiário</td><td><em>Estudei <u>para</u> passar.</em></td></tr>
+        <tr><td class="fig-name">com</td><td>companhia, instrumento, modo</td><td><em>Escrevi <u>com</u> caneta.</em></td></tr>
+        <tr><td class="fig-name">por</td><td>causa, agente, troca, duração</td><td><em>Fiz isso <u>por</u> amor.</em></td></tr>
+        <tr><td class="fig-name">sobre</td><td>tema, posição superior</td><td><em>Falamos <u>sobre</u> o poema.</em></td></tr>
+        <tr><td class="fig-name">entre</td><td>posição intermediária, escolha</td><td><em>Fique <u>entre</u> nós.</em></td></tr>
+        <tr><td class="fig-name">até</td><td>limite, conclusão</td><td><em>Fui <u>até</u> o fim.</em></td></tr>
+        <tr><td class="fig-name">sem</td><td>ausência, falta</td><td><em>Fui <u>sem</u> dinheiro.</em></td></tr>
+      </table>
+      <div class="highlight">
+        <strong>🔑 Contrações:</strong> preposição + artigo formam uma palavra só!<br>
+        <span class="tag">de + o = do</span> <span class="tag">de + a = da</span> <span class="tag">em + o = no</span> <span class="tag">em + a = na</span> <span class="tag">a + o = ao</span> <span class="tag">por + o = pelo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- FIGURAS DE LINGUAGEM -->
+  <div class="section" id="figuras">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🎨</span>
+      <h2>Figuras de Linguagem</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="highlight">
+        <strong>O que são?</strong> Recursos expressivos que tornam a linguagem mais criativa, emotiva e impactante. São muito usadas em poesia!
+      </div>
+
+      <div class="card" style="border-left-color:#7c3aed">
+        <h3>🔄 Metáfora</h3>
+        <p>Comparação implícita (sem usar "como", "tal qual", "parece"). Diz que uma coisa <strong>É</strong> outra.</p>
+        <div class="example-box">
+          <div class="label">Exemplos</div>
+          <p>➤ <em>"Você é um anjo."</em> (a pessoa é comparada a um anjo, mas não usa "como")<br>
+          ➤ <em>"A vida é um palco."</em><br>
+          ➤ <em>"Seus olhos são estrelas."</em></p>
+        </div>
+      </div>
+
+      <div class="card" style="border-left-color:#0ea5e9">
+        <h3>⚖️ Comparação (Símile)</h3>
+        <p>Comparação explícita — usa palavras como <strong>como, tal qual, parece, assim como, feito</strong>.</p>
+        <div class="example-box">
+          <div class="label">Exemplos</div>
+          <p>➤ <em>"Ela é bonita <u>como</u> uma flor."</em><br>
+          ➤ <em>"Correu <u>feito</u> um raio."</em><br>
+          ➤ <em>"<u>Parece</u> um leão rugindo."</em></p>
+        </div>
+      </div>
+
+      <div class="card" style="border-left-color:#10b981">
+        <h3>😌 Eufemismo</h3>
+        <p>Substitui uma palavra ou expressão chocante por outra mais <strong>suave</strong> ou delicada.</p>
+        <div class="example-box">
+          <div class="label">Exemplos</div>
+          <p>➤ <em>"Ele <u>passou desta para melhor</u>."</em> (em vez de "morreu")<br>
+          ➤ <em>"Ela tem os cabelos <u>maduros</u>."</em> (em vez de "brancos/grisalhos")<br>
+          ➤ <em>"Tem <u>necessidades especiais</u>."</em> (em vez de "deficiência")</p>
+        </div>
+      </div>
+
+      <div class="card" style="border-left-color:#f59e0b">
+        <h3>😲 Hipérbole</h3>
+        <p>Exagero intencional para dar mais expressividade. Não deve ser interpretado literalmente.</p>
+        <div class="example-box">
+          <div class="label">Exemplos</div>
+          <p>➤ <em>"Estou <u>morrendo de fome</u>!"</em><br>
+          ➤ <em>"Já te falei isso <u>um milhão de vezes</u>!"</em><br>
+          ➤ <em>"Ela chorou <u>um rio de lágrimas</u>."</em></p>
+        </div>
+      </div>
+
+      <div class="card" style="border-left-color:#ef4444">
+        <h3>⚡ Antítese</h3>
+        <p>Usa palavras ou ideias <strong>opostas</strong> juntas para criar contraste.</p>
+        <div class="example-box">
+          <div class="label">Exemplos</div>
+          <p>➤ <em>"O amor é <u>doce e amargo</u> ao mesmo tempo."</em><br>
+          ➤ <em>"Ele é tão <u>rico</u> que parece <u>pobre</u>."</em><br>
+          ➤ <em>"No <u>começo</u> era o <u>fim</u>."</em></p>
+        </div>
+      </div>
+
+      <div class="card" style="border-left-color:#8b5cf6">
+        <h3>😏 Ironia</h3>
+        <p>Diz o <strong>contrário</strong> do que se quer dizer, geralmente para criticar ou fazer humor.</p>
+        <div class="example-box">
+          <div class="label">Exemplos</div>
+          <p>➤ <em>"Que dia lindo!"</em> (dito num dia horrível com chuva)<br>
+          ➤ <em>"Que aluno dedicado!"</em> (dito para alguém que não estuda)<br>
+          ➤ <em>"Parabéns, você arrasou!"</em> (dito para alguém que errou tudo)</p>
+        </div>
+      </div>
+
+      <div class="highlight">
+        <strong>🧠 Como diferenciar metáfora de comparação?</strong><br>
+        Comparação usa "<em>como</em>", "<em>parece</em>", "<em>feito</em>" → <strong>"Ela é <u>como</u> um sol"</strong><br>
+        Metáfora não usa → <strong>"Ela <u>é</u> um sol"</strong>
+      </div>
+    </div>
+  </div>
+
+  <!-- OS PORQUÊS -->
+  <div class="section" id="porques">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">❓</span>
+      <h2>Ortografia: Os Porquês</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="porque-box">
+        <div class="porque-item">
+          <h4>1️⃣ Por que</h4>
+          <p style="font-size:0.85rem;color:#555;margin:.4rem 0"><strong>Quando usar:</strong> em perguntas diretas e indiretas; equivale a "por qual razão"</p>
+          <code>Por que você foi?</code><br>
+          <code>Não sei por que ele foi.</code>
+        </div>
+        <div class="porque-item">
+          <h4>2️⃣ Porque</h4>
+          <p style="font-size:0.85rem;color:#555;margin:.4rem 0"><strong>Quando usar:</strong> nas respostas e explicações; equivale a "pois", "uma vez que"</p>
+          <code>Fui porque quis.</code><br>
+          <code>Chorei porque estava triste.</code>
+        </div>
+        <div class="porque-item">
+          <h4>3️⃣ Por quê</h4>
+          <p style="font-size:0.85rem;color:#555;margin:.4rem 0"><strong>Quando usar:</strong> no final de frases interrogativas (antes de ponto de interrogação ou final da frase)</p>
+          <code>Você foi por quê?</code><br>
+          <code>Não sei por quê.</code>
+        </div>
+        <div class="porque-item">
+          <h4>4️⃣ Porquê</h4>
+          <p style="font-size:0.85rem;color:#555;margin:.4rem 0"><strong>Quando usar:</strong> é um substantivo (coisa), tem artigo antes (o, um)</p>
+          <code>Quero saber o porquê.</code><br>
+          <code>Não entendo esse porquê.</code>
+        </div>
+      </div>
+      <div class="highlight" style="margin-top:1rem">
+        <strong>🧠 Macete:</strong> Se puder substituir por "por qual razão" → use separado <em>por que</em>. Se puder substituir por "pois" → use junto <em>porque</em>. Se vier no final da frase com "?" → <em>por quê</em>. Se tiver artigo antes → <em>porquê</em>.
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="quiz">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🧠</span>
+      <h2>Quiz Rápido – Teste seus conhecimentos!</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="quiz-box">
+        <h3>🎯 Responda as questões:</h3>
+
+        <div class="quiz-question">
+          <p>1. "Ela correu <u>feito</u> o vento." Esta frase usa qual figura de linguagem?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Metáfora</button>
+          <button class="quiz-option" onclick="answer(this, true)">b) Comparação (Símile)</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) Hipérbole</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Ironia</button>
+          <div class="quiz-feedback">✅ Correto! "Feito" é uma palavra de comparação, então é símile (comparação explícita).</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. Complete: "Fui ao mercado ______ comprar pão." Qual preposição indica finalidade?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) de</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) em</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) para</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) com</button>
+          <div class="quiz-feedback">✅ "Para" indica finalidade/objetivo!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. "Estou com um fome de lobo!" Que figura de linguagem está sendo usada?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Antítese</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) Metáfora</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) Hipérbole</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Eufemismo</button>
+          <div class="quiz-feedback">✅ Exagero intencional = Hipérbole!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. "Fui à festa ______ me sinto bem quando estou com amigos." Qual "porque" usar?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) por que</button>
+          <button class="quiz-option" onclick="answer(this, true)">b) porque</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) por quê</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) porquê</button>
+          <div class="quiz-feedback">✅ Explica uma causa/razão → use "porque" (junto, sem acento).</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. "Aquele professor é uma baita inspiração!" Esta frase tem:</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Antítese</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) Ironia</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) Comparação</button>
+          <button class="quiz-option" onclick="answer(this, true)">d) Metáfora</button>
+          <div class="quiz-feedback">✅ Diz que o professor "é" uma inspiração sem usar "como" → Metáfora!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>📚 Resumo P2 – Língua Portuguesa | 7º Ano | Prova: 25/06</p>
+  <p style="margin-top:0.3rem"><a href="index.html">← Voltar para todos os resumos</a></p>
+</footer>
+
+<script>
+function toggle(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+
+function answer(btn, isCorrect) {
+  const questionDiv = btn.closest('.quiz-question');
+  const opts = questionDiv.querySelectorAll('.quiz-option');
+  const feedback = questionDiv.querySelector('.quiz-feedback');
+  opts.forEach(o => o.disabled = true);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    feedback.textContent = '✅ ' + feedback.textContent.replace(/^[✅❌]\s*/, '');
+  } else {
+    btn.classList.add('wrong');
+    feedback.textContent = '❌ Ops! Tente pensar melhor. ' + feedback.textContent.replace(/^[✅❌]\s*/, '');
+  }
+  feedback.classList.add('show');
+}
+</script>
+</body>
+</html>

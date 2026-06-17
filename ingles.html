@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌍 English P2 – 7º Ano</title>
+<style>
+  :root {
+    --primary: #0369a1;
+    --secondary: #38bdf8;
+    --accent: #f97316;
+    --bg: #f0f9ff;
+    --card: #ffffff;
+    --text: #0c1a2e;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); }
+
+  header {
+    background: linear-gradient(135deg, #0284c7, #0369a1);
+    color: white;
+    text-align: center;
+    padding: 2rem 1rem 3rem;
+    position: relative; overflow: hidden;
+  }
+  header::after {
+    content: '🇺🇸🇬🇧';
+    position: absolute; bottom: 1rem; right: 1rem;
+    font-size: 2rem; opacity: 0.3;
+  }
+  header h1 { font-size: 2.2rem; font-weight: 800; }
+  header p { font-size: 1.1rem; opacity: 0.9; margin-top: 0.4rem; }
+  .badge { display: inline-block; background: #f97316; color: white; font-weight: 700; padding: 0.3rem 1rem; border-radius: 50px; margin-top: 0.8rem; font-size: 0.9rem; }
+
+  .nav-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; padding: 1rem; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
+  .nav-pills a { background: #e0f2fe; color: var(--primary); text-decoration: none; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; }
+  .nav-pills a:hover { background: var(--primary); color: white; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem; }
+
+  .unit-header {
+    background: linear-gradient(90deg, #0369a1, #0ea5e9);
+    color: white;
+    padding: 1.2rem 1.5rem;
+    border-radius: 14px;
+    margin-bottom: 1.5rem;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .unit-header .unit-num {
+    background: rgba(255,255,255,0.25);
+    width: 50px; height: 50px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem; font-weight: 800;
+    flex-shrink: 0;
+  }
+  .unit-header h2 { font-size: 1.3rem; }
+  .unit-header p { font-size: 0.9rem; opacity: 0.85; margin-top: 0.2rem; }
+
+  .section { background: var(--card); border-radius: 16px; margin-bottom: 1.5rem; box-shadow: 0 4px 16px rgba(3,105,161,0.08); overflow: hidden; }
+  .section-header { background: linear-gradient(90deg, #0369a1, #0ea5e9); color: white; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none; }
+  .section-header .icon { font-size: 1.5rem; }
+  .section-header h2 { font-size: 1.1rem; font-weight: 700; flex: 1; }
+  .section-header .arrow { font-size: 1rem; transition: transform 0.3s; }
+  .section-header.open .arrow { transform: rotate(180deg); }
+  .section-body { padding: 1.5rem; display: none; }
+  .section-body.open { display: block; }
+
+  .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.8rem; }
+  .vocab-item {
+    background: #f0f9ff;
+    border: 1px solid #bae6fd;
+    border-radius: 10px;
+    padding: 0.8rem;
+    display: flex; flex-direction: column; gap: 0.2rem;
+  }
+  .vocab-item .en { font-weight: 700; color: var(--primary); font-size: 1rem; }
+  .vocab-item .pt { color: #555; font-size: 0.85rem; }
+  .vocab-item .eg { color: #0369a1; font-size: 0.8rem; font-style: italic; margin-top: 0.2rem; border-top: 1px solid #e0f2fe; padding-top: 0.3rem; }
+
+  .grammar-box { background: #fff7ed; border-left: 4px solid #f97316; border-radius: 8px; padding: 1rem 1.2rem; margin: 1rem 0; }
+  .grammar-box h3 { color: #c2410c; margin-bottom: 0.5rem; font-size: 1rem; }
+  .grammar-box .formula { background: #fff; border: 2px solid #fdba74; border-radius: 8px; padding: 0.6rem 1rem; font-family: monospace; font-size: 0.95rem; color: #7c3aed; margin: 0.5rem 0; }
+
+  .example-box { background: #f0fdf4; border: 2px dashed #4ade80; border-radius: 10px; padding: 1rem; margin: 0.8rem 0; }
+  .example-box .label { font-size: 0.75rem; font-weight: 700; color: #16a34a; text-transform: uppercase; margin-bottom: 0.4rem; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.8rem 0; }
+  th { background: var(--primary); color: white; padding: 0.6rem 1rem; text-align: left; }
+  td { padding: 0.6rem 1rem; border-bottom: 1px solid #e0f2fe; vertical-align: top; }
+  tr:nth-child(even) td { background: #f0f9ff; }
+
+  .highlight { background: #fef9c3; border-radius: 6px; padding: 0.8rem 1rem; margin: 0.8rem 0; border-left: 4px solid #fbbf24; }
+  .highlight strong { color: #92400e; }
+
+  .card { background: #f0f9ff; border-left: 4px solid var(--primary); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+  .card h3 { color: var(--primary); font-size: 1rem; margin-bottom: 0.5rem; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  .conditional-table { overflow-x: auto; }
+
+  .quiz-box { background: linear-gradient(135deg, #0369a1, #0284c7); color: white; border-radius: 14px; padding: 1.5rem; margin-top: 1rem; }
+  .quiz-box h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+  .quiz-question { margin-bottom: 1.5rem; }
+  .quiz-question p { margin-bottom: 0.6rem; font-weight: 500; }
+  .quiz-option { display: block; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3); border-radius: 8px; padding: 0.6rem 1rem; margin-bottom: 0.4rem; cursor: pointer; transition: all 0.2s; width: 100%; text-align: left; color: white; font-size: 0.95rem; }
+  .quiz-option:hover { background: rgba(255,255,255,0.25); }
+  .quiz-option.correct { background: #16a34a; border-color: #4ade80; }
+  .quiz-option.wrong { background: #dc2626; border-color: #f87171; }
+  .quiz-feedback { font-size: 0.85rem; margin-top: 0.4rem; padding: 0.4rem 0.7rem; border-radius: 6px; display: none; }
+  .quiz-feedback.show { display: block; background: rgba(255,255,255,0.2); }
+
+  footer { text-align: center; padding: 2rem; color: #6b7280; font-size: 0.85rem; }
+  footer a { color: var(--primary); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌍 English</h1>
+  <p>Study Guide P2 – 7th Grade</p>
+  <span class="badge">📅 Mock Exam – June 25th</span>
+</header>
+
+<nav class="nav-pills">
+  <a href="#unit5">Unit 5: Dream Houses</a>
+  <a href="#unit6">Unit 6: Hidden Danger</a>
+  <a href="#reading">Reading Tips</a>
+  <a href="#quiz">Quiz</a>
+</nav>
+
+<div class="container">
+
+  <!-- CONTEÚDO P2 CONFORME PDF -->
+  <div style="background:linear-gradient(135deg,#e0f2fe,#f0f9ff);border:2px solid #7dd3fc;border-radius:14px;padding:1.2rem 1.5rem;margin-bottom:1.5rem">
+    <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.7rem">
+      <span style="font-size:1.3rem">📋</span>
+      <strong style="color:#0369a1;font-size:1rem">P2 Content – as per Comunicado 07 (PDF)</strong>
+    </div>
+    <ul style="list-style:none;font-size:0.9rem;color:#374151;line-height:1.9">
+      <li>🏠 <strong>Unit 5 – Dream Houses:</strong> Vocabulary: Furniture (p.59) + Household chores (p.62)</li>
+      <li>⚖️ Language in action: (not) as + adjective + as / (not) + adjective + enough (p.61)</li>
+      <li>📋 Have to / don't have to (p.63)</li>
+      <li>⚠️ <strong>Unit 6 – Hidden Danger:</strong> Vocabulary: Accidents and injuries (p.71) + Parts of the body (p.74)</li>
+      <li>💭 Language in action: Should/shouldn't, must/mustn't (p.73)</li>
+      <li>🔀 Zero and First Conditionals (p.75)</li>
+      <li>📖 Reading Comprehension</li>
+    </ul>
+    <p style="font-size:0.8rem;color:#6b7280;margin-top:0.5rem">📚 Reference: Own it 2 (livro didático)</p>
+  </div>
+
+  <!-- UNIT 5 -->
+  <div class="unit-header" id="unit5">
+    <div class="unit-num">5</div>
+    <div>
+      <h2>Unit 5 – Dream Houses 🏠</h2>
+      <p>Furniture • Household Chores • Comparisons • Obligations</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🛋️</span>
+      <h2>Vocabulary: Furniture (Móveis)</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="vocab-grid">
+        <div class="vocab-item"><span class="en">sofa/couch</span><span class="pt">sofá</span></div>
+        <div class="vocab-item"><span class="en">armchair</span><span class="pt">poltrona</span></div>
+        <div class="vocab-item"><span class="en">bookshelf</span><span class="pt">estante de livros</span></div>
+        <div class="vocab-item"><span class="en">wardrobe</span><span class="pt">guarda-roupa</span></div>
+        <div class="vocab-item"><span class="en">chest of drawers</span><span class="pt">cômoda</span></div>
+        <div class="vocab-item"><span class="en">bedside table</span><span class="pt">criado-mudo</span></div>
+        <div class="vocab-item"><span class="en">coffee table</span><span class="pt">mesa de centro</span></div>
+        <div class="vocab-item"><span class="en">curtains</span><span class="pt">cortinas</span></div>
+        <div class="vocab-item"><span class="en">carpet/rug</span><span class="pt">tapete</span></div>
+        <div class="vocab-item"><span class="en">mirror</span><span class="pt">espelho</span></div>
+        <div class="vocab-item"><span class="en">ceiling fan</span><span class="pt">ventilador de teto</span></div>
+        <div class="vocab-item"><span class="en">fireplace</span><span class="pt">lareira</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🧹</span>
+      <h2>Vocabulary: Household Chores (Tarefas Domésticas)</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="vocab-grid">
+        <div class="vocab-item"><span class="en">do the dishes</span><span class="pt">lavar a louça</span></div>
+        <div class="vocab-item"><span class="en">vacuum the floor</span><span class="pt">aspirar o chão</span></div>
+        <div class="vocab-item"><span class="en">sweep the floor</span><span class="pt">varrer o chão</span></div>
+        <div class="vocab-item"><span class="en">mop the floor</span><span class="pt">esfregar o chão</span></div>
+        <div class="vocab-item"><span class="en">do the laundry</span><span class="pt">lavar a roupa</span></div>
+        <div class="vocab-item"><span class="en">iron the clothes</span><span class="pt">passar roupa</span></div>
+        <div class="vocab-item"><span class="en">take out the trash</span><span class="pt">tirar o lixo</span></div>
+        <div class="vocab-item"><span class="en">make the bed</span><span class="pt">arrumar a cama</span></div>
+        <div class="vocab-item"><span class="en">tidy up the room</span><span class="pt">arrumar o quarto</span></div>
+        <div class="vocab-item"><span class="en">wash the car</span><span class="pt">lavar o carro</span></div>
+        <div class="vocab-item"><span class="en">water the plants</span><span class="pt">regar as plantas</span></div>
+        <div class="vocab-item"><span class="en">walk the dog</span><span class="pt">passear com o cachorro</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">⚖️</span>
+      <h2>Grammar: Comparisons – (not) as … as / enough</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="grammar-box">
+        <h3>📐 (not) as + adjective + as</h3>
+        <div class="formula">as + adjective + as → igual/tão ... quanto</div>
+        <div class="formula">not as + adjective + as → menos ... do que</div>
+        <div class="example-box">
+          <div class="label">Examples</div>
+          <p>➤ My house is <strong>as big as</strong> yours. (tão grande quanto)<br>
+          ➤ This sofa is <strong>not as comfortable as</strong> the armchair. (menos confortável)<br>
+          ➤ She is <strong>as tall as</strong> her brother.</p>
+        </div>
+      </div>
+      <div class="grammar-box">
+        <h3>📐 (not) + adjective + enough</h3>
+        <div class="formula">adjective + enough → suficientemente ...  (para)</div>
+        <div class="formula">not + adjective + enough → não é suficientemente ...</div>
+        <div class="example-box">
+          <div class="label">Examples</div>
+          <p>➤ The room is <strong>big enough</strong> for a bed. (grande o suficiente)<br>
+          ➤ This chair isn't <strong>comfortable enough</strong> to sit on.<br>
+          ➤ She isn't <strong>old enough</strong> to drive.</p>
+        </div>
+      </div>
+      <div class="highlight">
+        <strong>⚠️ Atenção à ordem!</strong> "Enough" vem DEPOIS do adjetivo: ✅ big <u>enough</u> &nbsp;&nbsp; ❌ enough big
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">📋</span>
+      <h2>Grammar: Have to / Don't have to (Obrigações)</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <table>
+        <tr><th>Forma</th><th>Sentido</th><th>Exemplo</th></tr>
+        <tr><td><strong>have to</strong></td><td>obrigação (necessidade)</td><td><em>I <u>have to</u> do my homework.</em></td></tr>
+        <tr><td><strong>don't / doesn't have to</strong></td><td>não é obrigado (sem necessidade)</td><td><em>She <u>doesn't have to</u> cook.</em></td></tr>
+        <tr><td><strong>Do you have to...?</strong></td><td>pergunta sobre obrigação</td><td><em><u>Do</u> you <u>have to</u> work today?</em></td></tr>
+      </table>
+      <div class="example-box">
+        <div class="label">More Examples</div>
+        <p>➤ Students <strong>have to</strong> wear uniforms. (obrigação)<br>
+        ➤ You <strong>don't have to</strong> come early. (não é necessário)<br>
+        ➤ He <strong>has to</strong> clean his room every day.</p>
+      </div>
+      <div class="highlight">
+        <strong>💡 have to vs. must:</strong> Ambos indicam obrigação, mas <em>have to</em> é mais comum no dia a dia e <em>must</em> é mais formal/interno.
+      </div>
+    </div>
+  </div>
+
+  <!-- UNIT 6 -->
+  <div class="unit-header" id="unit6" style="margin-top:2rem">
+    <div class="unit-num">6</div>
+    <div>
+      <h2>Unit 6 – Hidden Danger ⚠️</h2>
+      <p>Accidents • Body Parts • Should • Conditionals</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🩺</span>
+      <h2>Vocabulary: Accidents & Injuries + Body Parts</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="grid-2">
+        <div>
+          <h3 style="margin-bottom:0.7rem;color:var(--primary)">🤕 Accidents & Injuries</h3>
+          <div class="vocab-grid" style="grid-template-columns:1fr">
+            <div class="vocab-item"><span class="en">cut</span><span class="pt">corte</span></div>
+            <div class="vocab-item"><span class="en">bruise</span><span class="pt">machucado/hematoma</span></div>
+            <div class="vocab-item"><span class="en">burn</span><span class="pt">queimadura</span></div>
+            <div class="vocab-item"><span class="en">sprain</span><span class="pt">torção</span></div>
+            <div class="vocab-item"><span class="en">fracture/broken bone</span><span class="pt">fratura</span></div>
+            <div class="vocab-item"><span class="en">blister</span><span class="pt">bolha</span></div>
+            <div class="vocab-item"><span class="en">nosebleed</span><span class="pt">sangramento nasal</span></div>
+            <div class="vocab-item"><span class="en">insect bite</span><span class="pt">picada de inseto</span></div>
+          </div>
+        </div>
+        <div>
+          <h3 style="margin-bottom:0.7rem;color:var(--primary)">💪 Parts of the Body</h3>
+          <div class="vocab-grid" style="grid-template-columns:1fr">
+            <div class="vocab-item"><span class="en">forehead</span><span class="pt">testa</span></div>
+            <div class="vocab-item"><span class="en">cheek</span><span class="pt">bochecha</span></div>
+            <div class="vocab-item"><span class="en">chin</span><span class="pt">queixo</span></div>
+            <div class="vocab-item"><span class="en">shoulder</span><span class="pt">ombro</span></div>
+            <div class="vocab-item"><span class="en">elbow</span><span class="pt">cotovelo</span></div>
+            <div class="vocab-item"><span class="en">wrist</span><span class="pt">pulso</span></div>
+            <div class="vocab-item"><span class="en">thumb</span><span class="pt">polegar</span></div>
+            <div class="vocab-item"><span class="en">ankle</span><span class="pt">tornozelo</span></div>
+            <div class="vocab-item"><span class="en">heel</span><span class="pt">calcanhar</span></div>
+            <div class="vocab-item"><span class="en">shin</span><span class="pt">canela</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">💭</span>
+      <h2>Grammar: Should / Shouldn't & Must / Mustn't</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <table>
+        <tr><th>Modal</th><th>Sentido</th><th>Exemplo</th></tr>
+        <tr><td><strong>should</strong></td><td>conselho/sugestão (deveria)</td><td><em>You <u>should</u> see a doctor.</em></td></tr>
+        <tr><td><strong>shouldn't</strong></td><td>não é aconselhável</td><td><em>You <u>shouldn't</u> eat so much sugar.</em></td></tr>
+        <tr><td><strong>must</strong></td><td>obrigação forte/regra</td><td><em>You <u>must</u> wear a seatbelt.</em></td></tr>
+        <tr><td><strong>mustn't</strong></td><td>proibição</td><td><em>You <u>mustn't</u> run in the corridor.</em></td></tr>
+      </table>
+      <div class="highlight">
+        <strong>💡 Diferença:</strong> <em>Should</em> = conselho (pode ou não seguir). <em>Must</em> = obrigação/proibição (é necessário/proibido).
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🔀</span>
+      <h2>Grammar: Zero & First Conditionals (Condicionais)</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="grammar-box">
+        <h3>🌡️ Zero Conditional – Fatos e verdades gerais</h3>
+        <div class="formula">If + Simple Present, Simple Present</div>
+        <p style="margin:0.5rem 0;font-size:0.9rem;color:#666">Usa-se para fatos científicos, verdades universais, situações sempre verdadeiras.</p>
+        <div class="example-box">
+          <div class="label">Examples</div>
+          <p>➤ <strong>If</strong> you heat water to 100°C, it <strong>boils</strong>.<br>
+          ➤ <strong>If</strong> it rains, the ground <strong>gets</strong> wet.<br>
+          ➤ <strong>If</strong> you cut yourself, you <strong>bleed</strong>.</p>
+        </div>
+      </div>
+      <div class="grammar-box">
+        <h3>🎯 First Conditional – Situações reais/possíveis no futuro</h3>
+        <div class="formula">If + Simple Present, will + verb</div>
+        <p style="margin:0.5rem 0;font-size:0.9rem;color:#666">Usa-se para situações possíveis no futuro com consequências reais.</p>
+        <div class="example-box">
+          <div class="label">Examples</div>
+          <p>➤ <strong>If</strong> you fall, you <strong>will</strong> hurt yourself.<br>
+          ➤ <strong>If</strong> she doesn't study, she <strong>will</strong> fail the test.<br>
+          ➤ <strong>If</strong> it rains tomorrow, we <strong>won't</strong> go to the park.</p>
+        </div>
+      </div>
+      <div class="highlight">
+        <strong>🔑 Dica:</strong> A ordem das orações pode ser invertida! "You will hurt yourself <strong>if</strong> you fall." (sem vírgula quando o "if" vem depois)
+      </div>
+    </div>
+  </div>
+
+  <!-- READING TIPS -->
+  <div class="section" id="reading">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">📖</span>
+      <h2>Reading Comprehension Tips</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="card" style="background:#f0f9ff">
+        <h3>🎯 Estratégias para a prova</h3>
+        <p><strong>1. Scanning:</strong> Leia as questões ANTES do texto. Saiba o que procurar.<br><br>
+        <strong>2. Skimming:</strong> Leia o texto rapidamente para pegar a ideia geral.<br><br>
+        <strong>3. Context clues:</strong> Use o contexto para adivinhar palavras desconhecidas.<br><br>
+        <strong>4. True/False/Not Given:</strong> O que não está no texto = Not Given.<br><br>
+        <strong>5. Linhas importantes:</strong> As respostas geralmente estão em ordem no texto.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="quiz">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🧠</span>
+      <h2>Quiz – Test Yourself!</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="quiz-box">
+        <h3>🎯 Answer the questions:</h3>
+
+        <div class="quiz-question">
+          <p>1. "If you touch fire, you _____ burned." Which tense is this?</p>
+          <button class="quiz-option" onclick="answer(this, true)">a) Zero Conditional – gets</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) First Conditional – will get</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) Should/Shouldn't</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Have to</button>
+          <div class="quiz-feedback">✅ Zero conditional! Fact/truth: If + present, present → "get" (gets)</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. What is "cotovelo" in English?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) wrist</button>
+          <button class="quiz-option" onclick="answer(this, true)">b) elbow</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) ankle</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) shoulder</button>
+          <div class="quiz-feedback">✅ Elbow = cotovelo! Wrist = pulso, Ankle = tornozelo, Shoulder = ombro.</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. "This room isn't _____ enough for a wardrobe." Fill in the blank:</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) too much</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) as big as</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) big</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) bigger</button>
+          <div class="quiz-feedback">✅ "big enough" – adjective comes BEFORE "enough"!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. "You _____ run in the hospital." (proibição)</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) should</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) have to</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) mustn't</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) don't have to</button>
+          <div class="quiz-feedback">✅ Mustn't = prohibition! Don't have to = not necessary (different meaning!)</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. What is "lavar a louça" in English?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) do the laundry</button>
+          <button class="quiz-option" onclick="answer(this, true)">b) do the dishes</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) mop the floor</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) take out the trash</button>
+          <div class="quiz-feedback">✅ Do the dishes = lavar a louça! Do the laundry = lavar roupa.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>📚 English Study Guide P2 | 7th Grade | Exam: June 25th</p>
+  <p style="margin-top:0.3rem"><a href="index.html">← Back to all subjects</a></p>
+</footer>
+
+<script>
+function toggle(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+function answer(btn, isCorrect) {
+  const questionDiv = btn.closest('.quiz-question');
+  const opts = questionDiv.querySelectorAll('.quiz-option');
+  const feedback = questionDiv.querySelector('.quiz-feedback');
+  opts.forEach(o => o.disabled = true);
+  if (isCorrect) { btn.classList.add('correct'); }
+  else { btn.classList.add('wrong'); feedback.textContent = '❌ Not quite! ' + feedback.textContent.replace(/^[✅❌][^!]*! /, ''); }
+  feedback.classList.add('show');
+}
+</script>
+</body>
+</html>

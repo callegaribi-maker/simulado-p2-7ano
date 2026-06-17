@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🔬 Ciências P2 – 7º Ano</title>
+<style>
+  :root { --primary: #0e7490; --secondary: #06b6d4; --accent: #f43f5e; --bg: #ecfeff; --card: #fff; --text: #083344; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); }
+
+  header { background: linear-gradient(135deg, #0e7490, #0891b2); color: white; text-align: center; padding: 2rem 1rem 3rem; position: relative; overflow: hidden; }
+  header::before { content: '🦠🔬💉'; position: absolute; bottom: 0.5rem; right: 1rem; font-size: 2rem; opacity: 0.25; }
+  header h1 { font-size: 2.2rem; font-weight: 800; }
+  header p { font-size: 1.1rem; opacity: 0.9; margin-top: 0.4rem; }
+  .badge { display: inline-block; background: #f43f5e; color: white; font-weight: 700; padding: 0.3rem 1rem; border-radius: 50px; margin-top: 0.8rem; font-size: 0.9rem; }
+
+  .nav-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; padding: 1rem; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
+  .nav-pills a { background: #cffafe; color: var(--primary); text-decoration: none; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; }
+  .nav-pills a:hover { background: var(--primary); color: white; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem; }
+
+  .chapter-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--primary); color: white; padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem; }
+
+  .section { background: var(--card); border-radius: 16px; margin-bottom: 1.5rem; box-shadow: 0 4px 16px rgba(14,116,144,0.08); overflow: hidden; }
+  .section-header { background: linear-gradient(90deg, #0e7490, #0891b2); color: white; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none; }
+  .section-header.cap8 { background: linear-gradient(90deg, #7c3aed, #8b5cf6); }
+  .section-header .icon { font-size: 1.5rem; }
+  .section-header h2 { font-size: 1.1rem; font-weight: 700; flex: 1; }
+  .section-header .arrow { font-size: 1rem; transition: transform 0.3s; }
+  .section-header.open .arrow { transform: rotate(180deg); }
+  .section-body { padding: 1.5rem; display: none; }
+  .section-body.open { display: block; }
+
+  .card { background: #ecfeff; border-left: 4px solid var(--primary); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+  .card h3 { color: var(--primary); font-size: 1rem; margin-bottom: 0.5rem; }
+  .card.red { background: #fff1f2; border-left-color: #f43f5e; }
+  .card.red h3 { color: #be123c; }
+  .card.purple { background: #faf5ff; border-left-color: #7c3aed; }
+  .card.purple h3 { color: #6d28d9; }
+  .card.green { background: #f0fdf4; border-left-color: #16a34a; }
+  .card.green h3 { color: #15803d; }
+  .card.orange { background: #fff7ed; border-left-color: #ea580c; }
+  .card.orange h3 { color: #c2410c; }
+
+  .highlight { background: #fef9c3; border-radius: 6px; padding: 0.8rem 1rem; margin: 0.8rem 0; border-left: 4px solid #fbbf24; }
+  .highlight strong { color: #92400e; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.88rem; margin: 0.8rem 0; }
+  th { background: var(--primary); color: white; padding: 0.6rem 0.8rem; text-align: left; }
+  td { padding: 0.6rem 0.8rem; border-bottom: 1px solid #cffafe; vertical-align: top; }
+  tr:nth-child(even) td { background: #ecfeff; }
+
+  .disease-card {
+    border-radius: 12px;
+    padding: 1rem;
+    background: white;
+    border: 1px solid #cffafe;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    margin-bottom: 0.8rem;
+  }
+  .disease-card .disease-name {
+    font-weight: 700; color: var(--primary); font-size: 1rem;
+    display: flex; align-items: center; gap: 0.4rem;
+    margin-bottom: 0.5rem;
+  }
+  .disease-card .info-row { display: flex; flex-wrap: wrap; gap: 0.8rem; font-size: 0.85rem; }
+  .disease-card .info-item { flex: 1; min-width: 140px; }
+  .disease-card .info-item .label { font-size: 0.72rem; font-weight: 700; color: #6b7280; text-transform: uppercase; }
+  .disease-card .info-item .value { color: #374151; }
+
+  .virus-vs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 500px) { .virus-vs { grid-template-columns: 1fr; } }
+
+  .prevention-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 0.8rem; margin: 0.8rem 0; }
+  .prevention-item { background: white; border-radius: 10px; padding: 0.8rem; text-align: center; border: 2px solid #cffafe; }
+  .prevention-item .p-icon { font-size: 1.8rem; }
+  .prevention-item p { font-size: 0.82rem; color: #374151; margin-top: 0.3rem; font-weight: 500; }
+
+  .quiz-box { background: linear-gradient(135deg, #0e7490, #0891b2); color: white; border-radius: 14px; padding: 1.5rem; margin-top: 1rem; }
+  .quiz-box h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+  .quiz-question { margin-bottom: 1.5rem; }
+  .quiz-question p { margin-bottom: 0.6rem; font-weight: 500; }
+  .quiz-option { display: block; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3); border-radius: 8px; padding: 0.6rem 1rem; margin-bottom: 0.4rem; cursor: pointer; transition: all 0.2s; width: 100%; text-align: left; color: white; font-size: 0.95rem; }
+  .quiz-option:hover { background: rgba(255,255,255,0.25); }
+  .quiz-option.correct { background: #16a34a; border-color: #4ade80; }
+  .quiz-option.wrong { background: #dc2626; border-color: #f87171; }
+  .quiz-feedback { font-size: 0.85rem; margin-top: 0.4rem; padding: 0.4rem 0.7rem; border-radius: 6px; display: none; }
+  .quiz-feedback.show { display: block; background: rgba(255,255,255,0.2); }
+
+  footer { text-align: center; padding: 2rem; color: #6b7280; font-size: 0.85rem; }
+  footer a { color: var(--primary); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🔬 Ciências</h1>
+  <p>Resumo P2 – Vírus, Viroses e Doenças Microbianas</p>
+  <span class="badge">📅 Simulado – 25 de junho</span>
+</header>
+
+<nav class="nav-pills">
+  <a href="#virus">O que são Vírus?</a>
+  <a href="#viroses">Viroses Humanas</a>
+  <a href="#doencas">Doenças Microbianas</a>
+  <a href="#prevencao">Prevenção</a>
+  <a href="#vacinas">Vacinas</a>
+  <a href="#saude">Saúde</a>
+  <a href="#quiz">Quiz</a>
+</nav>
+
+<div class="container">
+
+  <!-- CONTEÚDO P2 CONFORME PDF -->
+  <div style="background:linear-gradient(135deg,#cffafe,#ecfeff);border:2px solid #67e8f9;border-radius:14px;padding:1.2rem 1.5rem;margin-bottom:1.5rem">
+    <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.7rem">
+      <span style="font-size:1.3rem">📋</span>
+      <strong style="color:#0e7490;font-size:1rem">Conteúdo P2 – conforme Comunicado 07 (PDF)</strong>
+    </div>
+    <ul style="list-style:none;font-size:0.9rem;color:#374151;line-height:1.9">
+      <li>🦠 <strong>Cap. 7 – Vírus e viroses:</strong></li>
+      <li style="padding-left:1.2rem">• Descrição geral dos vírus (p. 54–56)</li>
+      <li style="padding-left:1.2rem">• Principais viroses humanas (p. 58–71)</li>
+      <li>🩺 <strong>Cap. 8 – Doenças causadas por microrganismos:</strong></li>
+      <li style="padding-left:1.2rem">• Os microrganismos causadores de doenças (p. 86)</li>
+      <li style="padding-left:1.2rem">• Como são transmitidas e como prevenir (p. 86–90)</li>
+      <li style="padding-left:1.2rem">• A importância da educação e do saneamento básico (p. 97)</li>
+      <li style="padding-left:1.2rem">• O que é saúde e como mantê-la (p. 98)</li>
+      <li style="padding-left:1.2rem">• A importância das vacinas e o calendário de vacinação brasileiro (p. 100)</li>
+    </ul>
+    <p style="font-size:0.8rem;color:#6b7280;margin-top:0.5rem">📚 Referência: SME, caderno Marista Mais, anotações no caderno, fichas, material complementar no Teams</p>
+  </div>
+
+  <!-- CAP 7 -->
+  <div style="margin-bottom:0.5rem">
+    <span class="chapter-tag">🦠 Cap. 7 – Vírus e Viroses</span>
+  </div>
+
+  <div class="section" id="virus">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🧬</span>
+      <h2>O que são Vírus? Características Gerais</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="card red">
+        <h3>⚠️ Vírus: seres vivos ou não?</h3>
+        <p>Esta é uma questão controversa! Os vírus são considerados <strong>"acelulares"</strong> (sem células), portanto estão no limite entre o vivo e o não-vivo. Eles precisam de uma célula hospedeira para se reproduzir.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>📦 Estrutura do Vírus</h3>
+          <p>• <strong>Material genético:</strong> DNA ou RNA (não os dois!)<br>
+          • <strong>Capsídeo:</strong> envoltório proteico que protege o material genético<br>
+          • <strong>Envelope viral:</strong> alguns vírus têm membrana lipídica ao redor do capsídeo (ex.: HIV, influenza)</p>
+        </div>
+        <div class="card">
+          <h3>🔄 Como os vírus se reproduzem?</h3>
+          <p>Os vírus são <strong>parasitas intracelulares obrigatórios</strong>. Eles:<br>
+          1. Entram na célula hospedeira<br>
+          2. Usam os mecanismos da célula<br>
+          3. Copiam seu material genético<br>
+          4. Produzem novas cópias<br>
+          5. A célula se rompe e libera os novos vírus</p>
+        </div>
+      </div>
+
+      <div class="highlight">
+        <strong>🔑 Diferença importante:</strong> Vírus são <strong>muito menores</strong> que as bactérias. Enquanto bactérias podem ser vistas em microscópio óptico, vírus só são visíveis em <strong>microscópio eletrônico</strong>. Antibióticos NÃO funcionam contra vírus!
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="viroses">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🤒</span>
+      <h2>Principais Viroses Humanas</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+
+      <div class="disease-card">
+        <div class="disease-name">🤧 Gripe (Influenza)</div>
+        <div class="info-row">
+          <div class="info-item"><div class="label">Agente</div><div class="value">Vírus Influenza (A, B, C)</div></div>
+          <div class="info-item"><div class="label">Transmissão</div><div class="value">Gotículas ao tossir/espirrar, contato direto</div></div>
+          <div class="info-item"><div class="label">Sintomas</div><div class="value">Febre alta, dor no corpo, tosse, coriza</div></div>
+          <div class="info-item"><div class="label">Prevenção</div><div class="value">Vacina anual, higiene das mãos</div></div>
+        </div>
+      </div>
+
+      <div class="disease-card">
+        <div class="disease-name">🩷 Dengue</div>
+        <div class="info-row">
+          <div class="info-item"><div class="label">Agente</div><div class="value">Vírus Dengue (4 sorotipos: 1, 2, 3, 4)</div></div>
+          <div class="info-item"><div class="label">Transmissão</div><div class="value">Picada do mosquito Aedes aegypti</div></div>
+          <div class="info-item"><div class="label">Sintomas</div><div class="value">Febre alta, dor de cabeça intensa, dor atrás dos olhos, manchas vermelhas</div></div>
+          <div class="info-item"><div class="label">Prevenção</div><div class="value">Eliminar água parada (criadouros do mosquito), uso de repelente</div></div>
+        </div>
+      </div>
+
+      <div class="disease-card">
+        <div class="disease-name">🦟 Zika</div>
+        <div class="info-row">
+          <div class="info-item"><div class="label">Agente</div><div class="value">Vírus Zika</div></div>
+          <div class="info-item"><div class="label">Transmissão</div><div class="value">Aedes aegypti, relação sexual, da mãe para o bebê</div></div>
+          <div class="info-item"><div class="label">Sintomas</div><div class="value">Febre leve, manchas na pele, conjuntivite. Pode causar microcefalia no feto</div></div>
+          <div class="info-item"><div class="label">Prevenção</div><div class="value">Eliminar criadouros, repelente, atenção especial em gestantes</div></div>
+        </div>
+      </div>
+
+      <div class="disease-card">
+        <div class="disease-name">🩸 HIV/AIDS</div>
+        <div class="info-row">
+          <div class="info-item"><div class="label">Agente</div><div class="value">HIV (vírus da imunodeficiência humana)</div></div>
+          <div class="info-item"><div class="label">Transmissão</div><div class="value">Relação sexual sem preservativo, sangue, da mãe para o filho</div></div>
+          <div class="info-item"><div class="label">Efeito</div><div class="value">Destrói os linfócitos T (imunidade), levando à AIDS</div></div>
+          <div class="info-item"><div class="label">Prevenção</div><div class="value">Preservativo, teste de HIV, não compartilhar seringas</div></div>
+        </div>
+      </div>
+
+      <div class="disease-card">
+        <div class="disease-name">🔴 Sarampo e Caxumba</div>
+        <div class="info-row">
+          <div class="info-item"><div class="label">Agente</div><div class="value">Vírus do sarampo (Morbillivirus) / Vírus da caxumba (Paramyxovirus)</div></div>
+          <div class="info-item"><div class="label">Transmissão</div><div class="value">Via aérea (tosse, espirro), altamente contagiosas</div></div>
+          <div class="info-item"><div class="label">Sintomas</div><div class="value">Sarampo: febre, manchas vermelhas pelo corpo<br>Caxumba: inchaço nas glândulas salivares</div></div>
+          <div class="info-item"><div class="label">Prevenção</div><div class="value">Vacina Tríplice Viral (sarampo, caxumba, rubéola)</div></div>
+        </div>
+      </div>
+
+      <div class="disease-card">
+        <div class="disease-name">😷 COVID-19</div>
+        <div class="info-row">
+          <div class="info-item"><div class="label">Agente</div><div class="value">SARS-CoV-2 (coronavírus)</div></div>
+          <div class="info-item"><div class="label">Transmissão</div><div class="value">Gotículas, aerossóis (ar), contato com superfícies</div></div>
+          <div class="info-item"><div class="label">Sintomas</div><div class="value">Febre, tosse, perda de olfato/paladar, dificuldade respiratória</div></div>
+          <div class="info-item"><div class="label">Prevenção</div><div class="value">Vacina, máscara, higiene das mãos, ventilação</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CAP 8 -->
+  <div style="margin-bottom:0.5rem; margin-top:2rem">
+    <span class="chapter-tag" style="background:#7c3aed">🦠 Cap. 8 – Doenças por Microrganismos</span>
+  </div>
+
+  <div class="section" id="doencas">
+    <div class="section-header cap8 open" onclick="toggle(this)">
+      <span class="icon">🧫</span>
+      <h2>Microrganismos Causadores de Doenças</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <table>
+        <tr><th>Tipo</th><th>Exemplos de Doenças</th><th>Transmissão Geral</th></tr>
+        <tr><td><strong>🦠 Bactérias</strong></td><td>Tuberculose, cólera, febre tifoide, leptospirose, salmonelose</td><td>Contato direto, água/alimento contaminado, gotículas</td></tr>
+        <tr><td><strong>🦠 Vírus</strong></td><td>Gripe, dengue, COVID-19, HIV, sarampo, hepatite</td><td>Via aérea, contato sexual, vetores (mosquitos), sangue</td></tr>
+        <tr><td><strong>🦠 Fungos</strong></td><td>Micoses (pé-de-atleta, candidíase), meningite fúngica</td><td>Contato direto, ambiente úmido</td></tr>
+        <tr><td><strong>🦠 Protozoários</strong></td><td>Malária, doença de Chagas, amebíase, toxoplasmose</td><td>Vetores (mosquitos, barbeiro), água contaminada</td></tr>
+        <tr><td><strong>🦠 Vermes</strong></td><td>Esquistossomose, teníase, lombriga, ancilostomíase</td><td>Água/alimento contaminado, solo, carne crua</td></tr>
+      </table>
+
+      <div class="grid-2" style="margin-top:1rem">
+        <div class="disease-card" style="border-left:4px solid #7c3aed">
+          <div class="disease-name">🐾 Leptospirose</div>
+          <div class="info-row">
+            <div class="info-item"><div class="label">Agente</div><div class="value">Bactéria Leptospira</div></div>
+            <div class="info-item"><div class="label">Transmissão</div><div class="value">Contato com água/lama contaminada com urina de rato</div></div>
+            <div class="info-item"><div class="label">Contexto</div><div class="value">Muito comum em enchentes</div></div>
+          </div>
+        </div>
+        <div class="disease-card" style="border-left:4px solid #7c3aed">
+          <div class="disease-name">🦟 Malária</div>
+          <div class="info-row">
+            <div class="info-item"><div class="label">Agente</div><div class="value">Protozoário Plasmodium</div></div>
+            <div class="info-item"><div class="label">Transmissão</div><div class="value">Picada do mosquito Anopheles fêmea</div></div>
+            <div class="info-item"><div class="label">Sintomas</div><div class="value">Febre recorrente, calafrios, anemia</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="prevencao">
+    <div class="section-header cap8 open" onclick="toggle(this)">
+      <span class="icon">🛡️</span>
+      <h2>Transmissão e Prevenção de Doenças</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="prevention-grid">
+        <div class="prevention-item">
+          <div class="p-icon">🧼</div>
+          <p>Lavar as mãos com frequência</p>
+        </div>
+        <div class="prevention-item">
+          <div class="p-icon">💧</div>
+          <p>Tratar a água antes de consumir</p>
+        </div>
+        <div class="prevention-item">
+          <div class="p-icon">🚰</div>
+          <p>Saneamento básico</p>
+        </div>
+        <div class="prevention-item">
+          <div class="p-icon">🥩</div>
+          <p>Cozinhar bem os alimentos</p>
+        </div>
+        <div class="prevention-item">
+          <div class="p-icon">💉</div>
+          <p>Vacinar-se conforme calendário</p>
+        </div>
+        <div class="prevention-item">
+          <div class="p-icon">🦟</div>
+          <p>Eliminar criadouros de mosquitos</p>
+        </div>
+        <div class="prevention-item">
+          <div class="p-icon">😷</div>
+          <p>Usar máscara em doenças respiratórias</p>
+        </div>
+        <div class="prevention-item">
+          <div class="p-icon">🏥</div>
+          <p>Consultar médico ao apresentar sintomas</p>
+        </div>
+      </div>
+
+      <div class="card green" style="margin-top:1rem">
+        <h3>🚿 Saneamento Básico</h3>
+        <p>O saneamento básico inclui: <strong>água tratada, esgoto tratado, coleta de lixo e drenagem</strong>. A falta de saneamento é a principal causa de doenças infecciosas em países em desenvolvimento. Com saneamento básico, doenças como cólera, febre tifoide, leptospirose e diarreias são praticamente eliminadas.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="vacinas">
+    <div class="section-header cap8 open" onclick="toggle(this)">
+      <span class="icon">💉</span>
+      <h2>Vacinas e Calendário de Vacinação</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="card">
+        <h3>🧬 Como as vacinas funcionam?</h3>
+        <p>As vacinas contêm <strong>agentes enfraquecidos, inativados ou fragmentos</strong> do microrganismo. Quando são aplicadas, o sistema imunológico aprende a reconhecer e combater aquele patógeno. Assim, se a pessoa entrar em contato com o vírus ou bactéria real, já saberá defender o organismo.</p>
+      </div>
+
+      <table>
+        <tr><th>Vacina</th><th>Protege contra</th><th>Quando tomar</th></tr>
+        <tr><td><strong>BCG</strong></td><td>Tuberculose grave</td><td>Ao nascer</td></tr>
+        <tr><td><strong>Hepatite B</strong></td><td>Hepatite B</td><td>Ao nascer + 1 e 6 meses</td></tr>
+        <tr><td><strong>DTP</strong></td><td>Difteria, tétano, coqueluche</td><td>2, 4, 6 meses + reforços</td></tr>
+        <tr><td><strong>Poliomielite (VIP/VOP)</strong></td><td>Paralisia infantil</td><td>2, 4, 6, 15 meses</td></tr>
+        <tr><td><strong>Tríplice Viral (SCR)</strong></td><td>Sarampo, caxumba, rubéola</td><td>12 meses + reforço 15 meses</td></tr>
+        <tr><td><strong>HPV</strong></td><td>Papilomavírus (câncer)</td><td>9 a 14 anos (meninas) / 11-14 (meninos)</td></tr>
+        <tr><td><strong>Influenza (Gripe)</strong></td><td>Gripe</td><td>Anualmente</td></tr>
+        <tr><td><strong>Febre Amarela</strong></td><td>Febre Amarela</td><td>9 meses + dose de reforço</td></tr>
+      </table>
+
+      <div class="highlight">
+        <strong>🧠 Imunidade de Rebanho:</strong> Quando uma grande parte da população está vacinada, o vírus não consegue se espalhar, protegendo até quem não pode ser vacinado (bebês, imunossuprimidos). É por isso que as vacinas são importantes para todos!
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="saude">
+    <div class="section-header cap8 open" onclick="toggle(this)">
+      <span class="icon">❤️</span>
+      <h2>O que é Saúde e Como Mantê-la?</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="card purple">
+        <h3>🌍 Definição da OMS</h3>
+        <p>Segundo a Organização Mundial da Saúde (OMS), saúde não é apenas a ausência de doenças, mas um <strong>completo bem-estar físico, mental e social</strong>.</p>
+      </div>
+      <div class="grid-2">
+        <div class="card green">
+          <h3>✅ Hábitos que promovem saúde</h3>
+          <p>• Alimentação balanceada e variada<br>
+          • Prática regular de atividades físicas<br>
+          • Sono adequado (8h para adolescentes)<br>
+          • Higiene pessoal e ambiental<br>
+          • Hidratação (beber água)<br>
+          • Vacinação em dia<br>
+          • Saúde mental (lazer, família, amigos)</p>
+        </div>
+        <div class="card red">
+          <h3>❌ Hábitos que prejudicam saúde</h3>
+          <p>• Sedentarismo<br>
+          • Alimentação rica em açúcar e gordura<br>
+          • Fumo e álcool<br>
+          • Estresse excessivo<br>
+          • Falta de sono<br>
+          • Automedicação<br>
+          • Descarte incorreto de lixo</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="quiz">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🧠</span>
+      <h2>Quiz de Ciências!</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="quiz-box">
+        <h3>🎯 Responda as questões:</h3>
+
+        <div class="quiz-question">
+          <p>1. Por que antibióticos NÃO funcionam contra vírus?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Porque os vírus são muito grandes</button>
+          <button class="quiz-option" onclick="answer(this, true)">b) Porque os vírus são acelulares – os antibióticos combatem estruturas celulares de bactérias</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) Porque os vírus vivem dentro das células e não podem ser alcançados</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Porque os vírus produzem suas próprias proteínas resistentes</button>
+          <div class="quiz-feedback">✅ Antibióticos atacam estruturas de células bacterianas. Vírus não têm células, então antibióticos não têm efeito!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. Qual mosquito transmite dengue, Zika e Chikungunya?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Anopheles</button>
+          <button class="quiz-option" onclick="answer(this, true)">b) Aedes aegypti</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) Culex</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Mansonia</button>
+          <div class="quiz-feedback">✅ Aedes aegypti! O Anopheles transmite malária.</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. A leptospirose se transmite principalmente por:</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Picada de mosquito</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) Contato com pessoa doente</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) Contato com água ou lama contaminada com urina de rato</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Ingestão de carne mal cozida</button>
+          <div class="quiz-feedback">✅ Leptospirose é típica de enchentes: a urina de ratos contamina a água e o solo!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. Como as vacinas protegem nosso organismo?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Matam os vírus antes de eles entrarem no corpo</button>
+          <button class="quiz-option" onclick="answer(this, true)">b) Ensinam o sistema imunológico a reconhecer e combater o patógeno</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) Criam uma barreira física no sangue</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Aumentam a temperatura do corpo para matar microrganismos</button>
+          <div class="quiz-feedback">✅ As vacinas "treinam" o sistema imunológico, que memoriza o patógeno e age rapidamente se ele aparecer!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. Qual vacina protege contra sarampo, caxumba e rubéola?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) BCG</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) DTP</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) Tríplice Viral (SCR)</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Varicela</button>
+          <div class="quiz-feedback">✅ Tríplice Viral (SCR) = Sarampo + Caxumba (Rubéola) → tomada aos 12 e 15 meses!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>📚 Resumo P2 – Ciências | 7º Ano | Prova: 25/06 | Cap.7: Vírus + Cap.8: Doenças Microbianas</p>
+  <p style="margin-top:0.3rem"><a href="index.html">← Voltar para todos os resumos</a></p>
+</footer>
+
+<script>
+function toggle(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+function answer(btn, isCorrect) {
+  const questionDiv = btn.closest('.quiz-question');
+  const opts = questionDiv.querySelectorAll('.quiz-option');
+  const feedback = questionDiv.querySelector('.quiz-feedback');
+  opts.forEach(o => o.disabled = true);
+  if (isCorrect) { btn.classList.add('correct'); }
+  else { btn.classList.add('wrong'); feedback.textContent = '❌ Não! ' + feedback.textContent.replace(/^[✅❌]\s*/, ''); }
+  feedback.classList.add('show');
+}
+</script>
+</body>
+</html>

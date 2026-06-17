@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌍 Geografia P2 – 7º Ano</title>
+<style>
+  :root { --primary: #047857; --secondary: #10b981; --accent: #fbbf24; --bg: #f0fdf4; --card: #fff; --text: #052e16; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); }
+
+  header { background: linear-gradient(135deg, #065f46, #047857); color: white; text-align: center; padding: 2rem 1rem 3rem; position: relative; overflow: hidden; }
+  header::before { content: '🌿🗺️🌊'; position: absolute; bottom: 0.5rem; right: 1rem; font-size: 2rem; opacity: 0.25; }
+  header h1 { font-size: 2.2rem; font-weight: 800; }
+  header p { font-size: 1.1rem; opacity: 0.9; margin-top: 0.4rem; }
+  .badge { display: inline-block; background: #fbbf24; color: #052e16; font-weight: 700; padding: 0.3rem 1rem; border-radius: 50px; margin-top: 0.8rem; font-size: 0.9rem; }
+
+  .nav-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; padding: 1rem; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
+  .nav-pills a { background: #d1fae5; color: var(--primary); text-decoration: none; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; }
+  .nav-pills a:hover { background: var(--primary); color: white; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem; }
+
+  .disciplina-tag { display: inline-flex; align-items: center; gap: 0.5rem; background: var(--primary); color: white; padding: 0.5rem 1.2rem; border-radius: 50px; font-weight: 700; font-size: 0.9rem; margin-bottom: 1rem; }
+
+  .section { background: var(--card); border-radius: 16px; margin-bottom: 1.5rem; box-shadow: 0 4px 16px rgba(4,120,87,0.08); overflow: hidden; }
+  .section-header { background: linear-gradient(90deg, #065f46, #047857); color: white; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none; }
+  .section-header.geo2 { background: linear-gradient(90deg, #1d4ed8, #2563eb); }
+  .section-header .icon { font-size: 1.5rem; }
+  .section-header h2 { font-size: 1.1rem; font-weight: 700; flex: 1; }
+  .section-header .arrow { font-size: 1rem; transition: transform 0.3s; }
+  .section-header.open .arrow { transform: rotate(180deg); }
+  .section-body { padding: 1.5rem; display: none; }
+  .section-body.open { display: block; }
+
+  .card { background: #f0fdf4; border-left: 4px solid var(--primary); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+  .card h3 { color: var(--primary); font-size: 1rem; margin-bottom: 0.5rem; }
+  .card.blue { background: #eff6ff; border-left-color: #2563eb; }
+  .card.blue h3 { color: #1e40af; }
+  .card.orange { background: #fff7ed; border-left-color: #ea580c; }
+  .card.orange h3 { color: #c2410c; }
+
+  .highlight { background: #fef9c3; border-radius: 6px; padding: 0.8rem 1rem; margin: 0.8rem 0; border-left: 4px solid #fbbf24; }
+  .highlight strong { color: #92400e; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.8rem 0; }
+  th { background: var(--primary); color: white; padding: 0.6rem 1rem; text-align: left; }
+  .blue-th th { background: #2563eb; }
+  td { padding: 0.6rem 1rem; border-bottom: 1px solid #d1fae5; vertical-align: top; }
+  tr:nth-child(even) td { background: #f0fdf4; }
+  .blue-tr tr:nth-child(even) td { background: #eff6ff; }
+  .blue-tr td { border-bottom: 1px solid #bfdbfe; }
+
+  .resource-card { border-radius: 12px; padding: 1rem; text-align: center; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+  .resource-card .emoji { font-size: 2rem; margin-bottom: 0.4rem; }
+  .resource-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--primary); }
+  .resource-card p { font-size: 0.8rem; color: #555; margin-top: 0.3rem; }
+
+  .sector-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media (max-width: 500px) { .sector-grid { grid-template-columns: 1fr; } }
+  .sector-card { border-radius: 12px; padding: 1.2rem; color: white; text-align: center; }
+  .sector-card.s1 { background: linear-gradient(135deg, #047857, #10b981); }
+  .sector-card.s2 { background: linear-gradient(135deg, #1d4ed8, #3b82f6); }
+  .sector-card.s3 { background: linear-gradient(135deg, #7c3aed, #a78bfa); }
+  .sector-card .num { font-size: 2rem; font-weight: 800; }
+  .sector-card h4 { font-size: 0.9rem; margin: 0.3rem 0; }
+  .sector-card p { font-size: 0.8rem; opacity: 0.9; }
+
+  .quiz-box { background: linear-gradient(135deg, #065f46, #047857); color: white; border-radius: 14px; padding: 1.5rem; margin-top: 1rem; }
+  .quiz-box h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+  .quiz-question { margin-bottom: 1.5rem; }
+  .quiz-question p { margin-bottom: 0.6rem; font-weight: 500; }
+  .quiz-option { display: block; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3); border-radius: 8px; padding: 0.6rem 1rem; margin-bottom: 0.4rem; cursor: pointer; transition: all 0.2s; width: 100%; text-align: left; color: white; font-size: 0.95rem; }
+  .quiz-option:hover { background: rgba(255,255,255,0.25); }
+  .quiz-option.correct { background: #16a34a; border-color: #4ade80; }
+  .quiz-option.wrong { background: #dc2626; border-color: #f87171; }
+  .quiz-feedback { font-size: 0.85rem; margin-top: 0.4rem; padding: 0.4rem 0.7rem; border-radius: 6px; display: none; }
+  .quiz-feedback.show { display: block; background: rgba(255,255,255,0.2); }
+
+  footer { text-align: center; padding: 2rem; color: #6b7280; font-size: 0.85rem; }
+  footer a { color: var(--primary); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🌍 Geografia</h1>
+  <p>Resumo P2 – Geo1 Cap.8 + Geo2 Cap.6</p>
+  <span class="badge">📅 Simulado – 25 de junho</span>
+</header>
+
+<nav class="nav-pills">
+  <a href="#extrativismo">GEO1: Extrativismo</a>
+  <a href="#tipos-ext">Tipos de Extrativismo</a>
+  <a href="#economia">GEO2: Economia</a>
+  <a href="#setores">Setores Econômicos</a>
+  <a href="#quiz">Quiz</a>
+</nav>
+
+<div class="container">
+
+  <!-- CONTEÚDO P2 CONFORME PDF -->
+  <div style="background:linear-gradient(135deg,#d1fae5,#f0fdf4);border:2px solid #6ee7b7;border-radius:14px;padding:1.2rem 1.5rem;margin-bottom:1.5rem">
+    <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.7rem">
+      <span style="font-size:1.3rem">📋</span>
+      <strong style="color:#065f46;font-size:1rem">Conteúdo P2 – conforme Comunicado 07 (PDF)</strong>
+    </div>
+    <ul style="list-style:none;font-size:0.9rem;color:#374151;line-height:1.9">
+      <li>🌿 <strong>GEO 1 – Cap. 8 / Módulo 2:</strong> Extrativismo e recursos naturais</li>
+      <li>💼 <strong>GEO 2 – Cap. 6 / Módulo 2:</strong> Economia e setores econômicos no Brasil</li>
+    </ul>
+    <p style="font-size:0.8rem;color:#6b7280;margin-top:0.5rem">📚 Referência: SME, caderno Marista Mais, anotações no caderno, fichas, material complementar no Teams</p>
+  </div>
+
+  <!-- GEO 1: EXTRATIVISMO -->
+  <div style="margin-bottom:0.5rem">
+    <span class="disciplina-tag">🌿 GEO 1 – Cap. 8 / Módulo 2</span>
+  </div>
+
+  <div class="section" id="extrativismo">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🌳</span>
+      <h2>Extrativismo e Recursos Naturais</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="card">
+        <h3>📖 O que é Extrativismo?</h3>
+        <p>É a atividade econômica que consiste em <strong>retirar da natureza</strong> recursos como plantas, animais e minerais, com pouca ou nenhuma transformação. É uma das atividades mais antigas da humanidade.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>♻️ Extrativismo Sustentável</h3>
+          <p>Retira recursos sem destruir o ambiente, respeitando o tempo de renovação da natureza.<br><br>
+          <strong>Exemplos:</strong><br>
+          • Coleta de frutas e castanhas<br>
+          • Pesca artesanal<br>
+          • Coleta de látex (seringueiro)<br>
+          • Apicultura (mel)</p>
+        </div>
+        <div class="card orange">
+          <h3>⚠️ Extrativismo Predatório</h3>
+          <p>Retira recursos de forma excessiva, sem respeitar a capacidade de renovação da natureza. Causa danos ambientais.<br><br>
+          <strong>Exemplos:</strong><br>
+          • Desmatamento para madeira<br>
+          • Pesca excessiva (predatória)<br>
+          • Caça ilegal<br>
+          • Mineração sem controle</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="tipos-ext">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🔍</span>
+      <h2>Tipos de Extrativismo</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr)); gap:1rem">
+        <div class="resource-card">
+          <div class="emoji">🌿</div>
+          <h4>Extrativismo Vegetal</h4>
+          <p>Extração de produtos das plantas: madeira, látex (borracha), castanha, açaí, palmito, erva-mate, carnaúba</p>
+        </div>
+        <div class="resource-card">
+          <div class="emoji">🐟</div>
+          <h4>Extrativismo Animal</h4>
+          <p>Pesca (marítima e de água doce), caça, extração de mel, criação de bichos-da-seda</p>
+        </div>
+        <div class="resource-card">
+          <div class="emoji">⛏️</div>
+          <h4>Extrativismo Mineral</h4>
+          <p>Extração de minérios: ferro, ouro, petróleo, carvão mineral, bauxita, manganês, diamante</p>
+        </div>
+      </div>
+
+      <div style="margin-top:1rem">
+        <table>
+          <tr><th>Recurso</th><th>Tipo</th><th>Onde é extraído (Brasil)</th><th>Uso</th></tr>
+          <tr><td><strong>Minério de ferro</strong></td><td>Mineral</td><td>MG (Carajás, PA)</td><td>Siderurgia, exportação</td></tr>
+          <tr><td><strong>Petróleo</strong></td><td>Mineral</td><td>Pré-sal (RJ, ES)</td><td>Combustível, plásticos</td></tr>
+          <tr><td><strong>Madeira</strong></td><td>Vegetal</td><td>Amazônia, Sul do Brasil</td><td>Construção, papel</td></tr>
+          <tr><td><strong>Látex / Borracha</strong></td><td>Vegetal</td><td>Amazônia</td><td>Pneus, calçados</td></tr>
+          <tr><td><strong>Castanha-do-pará</strong></td><td>Vegetal</td><td>Amazônia</td><td>Alimentação, exportação</td></tr>
+          <tr><td><strong>Pesca</strong></td><td>Animal</td><td>Litoral brasileiro</td><td>Alimentação</td></tr>
+          <tr><td><strong>Bauxita</strong></td><td>Mineral</td><td>Pará, MG</td><td>Fabricação de alumínio</td></tr>
+        </table>
+      </div>
+
+      <div class="highlight">
+        <strong>💡 Recursos Renováveis vs. Não Renováveis:</strong><br>
+        <strong>Renováveis:</strong> se recuperam com o tempo (florestas, peixes, água) → desde que usados com respeito<br>
+        <strong>Não renováveis:</strong> levam milhões de anos para se formar e podem acabar (petróleo, carvão, minérios)
+      </div>
+
+      <div class="card green">
+        <h3>🌱 Extrativismo no Contexto Atual</h3>
+        <p>O Brasil é um dos maiores exportadores de recursos naturais do mundo. Porém, o desafio é equilibrar o desenvolvimento econômico com a preservação ambiental. O <strong>desmatamento da Amazônia</strong> é um dos maiores problemas ambientais relacionados ao extrativismo predatório.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- GEO 2: ECONOMIA -->
+  <div style="margin-bottom:0.5rem; margin-top:2rem">
+    <span class="disciplina-tag" style="background:#1d4ed8">🏭 GEO 2 – Cap. 6 / Módulo 2</span>
+  </div>
+
+  <div class="section" id="economia">
+    <div class="section-header geo2 open" onclick="toggle(this)">
+      <span class="icon">💼</span>
+      <h2>Economia e Setores Econômicos no Brasil</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="card blue">
+        <h3>📊 O que é Economia?</h3>
+        <p>Economia é o conjunto de atividades relacionadas à produção, distribuição e consumo de bens e serviços. Para entender a economia de um país, analisamos os <strong>setores econômicos</strong>.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" id="setores">
+    <div class="section-header geo2 open" onclick="toggle(this)">
+      <span class="icon">📦</span>
+      <h2>Os Três Setores da Economia</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="sector-grid">
+        <div class="sector-card s1">
+          <div class="num">1°</div>
+          <h4>Setor Primário</h4>
+          <p>Extração direta da natureza</p>
+          <p style="margin-top:0.5rem; font-size:0.75rem">🌾 Agricultura<br>🐄 Pecuária<br>🐟 Pesca<br>⛏️ Mineração<br>🌳 Extrativismo</p>
+        </div>
+        <div class="sector-card s2">
+          <div class="num">2°</div>
+          <h4>Setor Secundário</h4>
+          <p>Transformação de matérias-primas</p>
+          <p style="margin-top:0.5rem; font-size:0.75rem">🏭 Indústria<br>🔨 Construção civil<br>⚡ Geração de energia<br>🚗 Automóveis</p>
+        </div>
+        <div class="sector-card s3">
+          <div class="num">3°</div>
+          <h4>Setor Terciário</h4>
+          <p>Prestação de serviços e comércio</p>
+          <p style="margin-top:0.5rem; font-size:0.75rem">🏪 Comércio<br>🏥 Saúde<br>🎓 Educação<br>🏦 Bancos<br>💻 Tecnologia</p>
+        </div>
+      </div>
+
+      <div class="highlight" style="margin-top:1rem">
+        <strong>🇧🇷 Brasil hoje:</strong> O <strong>setor terciário</strong> é o maior da economia brasileira (mais de 70% do PIB). O setor primário é muito importante para as exportações (agronegócio). A indústria (setor secundário) enfrenta desafios de modernização.
+      </div>
+
+      <div class="grid-2" style="margin-top:1rem">
+        <div class="card blue">
+          <h3>🌾 Agropecuária Brasileira</h3>
+          <p>O Brasil é um dos maiores produtores e exportadores mundiais de:<br><br>
+          • <strong>Soja</strong> (1º mundial)<br>
+          • <strong>Carne bovina</strong> (maior exportador)<br>
+          • <strong>Frango</strong> (maior exportador)<br>
+          • <strong>Café</strong> (1º mundial)<br>
+          • <strong>Cana-de-açúcar</strong> (1º mundial)<br>
+          • <strong>Laranja/suco</strong> (1º mundial)<br>
+          • <strong>Milho</strong> (3º mundial)</p>
+        </div>
+        <div class="card">
+          <h3>🏭 Indústria Brasileira</h3>
+          <p>Principais polos industriais:<br><br>
+          • <strong>Sudeste</strong> (SP, RJ, MG) – maior polo<br>
+          • <strong>Sul</strong> (PR, SC, RS) – agroindústria, calçados<br>
+          • <strong>Nordeste</strong> – têxtil, alimentos<br>
+          • <strong>Norte</strong> – Zona Franca de Manaus (ZFM)<br><br>
+          <strong>Tipos:</strong> pesada, de bens de consumo, de alta tecnologia</p>
+        </div>
+      </div>
+
+      <div class="card orange" style="margin-top:0.5rem">
+        <h3>💰 PIB e Desenvolvimento</h3>
+        <p><strong>PIB (Produto Interno Bruto):</strong> soma de todos os bens e serviços produzidos num país num ano. Mede o tamanho da economia.<br><br>
+        O Brasil tem a <strong>maior economia da América Latina</strong>. Porém, há grande desigualdade: muitas riquezas, mas distribuídas de forma desigual.<br><br>
+        <strong>IDH (Índice de Desenvolvimento Humano):</strong> mede não só a riqueza, mas também educação e saúde da população.</p>
+      </div>
+
+      <table class="blue-th blue-tr" style="margin-top:1rem">
+        <tr><th>Conceito</th><th>Definição</th><th>Exemplo</th></tr>
+        <tr><td><strong>Exportação</strong></td><td>Vender produtos para outros países</td><td>Brasil exporta soja para China</td></tr>
+        <tr><td><strong>Importação</strong></td><td>Comprar produtos de outros países</td><td>Brasil importa combustível</td></tr>
+        <tr><td><strong>Balança Comercial</strong></td><td>Diferença entre exportações e importações</td><td>Superávit = exporta mais</td></tr>
+        <tr><td><strong>Agronegócio</strong></td><td>Setor do agropecuário mais tecnológico e voltado ao mercado</td><td>Grandes produtores de soja no MT</td></tr>
+        <tr><td><strong>Zona Franca de Manaus</strong></td><td>Área com impostos reduzidos para atrair indústrias</td><td>Produção de eletrônicos no AM</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="quiz">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🧠</span>
+      <h2>Quiz de Geografia!</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="quiz-box">
+        <h3>🎯 Responda as questões:</h3>
+
+        <div class="quiz-question">
+          <p>1. A extração de látex (borracha) na Amazônia é um exemplo de:</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Extrativismo mineral predatório</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) Extrativismo animal</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) Extrativismo vegetal</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Setor secundário</button>
+          <div class="quiz-feedback">✅ Látex é extraído da seringueira (planta) → extrativismo vegetal!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. Uma fábrica de automóveis pertence a qual setor econômico?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Setor primário</button>
+          <button class="quiz-option" onclick="answer(this, true)">b) Setor secundário</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) Setor terciário</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Setor extrativista</button>
+          <div class="quiz-feedback">✅ Fábricas = setor secundário (transformação de matérias-primas em produtos industrializados)!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. O que diferencia o extrativismo sustentável do predatório?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) O tipo de recurso extraído (vegetal, animal ou mineral)</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) Se usa máquinas ou trabalho manual</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) Se respeita ou não a capacidade de renovação da natureza</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Se é feito em área urbana ou rural</button>
+          <div class="quiz-feedback">✅ A chave é a sustentabilidade: o extrativismo predatório não respeita o tempo de renovação da natureza!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. O Brasil é o maior produtor mundial de qual produto agrícola?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Trigo</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) Arroz</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) Soja</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Milho</button>
+          <div class="quiz-feedback">✅ O Brasil é o maior produtor mundial de soja, além de café e cana-de-açúcar!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. Um médico, um professor e um bancário trabalham em qual setor econômico?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Setor primário</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) Setor secundário</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) Setor terciário</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Setor quaternário</button>
+          <div class="quiz-feedback">✅ Médicos, professores e bancários prestam SERVIÇOS → setor terciário (serviços e comércio)!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>📚 Resumo P2 – Geografia | 7º Ano | Prova: 25/06 | Geo1 Cap.8 + Geo2 Cap.6</p>
+  <p style="margin-top:0.3rem"><a href="index.html">← Voltar para todos os resumos</a></p>
+</footer>
+
+<script>
+function toggle(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+function answer(btn, isCorrect) {
+  const questionDiv = btn.closest('.quiz-question');
+  const opts = questionDiv.querySelectorAll('.quiz-option');
+  const feedback = questionDiv.querySelector('.quiz-feedback');
+  opts.forEach(o => o.disabled = true);
+  if (isCorrect) { btn.classList.add('correct'); }
+  else { btn.classList.add('wrong'); feedback.textContent = '❌ Não foi! ' + feedback.textContent.replace(/^[✅❌]\s*/, ''); }
+  feedback.classList.add('show');
+}
+</script>
+</body>
+</html>

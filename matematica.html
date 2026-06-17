@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📐 Matemática P2 – 7º Ano</title>
+<style>
+  :root { --primary: #dc2626; --secondary: #f87171; --accent: #fbbf24; --bg: #fff5f5; --card: #fff; --text: #1c0a0a; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); }
+
+  header { background: linear-gradient(135deg, #991b1b, #dc2626); color: white; text-align: center; padding: 2rem 1rem 3rem; position: relative; overflow: hidden; }
+  header::before { content: '📐📏✏️'; position: absolute; bottom: 0.5rem; right: 1rem; font-size: 2rem; opacity: 0.25; }
+  header h1 { font-size: 2.2rem; font-weight: 800; }
+  header p { font-size: 1.1rem; opacity: 0.9; margin-top: 0.4rem; }
+  .badge { display: inline-block; background: #fbbf24; color: #1c1917; font-weight: 700; padding: 0.3rem 1rem; border-radius: 50px; margin-top: 0.8rem; font-size: 0.9rem; }
+
+  .nav-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; padding: 1rem; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
+  .nav-pills a { background: #fee2e2; color: var(--primary); text-decoration: none; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; }
+  .nav-pills a:hover { background: var(--primary); color: white; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem; }
+
+  .section { background: var(--card); border-radius: 16px; margin-bottom: 1.5rem; box-shadow: 0 4px 16px rgba(220,38,38,0.08); overflow: hidden; }
+  .section-header { background: linear-gradient(90deg, #991b1b, #dc2626); color: white; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none; }
+  .section-header.cap7 { background: linear-gradient(90deg, #c2410c, #ea580c); }
+  .section-header.cap8 { background: linear-gradient(90deg, #7c3aed, #8b5cf6); }
+  .section-header .icon { font-size: 1.5rem; }
+  .section-header h2 { font-size: 1.1rem; font-weight: 700; flex: 1; }
+  .section-header .arrow { font-size: 1rem; transition: transform 0.3s; }
+  .section-header.open .arrow { transform: rotate(180deg); }
+  .section-body { padding: 1.5rem; display: none; }
+  .section-body.open { display: block; }
+
+  .card { background: #fff5f5; border-left: 4px solid var(--primary); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+  .card h3 { color: var(--primary); font-size: 1rem; margin-bottom: 0.5rem; }
+  .card.orange { background: #fff7ed; border-left-color: #ea580c; }
+  .card.orange h3 { color: #c2410c; }
+  .card.purple { background: #faf5ff; border-left-color: #7c3aed; }
+  .card.purple h3 { color: #6d28d9; }
+  .card.blue { background: #eff6ff; border-left-color: #2563eb; }
+  .card.blue h3 { color: #1e40af; }
+  .card.green { background: #f0fdf4; border-left-color: #16a34a; }
+  .card.green h3 { color: #15803d; }
+
+  .highlight { background: #fef9c3; border-radius: 6px; padding: 0.8rem 1rem; margin: 0.8rem 0; border-left: 4px solid #fbbf24; }
+  .highlight strong { color: #92400e; }
+
+  .formula-box {
+    background: linear-gradient(135deg, #fff5f5, #fee2e2);
+    border: 2px solid #fca5a5;
+    border-radius: 12px;
+    padding: 1rem 1.2rem;
+    margin: 0.8rem 0;
+    font-family: 'Georgia', serif;
+  }
+  .formula-box .formula-label { font-size: 0.75rem; font-weight: 700; color: #dc2626; text-transform: uppercase; margin-bottom: 0.4rem; font-family: 'Segoe UI', sans-serif; }
+  .formula-box .formula { font-size: 1.2rem; color: #1c0a0a; text-align: center; padding: 0.5rem; }
+
+  .shape-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+  .shape-card {
+    background: white;
+    border-radius: 14px;
+    padding: 1.2rem;
+    border: 2px solid #fee2e2;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .shape-card .shape-name { font-weight: 700; color: var(--primary); font-size: 1rem; margin-bottom: 0.5rem; }
+  .shape-card svg { margin: 0.5rem auto; display: block; }
+  .shape-card .formulas { font-size: 0.85rem; text-align: left; color: #374151; }
+  .shape-card .formulas p { margin: 0.2rem 0; }
+  .shape-card .formulas strong { color: var(--primary); }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .grid-2 { grid-template-columns: 1fr; } }
+
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; margin: 0.8rem 0; }
+  th { background: var(--primary); color: white; padding: 0.6rem 1rem; text-align: left; }
+  td { padding: 0.6rem 1rem; border-bottom: 1px solid #fee2e2; vertical-align: top; }
+  tr:nth-child(even) td { background: #fff5f5; }
+
+  .example-box { background: #f0fdf4; border: 2px dashed #4ade80; border-radius: 10px; padding: 1rem; margin: 0.8rem 0; }
+  .example-box .label { font-size: 0.75rem; font-weight: 700; color: #16a34a; text-transform: uppercase; margin-bottom: 0.4rem; }
+
+  .transformation-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+  @media (max-width: 500px) { .transformation-grid { grid-template-columns: 1fr; } }
+  .transf-card { border-radius: 12px; padding: 1.2rem; color: white; text-align: center; }
+  .transf-card.t1 { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
+  .transf-card.t2 { background: linear-gradient(135deg, #0369a1, #0ea5e9); }
+  .transf-card.t3 { background: linear-gradient(135deg, #047857, #10b981); }
+  .transf-card .t-icon { font-size: 2rem; }
+  .transf-card h4 { font-size: 0.9rem; margin: 0.4rem 0 0.3rem; font-weight: 700; }
+  .transf-card p { font-size: 0.8rem; opacity: 0.9; }
+
+  .quiz-box { background: linear-gradient(135deg, #991b1b, #dc2626); color: white; border-radius: 14px; padding: 1.5rem; margin-top: 1rem; }
+  .quiz-box h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+  .quiz-question { margin-bottom: 1.5rem; }
+  .quiz-question p { margin-bottom: 0.6rem; font-weight: 500; }
+  .quiz-option { display: block; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3); border-radius: 8px; padding: 0.6rem 1rem; margin-bottom: 0.4rem; cursor: pointer; transition: all 0.2s; width: 100%; text-align: left; color: white; font-size: 0.95rem; }
+  .quiz-option:hover { background: rgba(255,255,255,0.25); }
+  .quiz-option.correct { background: #16a34a; border-color: #4ade80; }
+  .quiz-option.wrong { background: #7c3aed; border-color: #a78bfa; }
+  .quiz-feedback { font-size: 0.85rem; margin-top: 0.4rem; padding: 0.4rem 0.7rem; border-radius: 6px; display: none; }
+  .quiz-feedback.show { display: block; background: rgba(255,255,255,0.2); }
+
+  footer { text-align: center; padding: 2rem; color: #6b7280; font-size: 0.85rem; }
+  footer a { color: var(--primary); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📐 Matemática</h1>
+  <p>Resumo P2 – Geometria Plana, Área, Volume e Transformações</p>
+  <span class="badge">📅 Simulado – 25 de junho</span>
+</header>
+
+<nav class="nav-pills">
+  <a href="#geo-plana">Geometria Plana</a>
+  <a href="#area">Área</a>
+  <a href="#volume">Volume</a>
+  <a href="#transformacoes">Transformações</a>
+  <a href="#quiz">Quiz</a>
+</nav>
+
+<div class="container">
+
+  <!-- CONTEÚDO P2 CONFORME PDF -->
+  <div style="background:linear-gradient(135deg,#fee2e2,#fff5f5);border:2px solid #fca5a5;border-radius:14px;padding:1.2rem 1.5rem;margin-bottom:1.5rem">
+    <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.7rem">
+      <span style="font-size:1.3rem">📋</span>
+      <strong style="color:#991b1b;font-size:1rem">Conteúdo P2 – conforme Comunicado 07 (PDF)</strong>
+    </div>
+    <ul style="list-style:none;font-size:0.9rem;color:#374151;line-height:1.9">
+      <li>🔷 <strong>Cap. 6:</strong> Geometria Plana</li>
+      <li>📏 <strong>Cap. 7:</strong> Noções de área e volume</li>
+      <li>🔄 <strong>Cap. 8:</strong> Transformações geométricas</li>
+    </ul>
+    <p style="font-size:0.8rem;color:#6b7280;margin-top:0.5rem">📚 Referência: SME, caderno Marista Mais, anotações no caderno, fichas, material complementar no Teams</p>
+  </div>
+
+  <!-- CAP 6: GEOMETRIA PLANA -->
+  <div class="section" id="geo-plana">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🔷</span>
+      <h2>Cap. 6 – Geometria Plana</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="card">
+        <h3>📖 O que é Geometria Plana?</h3>
+        <p>Estuda as figuras que existem em apenas <strong>duas dimensões</strong> (comprimento e largura). Também chamada de geometria 2D ou euclidiana plana.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>📐 Elementos Básicos</h3>
+          <p><strong>Ponto:</strong> não tem dimensão, só posição<br>
+          <strong>Reta:</strong> 1D, infinita nos dois sentidos<br>
+          <strong>Semirreta:</strong> começa em um ponto, vai ao infinito<br>
+          <strong>Segmento:</strong> trecho limitado de reta<br>
+          <strong>Ângulo:</strong> abertura entre duas semirretas de mesmo ponto</p>
+        </div>
+        <div class="card blue">
+          <h3>📏 Tipos de Ângulos</h3>
+          <p><strong>Agudo:</strong> 0° &lt; α &lt; 90°<br>
+          <strong>Reto:</strong> α = 90°<br>
+          <strong>Obtuso:</strong> 90° &lt; α &lt; 180°<br>
+          <strong>Raso:</strong> α = 180°<br>
+          <strong>Complementares:</strong> soma = 90°<br>
+          <strong>Suplementares:</strong> soma = 180°</p>
+        </div>
+      </div>
+
+      <h3 style="margin:1rem 0 0.8rem; color:var(--primary)">🔷 Principais Figuras Planas</h3>
+      <div class="shape-grid">
+
+        <div class="shape-card">
+          <div class="shape-name">Triângulo</div>
+          <svg width="80" height="60" viewBox="0 0 80 60">
+            <polygon points="40,5 75,55 5,55" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+          </svg>
+          <div class="formulas">
+            <p><strong>Área:</strong> b × h ÷ 2</p>
+            <p><strong>Soma ângulos:</strong> 180°</p>
+            <p><strong>Tipos:</strong> equilátero (3 iguais), isósceles (2 iguais), escaleno (todos diferentes)</p>
+          </div>
+        </div>
+
+        <div class="shape-card">
+          <div class="shape-name">Quadrado</div>
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <rect x="5" y="5" width="60" height="60" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+            <text x="18" y="38" font-size="11" fill="#dc2626">l = lado</text>
+          </svg>
+          <div class="formulas">
+            <p><strong>Área:</strong> l²</p>
+            <p><strong>Perímetro:</strong> 4 × l</p>
+            <p>4 lados iguais, 4 ângulos retos</p>
+          </div>
+        </div>
+
+        <div class="shape-card">
+          <div class="shape-name">Retângulo</div>
+          <svg width="90" height="60" viewBox="0 0 90 60">
+            <rect x="5" y="5" width="80" height="50" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+            <text x="30" y="33" font-size="10" fill="#dc2626">b × h</text>
+          </svg>
+          <div class="formulas">
+            <p><strong>Área:</strong> b × h</p>
+            <p><strong>Perímetro:</strong> 2 × (b + h)</p>
+            <p>4 ângulos retos, lados opostos iguais</p>
+          </div>
+        </div>
+
+        <div class="shape-card">
+          <div class="shape-name">Paralelogramo</div>
+          <svg width="90" height="60" viewBox="0 0 90 60">
+            <polygon points="15,55 5,5 75,5 85,55" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+          </svg>
+          <div class="formulas">
+            <p><strong>Área:</strong> b × h</p>
+            <p>Lados opostos paralelos e iguais</p>
+          </div>
+        </div>
+
+        <div class="shape-card">
+          <div class="shape-name">Trapézio</div>
+          <svg width="90" height="60" viewBox="0 0 90 60">
+            <polygon points="20,5 70,5 85,55 5,55" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+            <text x="30" y="35" font-size="9" fill="#dc2626">B (base maior)</text>
+          </svg>
+          <div class="formulas">
+            <p><strong>Área:</strong> (B + b) × h ÷ 2</p>
+            <p>Um par de lados paralelos (bases)</p>
+          </div>
+        </div>
+
+        <div class="shape-card">
+          <div class="shape-name">Círculo / Circunferência</div>
+          <svg width="70" height="70" viewBox="0 0 70 70">
+            <circle cx="35" cy="35" r="30" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+            <line x1="35" y1="35" x2="65" y2="35" stroke="#dc2626" stroke-width="1.5"/>
+            <text x="40" y="30" font-size="9" fill="#dc2626">r</text>
+          </svg>
+          <div class="formulas">
+            <p><strong>Área:</strong> π × r²</p>
+            <p><strong>Comprimento:</strong> 2 × π × r</p>
+            <p>π ≈ 3,14 ou 22/7</p>
+          </div>
+        </div>
+
+        <div class="shape-card">
+          <div class="shape-name">Losango</div>
+          <svg width="70" height="80" viewBox="0 0 70 80">
+            <polygon points="35,5 65,40 35,75 5,40" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+            <line x1="35" y1="5" x2="35" y2="75" stroke="#dc2626" stroke-width="1" stroke-dasharray="3"/>
+            <line x1="5" y1="40" x2="65" y2="40" stroke="#dc2626" stroke-width="1" stroke-dasharray="3"/>
+          </svg>
+          <div class="formulas">
+            <p><strong>Área:</strong> D × d ÷ 2</p>
+            <p>(D = diagonal maior, d = diagonal menor)</p>
+            <p>4 lados iguais</p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="highlight" style="margin-top:1rem">
+        <strong>🧠 Memorize o valor de π:</strong> π ≈ 3,14159... Nas provas, normalmente usam π = 3,14 ou deixam em π mesmo.
+      </div>
+    </div>
+  </div>
+
+  <!-- CAP 7: ÁREA E VOLUME -->
+  <div class="section" id="area">
+    <div class="section-header cap7 open" onclick="toggle(this)">
+      <span class="icon">📏</span>
+      <h2>Cap. 7 – Noções de Área e Volume</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="grid-2">
+        <div class="card orange">
+          <h3>📐 Área</h3>
+          <p>Mede a <strong>superfície</strong> de uma figura. Usamos unidades quadradas:<br>
+          cm², m², km², etc.<br><br>
+          <strong>Dica:</strong> 1 m² = 10.000 cm²<br>
+          1 km² = 1.000.000 m²</p>
+        </div>
+        <div class="card blue">
+          <h3>📦 Volume</h3>
+          <p>Mede o <strong>espaço interno</strong> de uma figura 3D. Usamos unidades cúbicas:<br>
+          cm³, m³, litros (L), etc.<br><br>
+          <strong>Dica:</strong> 1 L = 1 dm³ = 1.000 cm³<br>
+          1 m³ = 1.000 L</p>
+        </div>
+      </div>
+
+      <div class="formula-box" style="margin-top:1rem">
+        <div class="formula-label">Resumo das Fórmulas de Área</div>
+        <table style="margin:0">
+          <tr><th>Figura</th><th>Fórmula da Área</th></tr>
+          <tr><td>Quadrado</td><td><strong>A = l²</strong></td></tr>
+          <tr><td>Retângulo</td><td><strong>A = b × h</strong></td></tr>
+          <tr><td>Triângulo</td><td><strong>A = (b × h) / 2</strong></td></tr>
+          <tr><td>Paralelogramo</td><td><strong>A = b × h</strong></td></tr>
+          <tr><td>Trapézio</td><td><strong>A = (B + b) × h / 2</strong></td></tr>
+          <tr><td>Losango</td><td><strong>A = (D × d) / 2</strong></td></tr>
+          <tr><td>Círculo</td><td><strong>A = π × r²</strong></td></tr>
+        </table>
+      </div>
+
+      <h3 style="margin:1.5rem 0 0.8rem; color:#c2410c">📦 Volumes dos Sólidos</h3>
+
+      <div class="grid-2">
+        <div class="card orange">
+          <h3>🧱 Paralelepípedo (caixa)</h3>
+          <p><strong>Volume:</strong> V = c × l × a<br>
+          (comprimento × largura × altura)<br><br>
+          <strong>Área total:</strong> A = 2(cl + ca + la)</p>
+          <div class="example-box">
+            <div class="label">Exemplo</div>
+            <p>Caixa: 5m × 3m × 2m<br>
+            V = 5 × 3 × 2 = <strong>30 m³</strong></p>
+          </div>
+        </div>
+        <div class="card blue">
+          <h3>🔷 Cubo</h3>
+          <p><strong>Volume:</strong> V = a³<br>
+          (aresta³)<br><br>
+          <strong>Área total:</strong> A = 6 × a²<br>
+          (6 faces quadradas)</p>
+          <div class="example-box">
+            <div class="label">Exemplo</div>
+            <p>Cubo com aresta 4 cm:<br>
+            V = 4³ = 4 × 4 × 4 = <strong>64 cm³</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:1rem">
+        <div class="card purple">
+          <h3>🥫 Cilindro</h3>
+          <p><strong>Volume:</strong> V = π × r² × h<br><br>
+          <strong>Área lateral:</strong> A = 2 × π × r × h<br>
+          <strong>Área total:</strong> A = 2πr² + 2πrh</p>
+        </div>
+        <div class="card green">
+          <h3>🔺 Pirâmide</h3>
+          <p><strong>Volume:</strong> V = A<sub>base</sub> × h / 3<br><br>
+          O volume é ⅓ do volume do prisma correspondente.</p>
+        </div>
+      </div>
+
+      <div class="highlight">
+        <strong>💡 Dica prática:</strong> Volume de prisma = área da base × altura. O cilindro é um "prisma circular"!
+      </div>
+    </div>
+  </div>
+
+  <!-- CAP 8: TRANSFORMAÇÕES GEOMÉTRICAS -->
+  <div id="volume"></div>
+  <div class="section" id="transformacoes" style="margin-top:0">
+    <div class="section-header cap8 open" onclick="toggle(this)">
+      <span class="icon">🔄</span>
+      <h2>Cap. 8 – Transformações Geométricas</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="card purple">
+        <h3>📖 O que são Transformações Geométricas?</h3>
+        <p>São operações que <strong>movem, giram, refletem ou redimensionam</strong> uma figura, gerando uma nova figura (a imagem). A figura original é chamada de <strong>pré-imagem</strong> e o resultado é a <strong>imagem</strong>.</p>
+      </div>
+
+      <div class="transformation-grid">
+        <div class="transf-card t1">
+          <div class="t-icon">↔️</div>
+          <h4>Translação</h4>
+          <p>Desliza a figura de um ponto para outro, sem rodar nem virar. Mantém tamanho, forma e orientação.</p>
+        </div>
+        <div class="transf-card t2">
+          <div class="t-icon">🔄</div>
+          <h4>Rotação</h4>
+          <p>Gira a figura em torno de um ponto (centro de rotação) por um ângulo determinado. Mantém tamanho e forma.</p>
+        </div>
+        <div class="transf-card t3">
+          <div class="t-icon">🪞</div>
+          <h4>Reflexão (Simetria)</h4>
+          <p>Reflete a figura em relação a um eixo (como um espelho). A imagem é "espelhada". Mantém tamanho e forma.</p>
+        </div>
+      </div>
+
+      <div class="grid-2" style="margin-top:1rem">
+        <div class="card">
+          <h3>📐 Homotetia (Ampliação/Redução)</h3>
+          <p>Amplia ou reduz uma figura proporcionalmente a partir de um ponto fixo (centro de homotetia).<br><br>
+          <strong>Fator k &gt; 1:</strong> ampliação<br>
+          <strong>0 &lt; k &lt; 1:</strong> redução<br>
+          <strong>k = 1:</strong> figura idêntica<br><br>
+          A forma é preservada, mas o tamanho muda!</p>
+        </div>
+        <div class="card blue">
+          <h3>🔑 Isometrias vs. Homotetia</h3>
+          <p><strong>Isometrias</strong> (preservam tamanho):<br>
+          ✅ Translação<br>
+          ✅ Rotação<br>
+          ✅ Reflexão<br><br>
+          <strong>Homotetia</strong> (muda tamanho):<br>
+          ⚖️ Ampliação ou redução proporcional</p>
+        </div>
+      </div>
+
+      <div class="example-box" style="margin-top:1rem">
+        <div class="label">Exemplos do Dia a Dia</div>
+        <p>🪞 <strong>Reflexão:</strong> imagem no espelho, dobrar papel e recortar<br>
+        🔄 <strong>Rotação:</strong> ponteiros do relógio, roda-gigante<br>
+        ↔️ <strong>Translação:</strong> deslizar um objeto na mesa sem girá-lo<br>
+        🔍 <strong>Homotetia:</strong> zoom de câmera, fotocopiar em escala diferente, mapa</p>
+      </div>
+
+      <div class="highlight">
+        <strong>🧩 Figuras com simetria:</strong> Quadrado (4 eixos), Retângulo (2 eixos), Círculo (infinitos eixos), Triângulo equilátero (3 eixos). A simetria está em todos os lados na natureza: flores, borboletas, folhas!
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="quiz">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🧠</span>
+      <h2>Quiz de Matemática!</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="quiz-box">
+        <h3>🎯 Resolva as questões:</h3>
+
+        <div class="quiz-question">
+          <p>1. Um retângulo tem base 8 cm e altura 5 cm. Qual é sua área?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) 26 cm²</button>
+          <button class="quiz-option" onclick="answer(this, true)">b) 40 cm²</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) 13 cm²</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) 20 cm²</button>
+          <div class="quiz-feedback">✅ Área do retângulo = b × h = 8 × 5 = 40 cm²!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. Um cubo tem aresta de 3 cm. Qual é seu volume?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) 9 cm³</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) 18 cm³</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) 27 cm³</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) 54 cm³</button>
+          <div class="quiz-feedback">✅ Volume do cubo = a³ = 3³ = 3 × 3 × 3 = 27 cm³!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. Um trapézio tem base maior B = 10 cm, base menor b = 6 cm e altura h = 4 cm. Qual é sua área?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) 24 cm²</button>
+          <button class="quiz-option" onclick="answer(this, true)">b) 32 cm²</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) 40 cm²</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) 16 cm²</button>
+          <div class="quiz-feedback">✅ A = (B + b) × h / 2 = (10 + 6) × 4 / 2 = 16 × 4 / 2 = 64 / 2 = 32 cm²!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. Qual transformação geométrica equivale ao efeito de um espelho?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Translação</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) Rotação</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) Reflexão</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Homotetia</button>
+          <div class="quiz-feedback">✅ Reflexão = efeito espelho! A figura é "invertida" em relação a um eixo.</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. Um círculo tem raio r = 5 cm. Qual é sua área? (use π = 3,14)</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) 15,7 cm²</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) 31,4 cm²</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) 50 cm²</button>
+          <button class="quiz-option" onclick="answer(this, true)">d) 78,5 cm²</button>
+          <div class="quiz-feedback">✅ A = π × r² = 3,14 × 5² = 3,14 × 25 = 78,5 cm²!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>📚 Resumo P2 – Matemática | 7º Ano | Prova: 25/06 | Cap.6: Geometria + Cap.7: Área/Volume + Cap.8: Transformações</p>
+  <p style="margin-top:0.3rem"><a href="index.html">← Voltar para todos os resumos</a></p>
+</footer>
+
+<script>
+function toggle(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+function answer(btn, isCorrect) {
+  const questionDiv = btn.closest('.quiz-question');
+  const opts = questionDiv.querySelectorAll('.quiz-option');
+  const feedback = questionDiv.querySelector('.quiz-feedback');
+  opts.forEach(o => o.disabled = true);
+  if (isCorrect) { btn.classList.add('correct'); }
+  else { btn.classList.add('wrong'); feedback.textContent = '❌ Tente novamente! ' + feedback.textContent.replace(/^[✅❌]\s*/, ''); }
+  feedback.classList.add('show');
+}
+</script>
+</body>
+</html>

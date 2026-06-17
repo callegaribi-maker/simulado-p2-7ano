@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏛️ História P2 – 7º Ano</title>
+<style>
+  :root { --primary: #b45309; --secondary: #d97706; --accent: #fbbf24; --bg: #fffbeb; --card: #fff; --text: #1c1917; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', Arial, sans-serif; background: var(--bg); color: var(--text); }
+
+  header { background: linear-gradient(135deg, #92400e, #b45309); color: white; text-align: center; padding: 2rem 1rem 3rem; position: relative; overflow: hidden; }
+  header::before { content: '⚔️🌊🗺️'; position: absolute; bottom: 0.5rem; right: 1rem; font-size: 2rem; opacity: 0.25; }
+  header h1 { font-size: 2.2rem; font-weight: 800; }
+  header p { font-size: 1.1rem; opacity: 0.9; margin-top: 0.4rem; }
+  .badge { display: inline-block; background: #fbbf24; color: #1c1917; font-weight: 700; padding: 0.3rem 1rem; border-radius: 50px; margin-top: 0.8rem; font-size: 0.9rem; }
+
+  .nav-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; justify-content: center; padding: 1rem; background: white; box-shadow: 0 2px 8px rgba(0,0,0,0.08); position: sticky; top: 0; z-index: 100; }
+  .nav-pills a { background: #fef3c7; color: var(--primary); text-decoration: none; padding: 0.4rem 1rem; border-radius: 50px; font-size: 0.85rem; font-weight: 600; transition: all 0.2s; }
+  .nav-pills a:hover { background: var(--primary); color: white; }
+
+  .container { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem; }
+
+  .section { background: var(--card); border-radius: 16px; margin-bottom: 1.5rem; box-shadow: 0 4px 16px rgba(180,83,9,0.08); overflow: hidden; }
+  .section-header { background: linear-gradient(90deg, #92400e, #b45309); color: white; padding: 1rem 1.5rem; display: flex; align-items: center; gap: 0.75rem; cursor: pointer; user-select: none; }
+  .section-header .icon { font-size: 1.5rem; }
+  .section-header h2 { font-size: 1.1rem; font-weight: 700; flex: 1; }
+  .section-header .arrow { font-size: 1rem; transition: transform 0.3s; }
+  .section-header.open .arrow { transform: rotate(180deg); }
+  .section-body { padding: 1.5rem; display: none; }
+  .section-body.open { display: block; }
+
+  .card { background: #fef3c7; border-left: 4px solid var(--primary); border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+  .card h3 { color: var(--primary); font-size: 1rem; margin-bottom: 0.5rem; }
+  .card.blue { background: #eff6ff; border-left-color: #2563eb; }
+  .card.blue h3 { color: #1e40af; }
+  .card.green { background: #f0fdf4; border-left-color: #16a34a; }
+  .card.green h3 { color: #15803d; }
+  .card.red { background: #fef2f2; border-left-color: #dc2626; }
+  .card.red h3 { color: #b91c1c; }
+  .card.purple { background: #faf5ff; border-left-color: #7c3aed; }
+  .card.purple h3 { color: #6d28d9; }
+
+  .highlight { background: #fef9c3; border-radius: 6px; padding: 0.8rem 1rem; margin: 0.8rem 0; border-left: 4px solid #fbbf24; }
+  .highlight strong { color: #92400e; }
+
+  .timeline { position: relative; padding-left: 2rem; }
+  .timeline::before { content: ''; position: absolute; left: 0.7rem; top: 0; bottom: 0; width: 3px; background: linear-gradient(to bottom, #b45309, #fbbf24); border-radius: 2px; }
+  .timeline-item { position: relative; margin-bottom: 1.2rem; }
+  .timeline-item::before { content: ''; position: absolute; left: -1.65rem; top: 0.3rem; width: 14px; height: 14px; border-radius: 50%; background: var(--primary); border: 3px solid #fef3c7; box-shadow: 0 0 0 2px var(--primary); }
+  .timeline-item .date { font-size: 0.8rem; font-weight: 700; color: var(--secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+  .timeline-item h3 { font-size: 0.95rem; font-weight: 700; color: var(--text); margin: 0.1rem 0 0.2rem; }
+  .timeline-item p { font-size: 0.88rem; color: #57534e; }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
+  @media (max-width: 600px) { .grid-2, .grid-3 { grid-template-columns: 1fr; } }
+
+  .compare-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  .compare-table th { background: var(--primary); color: white; padding: 0.6rem 1rem; text-align: left; }
+  .compare-table td { padding: 0.6rem 1rem; border-bottom: 1px solid #fde68a; vertical-align: top; }
+  .compare-table tr:nth-child(even) td { background: #fffbeb; }
+
+  .tag { display: inline-block; background: #fde68a; color: #92400e; border-radius: 50px; padding: 0.2rem 0.7rem; font-size: 0.8rem; font-weight: 600; margin: 0.2rem; }
+
+  .map-box { background: linear-gradient(135deg, #1e3a5f, #2d6a9f); border-radius: 14px; padding: 1.5rem; color: white; margin: 1rem 0; }
+  .map-box h3 { margin-bottom: 0.8rem; font-size: 1rem; }
+  .route { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem; font-size: 0.9rem; }
+  .route .place { background: rgba(255,255,255,0.15); padding: 0.3rem 0.7rem; border-radius: 6px; }
+  .route .arrow { opacity: 0.7; }
+
+  .quiz-box { background: linear-gradient(135deg, #92400e, #b45309); color: white; border-radius: 14px; padding: 1.5rem; margin-top: 1rem; }
+  .quiz-box h3 { font-size: 1.1rem; margin-bottom: 1rem; }
+  .quiz-question { margin-bottom: 1.5rem; }
+  .quiz-question p { margin-bottom: 0.6rem; font-weight: 500; }
+  .quiz-option { display: block; background: rgba(255,255,255,0.15); border: 2px solid rgba(255,255,255,0.3); border-radius: 8px; padding: 0.6rem 1rem; margin-bottom: 0.4rem; cursor: pointer; transition: all 0.2s; width: 100%; text-align: left; color: white; font-size: 0.95rem; }
+  .quiz-option:hover { background: rgba(255,255,255,0.25); }
+  .quiz-option.correct { background: #16a34a; border-color: #4ade80; }
+  .quiz-option.wrong { background: #dc2626; border-color: #f87171; }
+  .quiz-feedback { font-size: 0.85rem; margin-top: 0.4rem; padding: 0.4rem 0.7rem; border-radius: 6px; display: none; }
+  .quiz-feedback.show { display: block; background: rgba(255,255,255,0.2); }
+
+  footer { text-align: center; padding: 2rem; color: #78716c; font-size: 0.85rem; }
+  footer a { color: var(--primary); text-decoration: none; }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>🏛️ História</h1>
+  <p>Resumo P2 – Cap. 7: Colonização da América</p>
+  <span class="badge">📅 Simulado – 25 de junho</span>
+</header>
+
+<nav class="nav-pills">
+  <a href="#contexto">Contexto</a>
+  <a href="#chegada">Chegada à América</a>
+  <a href="#colonizacao">Colonização</a>
+  <a href="#resistencia">Resistência</a>
+  <a href="#legado">Legado</a>
+  <a href="#quiz">Quiz</a>
+</nav>
+
+<div class="container">
+
+  <!-- CONTEÚDO P2 CONFORME PDF -->
+  <div style="background:linear-gradient(135deg,#fef3c7,#fffbeb);border:2px solid #fcd34d;border-radius:14px;padding:1.2rem 1.5rem;margin-bottom:1.5rem">
+    <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.7rem">
+      <span style="font-size:1.3rem">📋</span>
+      <strong style="color:#92400e;font-size:1rem">Conteúdo P2 – conforme Comunicado 07 (PDF)</strong>
+    </div>
+    <ul style="list-style:none;font-size:0.9rem;color:#374151;line-height:1.9">
+      <li>🏛️ <strong>Capítulo 7:</strong> O processo de colonização na América</li>
+    </ul>
+    <p style="font-size:0.8rem;color:#6b7280;margin-top:0.5rem">📚 Referência: SME, caderno Marista Mais, anotações no caderno, fichas, material complementar no Teams</p>
+  </div>
+
+  <!-- CONTEXTO -->
+  <div class="section" id="contexto">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🌍</span>
+      <h2>Contexto: O Que Levou à Colonização?</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="highlight">
+        <strong>Conexão com o P1:</strong> As Grandes Navegações (cap. 5-6) abriram o caminho para a colonização da América. Os europeus buscavam riquezas, terras e expansão do poder.
+      </div>
+      <div class="grid-2">
+        <div class="card">
+          <h3>💰 Motivações Europeias</h3>
+          <p>• Busca por riquezas (ouro, prata)<br>
+          • Exploração de novas terras<br>
+          • Expansão religiosa (catolicismo)<br>
+          • Interesses comerciais e políticos<br>
+          • Superpopulação e fome na Europa</p>
+        </div>
+        <div class="card blue">
+          <h3>🏴 Principais Colonizadores</h3>
+          <p>• <strong>Portugal</strong> → Brasil<br>
+          • <strong>Espanha</strong> → América Central, Caribe, América do Sul<br>
+          • <strong>Inglaterra</strong> → América do Norte<br>
+          • <strong>França</strong> → Canadá, parte do Caribe<br>
+          • <strong>Holanda</strong> → Suriname, ilhas caribenhas</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHEGADA -->
+  <div class="section" id="chegada">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">⛵</span>
+      <h2>Chegada dos Europeus à América</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="date">1492</div>
+          <h3>🇪🇸 Cristóvão Colombo chega à América</h3>
+          <p>Navegador a serviço da Espanha. Pensava ter chegado às Índias. Chegou ao Caribe (Bahamas, Cuba, Haiti).</p>
+        </div>
+        <div class="timeline-item">
+          <div class="date">1500</div>
+          <h3>🇵🇹 Pedro Álvares Cabral chega ao Brasil</h3>
+          <p>A serviço de Portugal. Aportou no litoral do atual estado da Bahia. O território passou a ser chamado de "Terra de Vera Cruz" e depois "Brasil" (por causa do pau-brasil).</p>
+        </div>
+        <div class="timeline-item">
+          <div class="date">1494</div>
+          <h3>📜 Tratado de Tordesilhas</h3>
+          <p>Acordo entre Portugal e Espanha dividindo as terras do "Novo Mundo". A linha imaginária passava 370 léguas a oeste de Cabo Verde. Terras a leste: Portugal. Terras a oeste: Espanha.</p>
+        </div>
+        <div class="timeline-item">
+          <div class="date">Séc. XVI</div>
+          <h3>🗺️ Início da Colonização</h3>
+          <p>Europeus estabelecem colônias, exploram recursos e impõem seu domínio sobre os povos indígenas.</p>
+        </div>
+      </div>
+      <div class="highlight">
+        <strong>🤔 Curiosidade:</strong> O nome "América" vem do navegador Américo Vespúcio, que percebeu que as terras descobertas eram um continente novo, diferente da Ásia.
+      </div>
+    </div>
+  </div>
+
+  <!-- COLONIZAÇÃO -->
+  <div class="section" id="colonizacao">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">⚒️</span>
+      <h2>O Processo de Colonização</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="grid-2">
+        <div class="card">
+          <h3>🌿 Exploração Econômica</h3>
+          <p>Os colonizadores extraíam riquezas para enriquecer a metrópole:<br><br>
+          • <strong>Brasil:</strong> pau-brasil, cana-de-açúcar, ouro, café<br>
+          • <strong>América espanhola:</strong> prata (Potosí), ouro<br>
+          • <strong>Caribe:</strong> cana-de-açúcar, tabaco<br><br>
+          Sistema chamado de <strong>Pacto Colonial</strong>: colônia produz → metrópole lucra.</p>
+        </div>
+        <div class="card red">
+          <h3>⛓️ Escravidão</h3>
+          <p>Para trabalhar nas lavouras e minas:<br><br>
+          <strong>1ª fase:</strong> Escravidão indígena (encontraram resistência)<br>
+          <strong>2ª fase:</strong> Tráfico negreiro – africanos escravizados trazidos à força<br><br>
+          Estima-se que mais de <strong>12 milhões de africanos</strong> foram trazidos para as Américas.</p>
+        </div>
+      </div>
+
+      <div class="grid-3" style="margin-top:1rem">
+        <div class="card green">
+          <h3>✝️ Missão Religiosa</h3>
+          <p>Jesuítas e outros missionários tentaram converter os indígenas ao catolicismo. Criaram as "reduções" (aldeias missionárias).</p>
+        </div>
+        <div class="card blue">
+          <h3>🏛️ Administração Colonial</h3>
+          <p>Criaram capitanias hereditárias (Brasil), vice-reinados (América espanhola). O governador representava a coroa europeia.</p>
+        </div>
+        <div class="card purple">
+          <h3>🐄 Pecuária e Agricultura</h3>
+          <p>Introdução de animais europeus (gado, cavalos, porcos) e plantas (cana, trigo). Transformou profundamente os biomas americanos.</p>
+        </div>
+      </div>
+
+      <div class="highlight" style="margin-top:1rem">
+        <strong>💡 Sistema de Plantation:</strong> Grandes propriedades rurais (latifúndios) com monocultura voltada à exportação + mão de obra escravizada. Base da economia colonial.
+      </div>
+    </div>
+  </div>
+
+  <!-- RESISTÊNCIA -->
+  <div class="section" id="resistencia">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">✊</span>
+      <h2>Resistência Indígena e Africana</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="grid-2">
+        <div class="card">
+          <h3>🏹 Resistência Indígena</h3>
+          <p>• Fugas para o interior do continente<br>
+          • Guerras contra colonizadores<br>
+          • Recusa ao trabalho forçado<br>
+          • Alianças com rivais dos colonizadores<br>
+          • Preservação de rituais e línguas<br><br>
+          <strong>Exemplo:</strong> Confederação dos Tamoios (aliança de povos Tupi contra portugueses no Brasil)</p>
+        </div>
+        <div class="card red">
+          <h3>✊ Resistência Africana</h3>
+          <p>• Levantes e revoltas a bordo dos navios negreiros<br>
+          • Fugas → formação dos <strong>quilombos</strong><br>
+          • Preservação cultural (religiões de matriz africana, línguas)<br>
+          • Revoltas nas fazendas<br><br>
+          <strong>Exemplo:</strong> <strong>Quilombo dos Palmares</strong> (Brasil) – maior quilombo, liderado por Zumbi</p>
+        </div>
+      </div>
+      <div class="highlight">
+        <strong>😢 Impacto sobre os Indígenas:</strong> Doenças trazidas pelos europeus (varíola, sarampo) mataram até 90% da população indígena em algumas regiões. Além disso, houve violência, escravização e destruição cultural.
+      </div>
+    </div>
+  </div>
+
+  <!-- LEGADO -->
+  <div class="section" id="legado">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🌐</span>
+      <h2>Consequências e Legado</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <table class="compare-table">
+        <tr><th>Para os Indígenas</th><th>Para os Africanos</th><th>Para os Europeus</th></tr>
+        <tr>
+          <td>Perda de terras e territórios<br>Dizimação por doenças<br>Escravização e trabalho forçado<br>Destruição cultural e religiosa</td>
+          <td>Escravização e violência<br>Separação de famílias e povos<br>Desumanização<br>Preservação cultural na luta</td>
+          <td>Enriquecimento das coroas<br>Acumulação de capital<br>Formação de impérios coloniais<br>Base para a Revolução Industrial</td>
+        </tr>
+      </table>
+      <div class="card green" style="margin-top:1rem">
+        <h3>🌎 A América Hoje</h3>
+        <p>A colonização moldou profundamente as sociedades americanas. Elementos culturais indígenas, africanos e europeus se misturam na cultura, gastronomia, idiomas e religiões de países como o Brasil, criando sociedades <strong>mestiças e plurais</strong>.</p>
+      </div>
+      <div class="highlight">
+        <strong>🔗 Conexão com o Projeto Interdisciplinar (P2):</strong> A exploração de recursos naturais e a busca por lucro iniciada na colonização tem relação direta com o consumismo atual. Os padrões de exploração continuam moldando o mundo!
+      </div>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="section" id="quiz">
+    <div class="section-header open" onclick="toggle(this)">
+      <span class="icon">🧠</span>
+      <h2>Quiz de História!</h2>
+      <span class="arrow">▼</span>
+    </div>
+    <div class="section-body open">
+      <div class="quiz-box">
+        <h3>🎯 Responda as questões:</h3>
+
+        <div class="quiz-question">
+          <p>1. Em que ano Pedro Álvares Cabral chegou ao Brasil?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) 1492</button>
+          <button class="quiz-option" onclick="answer(this, true)">b) 1500</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) 1494</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) 1521</button>
+          <div class="quiz-feedback">✅ 1500! Cristóvão Colombo chegou ao Caribe em 1492. O Tratado de Tordesilhas foi em 1494.</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>2. O que foi o Tratado de Tordesilhas?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Um tratado de paz entre indígenas e europeus</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) Um acordo para acabar com a escravidão</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) Um acordo entre Portugal e Espanha dividindo as terras do Novo Mundo</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Um tratado de comércio de pau-brasil</button>
+          <div class="quiz-feedback">✅ Correto! O Tratado de Tordesilhas (1494) dividiu as terras descobertas entre Portugal (leste) e Espanha (oeste).</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>3. O que foi o Quilombo dos Palmares?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Uma fazenda colonial de cana-de-açúcar</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) Uma missão jesuítica no Paraguai</button>
+          <button class="quiz-option" onclick="answer(this, true)">c) Uma comunidade de africanos escravizados fugidos, liderada por Zumbi</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Um porto de chegada de navios negreiros</button>
+          <div class="quiz-feedback">✅ O Quilombo dos Palmares foi o maior quilombo do Brasil colonial, liderado por Zumbi, símbolo de resistência!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>4. Qual era o principal objetivo econômico dos colonizadores europeus na América?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Criar uma sociedade igualitária com os indígenas</button>
+          <button class="quiz-option" onclick="answer(this, true)">b) Extrair riquezas (ouro, prata, pau-brasil) para enriquecer a metrópole</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) Estabelecer democracias nas novas terras</button>
+          <button class="quiz-option" onclick="answer(this, false)">d) Proteger os indígenas das guerras tribais</button>
+          <div class="quiz-feedback">✅ O Pacto Colonial: as colônias produziam riquezas para enriquecer a metrópole europeia!</div>
+        </div>
+
+        <div class="quiz-question">
+          <p>5. Como os indígenas resistiram à colonização?</p>
+          <button class="quiz-option" onclick="answer(this, false)">a) Aceitaram pacificamente os colonizadores</button>
+          <button class="quiz-option" onclick="answer(this, false)">b) Converteram-se ao catolicismo voluntariamente</button>
+          <button class="quiz-option" onclick="answer(this, false)">c) Fugiram sem resistir</button>
+          <button class="quiz-option" onclick="answer(this, true)">d) Fugas, guerras, alianças e preservação de suas culturas</button>
+          <div class="quiz-feedback">✅ Os indígenas resistiram de várias formas: guerras, fugas, alianças e preservação cultural!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>📚 Resumo P2 – História | 7º Ano | Prova: 25/06 | Cap. 7: Colonização da América</p>
+  <p style="margin-top:0.3rem"><a href="index.html">← Voltar para todos os resumos</a></p>
+</footer>
+
+<script>
+function toggle(header) {
+  header.classList.toggle('open');
+  const body = header.nextElementSibling;
+  body.classList.toggle('open');
+}
+function answer(btn, isCorrect) {
+  const questionDiv = btn.closest('.quiz-question');
+  const opts = questionDiv.querySelectorAll('.quiz-option');
+  const feedback = questionDiv.querySelector('.quiz-feedback');
+  opts.forEach(o => o.disabled = true);
+  if (isCorrect) { btn.classList.add('correct'); }
+  else { btn.classList.add('wrong'); feedback.textContent = '❌ Não exatamente! ' + feedback.textContent.replace(/^[✅❌]\s*/, ''); }
+  feedback.classList.add('show');
+}
+</script>
+</body>
+</html>
