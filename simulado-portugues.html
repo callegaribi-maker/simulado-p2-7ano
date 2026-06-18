@@ -24,7 +24,7 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
 .question-card{background:white;border-radius:16px;padding:1.3rem;margin-bottom:1rem;box-shadow:0 2px 12px rgba(0,0,0,.15)}
 .q-header{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.9rem}
 .q-num{background:#7c3aed;color:white;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;flex-shrink:0;margin-top:2px}
-.q-text{font-weight:600;font-size:.95rem;line-height:1.5;color:#1e293b}
+.q-text{font-weight:500;font-size:.95rem;line-height:1.6;color:#1e293b}
 .diff-badge{display:inline-block;font-size:.7rem;font-weight:700;padding:.15rem .55rem;border-radius:50px;margin-left:.5rem;vertical-align:middle}
 .badge-facil{background:#dcfce7;color:#166534}
 .badge-medio{background:#fef3c7;color:#92400e}
@@ -40,13 +40,11 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
 .feedback.show{display:block}
 .feedback.ok{background:#dcfce7;color:#166534}
 .feedback.err{background:#fff7ed;color:#92400e;border-left:3px solid #f59e0b}
-
 #submit-section{display:none;text-align:center;padding:2rem;background:white;border-radius:20px;margin-top:2rem;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 #submit-section h2{font-size:1.3rem;color:#1e293b;margin-bottom:.5rem}
 #submit-section p{color:#64748b;margin-bottom:1.2rem;font-size:.9rem}
 .submit-btn{background:linear-gradient(135deg,#7c3aed,#5b21b6);color:white;border:none;padding:1rem 2.5rem;border-radius:50px;font-size:1.05rem;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.2)}
 .submit-btn:hover{transform:translateY(-2px)}
-
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center;padding:1rem}
 .modal-overlay.show{display:flex}
 .modal{background:white;border-radius:24px;padding:2rem;max-width:440px;width:100%;text-align:center;max-height:90vh;overflow-y:auto}
@@ -92,8 +90,6 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="submit-btn" onclick="openNameModal()">📊 Ver minha nota! 🚀</button>
   </div>
 </div>
-
-<!-- Modal: nome -->
 <div class="modal-overlay" id="name-modal">
   <div class="modal">
     <div class="modal-emoji">✏️</div>
@@ -103,8 +99,6 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="confirm-btn" id="confirm-btn" onclick="confirmAndReveal()" disabled>Ver minha nota! 🚀</button>
   </div>
 </div>
-
-<!-- Modal: resultado -->
 <div class="modal-overlay" id="result-modal">
   <div class="modal">
     <div class="modal-emoji" id="m-emoji"></div>
@@ -120,37 +114,36 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="modal-close" onclick="document.getElementById('result-modal').classList.remove('show')">Ver gabarito detalhado ↓</button>
   </div>
 </div>
-
 <script>
 const SUBJECT = "Língua Portuguesa";
-const questions = [{"d": "facil", "q": "\"Forte como um leão\" é um exemplo de qual figura de linguagem?", "opts": ["Metáfora", "Hipérbole", "Comparação", "Ironia"], "c": 2}, {"d": "facil", "q": "O conjunto de versos em um poema chama-se:", "opts": ["Rima", "Estrofe", "Verso", "Métrica"], "c": 1}, {"d": "facil", "q": "Qual a forma correta ao perguntar o motivo de algo?", "opts": ["Porque", "Por quê", "Porquê", "Por que"], "c": 1}, {"d": "facil", "q": "\"Ela é uma rosa\" é exemplo de:", "opts": ["Comparação", "Metáfora", "Ironia", "Eufemismo"], "c": 1}, {"d": "facil", "q": "A classe gramatical que indica ação é o:", "opts": ["Substantivo", "Adjetivo", "Verbo", "Pronome"], "c": 2}, {"d": "facil", "q": "\"Ele partiu para uma viagem sem volta\" (referindo-se à morte) é:", "opts": ["Ironia", "Hipérbole", "Eufemismo", "Antítese"], "c": 2}, {"d": "facil", "q": "Preposições servem para:", "opts": ["Indicar ação", "Nomear pessoas", "Ligar termos da oração", "Qualificar substantivos"], "c": 2}, {"d": "medio", "q": "\"Amor e ódio se misturam\" exemplifica qual figura de linguagem?", "opts": ["Metáfora", "Hipérbole", "Antítese", "Comparação"], "c": 2}, {"d": "medio", "q": "\"Que dia lindo!\" dito em um dia de chuva intensa é um exemplo de:", "opts": ["Eufemismo", "Ironia", "Hipérbole", "Antítese"], "c": 1}, {"d": "medio", "q": "\"Porque\" junto e sem acento aparece quando:", "opts": ["Em perguntas diretas", "Dando explicação ou causa", "No final de uma pergunta", "Como substantivo"], "c": 1}, {"d": "medio", "q": "\"Esperei mil anos por você\" usa qual figura?", "opts": ["Metáfora", "Hipérbole", "Antítese", "Comparação"], "c": 1}, {"d": "medio", "q": "A preposição que indica lugar de origem é:", "opts": ["Para", "Com", "De", "Em"], "c": 2}, {"d": "medio", "q": "\"Porquê\" com acento, escrito junto, é um:", "opts": ["Verbo", "Advérbio", "Substantivo", "Adjetivo"], "c": 2}, {"d": "medio", "q": "\"Seus olhos são estrelas\" é qual figura de linguagem?", "opts": ["Comparação", "Ironia", "Metáfora", "Eufemismo"], "c": 2}, {"d": "dificil", "q": "Na frase \"Caminhei pela cidade\", \"pela\" é:", "opts": ["Pronome oblíquo", "Contração de preposição + artigo", "Conjunção", "Advérbio"], "c": 1}, {"d": "dificil", "q": "\"Por que\" em duas palavras sem acento é usado:", "opts": ["Como substantivo", "Em respostas causais", "Em perguntas diretas ou indiretas", "Para conectar orações de resultado"], "c": 2}, {"d": "dificil", "q": "\"A vida é um palco, e todos somos atores\" é:", "opts": ["Comparação", "Hipérbole", "Metáfora", "Eufemismo"], "c": 2}, {"d": "dificil", "q": "O verso sem métrica nem rima fixa chama-se:", "opts": ["Soneto", "Haiku", "Verso livre", "Ode"], "c": 2}, {"d": "dificil", "q": "\"Não viemos ao mundo para sofrer, mas para aprender\" contém:", "opts": ["Hipérbole", "Eufemismo", "Antítese", "Comparação"], "c": 2}, {"d": "dificil", "q": "Qual frase usa \"porquê\" como substantivo corretamente?", "opts": ["\"Não sei porquê foi embora\"", "\"Porquê você fez isso?\"", "\"Quero entender o porquê disso\"", "\"Fiz porquê estava com saudade\""], "c": 2}];
+const questions = [{"d": "facil", "q": "Leia o trecho da música de Cazuza: <em>\"O tempo não para...\"</em> — A expressão seguinte usa uma figura parecida: <em>\"Ela correu que nem uma gazela.\"</em> Que figura é essa?", "opts": ["Metáfora", "Hipérbole", "Comparação", "Ironia"], "c": 2}, {"d": "facil", "q": "Um poema de Drummond termina com a estrofe: <em>\"No meio do caminho tinha uma pedra / tinha uma pedra no meio do caminho.\"</em> O conjunto de versos destacado chama-se:", "opts": ["Rima", "Estrofe", "Métrica", "Refrão"], "c": 1}, {"d": "facil", "q": "Bia chegou na aula e a professora perguntou: <em>\"Alguém sabe <u>por que</u> estamos estudando figuras de linguagem?\"</em> A forma sublinhada está correta porque é usada:", "opts": ["Para dar causa/explicação", "Em perguntas diretas ou indiretas", "Como substantivo com artigo", "No final de uma frase afirmativa"], "c": 1}, {"d": "facil", "q": "O escritor Paulo Coelho escreveu: <em>\"A vida é uma grande surpresa.\"</em> Nessa frase, a vida é identificada diretamente com a surpresa, sem usar \"como\" ou \"que nem\". Isso é:", "opts": ["Comparação", "Metáfora", "Ironia", "Eufemismo"], "c": 1}, {"d": "facil", "q": "Na frase <em>\"O verbo correr indica uma ação.\"</em>, qual classe gramatical é o verbo <strong>correr</strong>?", "opts": ["Substantivo", "Adjetivo", "Verbo", "Pronome"], "c": 2}, {"d": "facil", "q": "No velório de um familiar, alguém disse: <em>\"Ele partiu para uma viagem sem volta.\"</em> Em vez de falar diretamente sobre a morte, usou-se uma expressão mais suave. Isso chama-se:", "opts": ["Ironia", "Hipérbole", "Eufemismo", "Antítese"], "c": 2}, {"d": "facil", "q": "Na frase <em>\"Fui <u>ao</u> mercado comprar pão.\"</em>, o termo sublinhado é a contração de:", "opts": ["a + a", "a + o", "em + o", "de + o"], "c": 1}, {"d": "medio", "q": "Leia o verso de Fernando Pessoa: <em>\"Não sou nada. / Nunca serei nada. / Não posso querer ser nada. / À parte isso, tenho em mim todos os sonhos do mundo.\"</em> Que figura aparece na contradição entre \"não sou nada\" e \"tenho todos os sonhos do mundo\"?", "opts": ["Metáfora", "Hipérbole", "Antítese", "Comparação"], "c": 2}, {"d": "medio", "q": "Numa rede social, alguém postou uma foto de um dia horrível de chuva com a legenda: <em>\"Que dia MARAVILHOSO! 😂\"</em>. Qual figura de linguagem está sendo usada?", "opts": ["Eufemismo", "Ironia", "Hipérbole", "Antítese"], "c": 1}, {"d": "medio", "q": "O professor perguntou <em>\"Você entendeu?\"</em> e o aluno respondeu: <em>\"Entendi, <u>porque</u> a explicação foi muito clara.\"</em> O uso de \"porque\" junto e sem acento está correto porque:", "opts": ["Está no final de uma pergunta", "Indica causa ou explicação", "É um substantivo", "Vem depois de ponto de interrogação"], "c": 1}, {"d": "medio", "q": "O cantor Roberto Carlos disse numa entrevista: <em>\"Esperei você uma eternidade.\"</em> No contexto, ele não esperou literalmente uma eternidade. Que figura foi usada?", "opts": ["Metáfora", "Hipérbole", "Antítese", "Comparação"], "c": 1}, {"d": "medio", "q": "Na frase <em>\"Ela veio <u>de</u> São Paulo ontem.\"</em>, a preposição sublinhada indica:", "opts": ["Destino", "Modo", "Lugar de origem", "Companhia"], "c": 2}, {"d": "medio", "q": "Bia quis saber o significado da palavra e escreveu: <em>\"Quero entender o <u>porquê</u> dessa regra.\"</em> O uso com acento e junto está correto porque é:", "opts": ["Verbo", "Advérbio de modo", "Substantivo (precedido de artigo)", "Conjunção causal"], "c": 2}, {"d": "medio", "q": "O poeta Vinicius de Moraes escreveu: <em>\"Seus olhos são dois sonhos\\ — só se faz sonho com você.\"</em> Que figura aparece em \"seus olhos são dois sonhos\"?", "opts": ["Comparação", "Ironia", "Metáfora", "Eufemismo"], "c": 2}, {"d": "dificil", "q": "Na frase <em>\"Ela caminhou <u>pela</u> praia ao entardecer\"</em>, o termo sublinhado é uma contração de:", "opts": ["para + a", "por + la", "por + a", "pera + a"], "c": 2}, {"d": "dificil", "q": "Leia os quatro usos e escolha o que usa \"por que\" separado e sem acento corretamente:<br>(A) <em>\"Não sei <u>por que</u> ela foi embora.\"</em><br>(B) <em>\"Ele foi embora, <u>por que</u> estava cansado.\"</em><br>(C) <em>\"O <u>por que</u> disso me intriga.\"</em><br>(D) <em>\"Foram campeões <u>por que</u> treinaram muito.\"</em>", "opts": ["Alternativa A", "Alternativa B", "Alternativa C", "Alternativa D"], "c": 0}, {"d": "dificil", "q": "Machado de Assis escreveu: <em>\"A vida é um jogo de cartas; é preciso aceitar as que nos dão, mas jogar bem as que temos.\"</em> Que figura predomina nessa frase?", "opts": ["Comparação (usa como/que nem)", "Hipérbole", "Metáfora (identifica vida com jogo)", "Eufemismo"], "c": 2}, {"d": "dificil", "q": "Um poema modernista não segue métrica nem rima fixas — cada verso tem liberdade formal. Como esse tipo de verso é chamado?", "opts": ["Soneto", "Haiku", "Verso livre", "Ode clássica"], "c": 2}, {"d": "dificil", "q": "Leia: <em>\"Vivemos num mundo de luz e trevas, de amor e ódio, de alegria e dor.\"</em> Que figura de linguagem estrutura toda essa frase?", "opts": ["Hipérbole", "Eufemismo", "Antítese (opostos lado a lado)", "Comparação"], "c": 2}, {"d": "dificil", "q": "Num texto jornalístico: <em>\"Economistas explicam o <u>porquê</u> da inflação alta.\"</em> Podemos trocar \"porquê\" por:", "opts": ["\"por quê\"", "\"porque\"", "\"a razão / o motivo\"", "\"por que\""], "c": 2}];
 let answered = 0;
 let userAnswers = {};
-
 function buildQuestions() {
-  ['facil','medio','dificil'].forEach(diff => {
-    const container = document.getElementById(diff + '-questions');
-    questions.filter(q => q.d === diff).forEach(q => {
-      const i = questions.indexOf(q);
-      const badge = diff==='facil'?'badge-facil':diff==='medio'?'badge-medio':'badge-dificil';
-      const label = diff==='facil'?'Fácil':diff==='medio'?'Média':'Difícil';
-      const opts = q.opts.map((o,j)=>`<button class="opt-btn" id="opt-${i}-${j}" onclick="choose(${i},${j},this)">${String.fromCharCode(65+j)}. ${o}</button>`).join('');
-      container.innerHTML += `<div class="question-card" id="card-${i}">
-        <div class="q-header"><div class="q-num">${i+1}</div><div class="q-text">${q.q} <span class="diff-badge ${badge}">${label}</span></div></div>
-        <div class="options">${opts}</div>
-        <div class="feedback" id="fb-${i}"></div>
-      </div>`;
+  ['facil','medio','dificil'].forEach(function(diff) {
+    var container = document.getElementById(diff + '-questions');
+    questions.filter(function(q){return q.d===diff;}).forEach(function(q) {
+      var i = questions.indexOf(q);
+      var badge = diff==='facil'?'badge-facil':diff==='medio'?'badge-medio':'badge-dificil';
+      var label = diff==='facil'?'Fácil':diff==='medio'?'Média':'Difícil';
+      var opts = q.opts.map(function(o,j){
+        return '<button class="opt-btn" id="opt-'+i+'-'+j+'" onclick="choose('+i+','+j+',this)">'+String.fromCharCode(65+j)+'. '+o+'</button>';
+      }).join('');
+      container.innerHTML += '<div class="question-card" id="card-'+i+'">'
+        +'<div class="q-header"><div class="q-num">'+(i+1)+'</div>'
+        +'<div class="q-text">'+q.q+' <span class="diff-badge '+badge+'">'+label+'</span></div></div>'
+        +'<div class="options">'+opts+'</div>'
+        +'<div class="feedback" id="fb-'+i+'"></div>'
+        +'</div>';
     });
   });
 }
-
 function choose(qi, oi, btn) {
   if (userAnswers[qi] !== undefined) return;
   userAnswers[qi] = oi;
   answered++;
-  // Remove seleção anterior e marca a escolhida (sem revelar certo/errado)
-  const card = document.getElementById('card-' + qi);
-  card.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  var card = document.getElementById('card-' + qi);
+  card.querySelectorAll('.opt-btn').forEach(function(b){b.classList.remove('selected');});
   btn.classList.add('selected');
   document.getElementById('prog-text').textContent = answered + ' / 20 respondidas';
   document.getElementById('prog-bar').style.width = (answered/20*100) + '%';
@@ -159,51 +152,43 @@ function choose(qi, oi, btn) {
     document.getElementById('submit-section').scrollIntoView({behavior:'smooth',block:'center'});
   }
 }
-
 function openNameModal() {
   document.getElementById('name-modal').classList.add('show');
-  setTimeout(()=>document.getElementById('name-input').focus(), 100);
+  setTimeout(function(){document.getElementById('name-input').focus();}, 100);
 }
-
 function checkName() {
   document.getElementById('confirm-btn').disabled = document.getElementById('name-input').value.trim().length < 2;
 }
-
 function confirmAndReveal() {
-  const name = document.getElementById('name-input').value.trim();
+  var name = document.getElementById('name-input').value.trim();
   if (!name) return;
   document.getElementById('name-modal').classList.remove('show');
-
-  // Revela gabarito em todas as questões
-  let facil=0,medio=0,dificil=0,ft=0,mt=0,dt=0;
-  questions.forEach((q,i) => {
+  var facil=0,medio=0,dificil=0,ft=0,mt=0,dt=0;
+  questions.forEach(function(q,i) {
     if(q.d==='facil') ft++; else if(q.d==='medio') mt++; else dt++;
-    const selected = userAnswers[i];
-    const correct = q.c;
-    const allBtns = document.getElementById('card-'+i).querySelectorAll('.opt-btn');
-    allBtns.forEach(b => b.disabled = true);
-    // Marca correto sempre verde
+    var selected = userAnswers[i];
+    var correct = q.c;
+    var allBtns = document.getElementById('card-'+i).querySelectorAll('.opt-btn');
+    allBtns.forEach(function(b){b.disabled=true;});
     allBtns[correct].classList.remove('selected');
     allBtns[correct].classList.add('correct');
-    const fb = document.getElementById('fb-'+i);
+    var fb = document.getElementById('fb-'+i);
     if (selected === correct) {
       if(q.d==='facil') facil++; else if(q.d==='medio') medio++; else dificil++;
       fb.textContent = '✅ Correto!';
       fb.className = 'feedback show ok';
     } else {
       if (selected !== undefined) allBtns[selected].classList.add('wrong');
-      fb.innerHTML = '❌ Você escolheu <strong>' + String.fromCharCode(65+selected) + '</strong>. A resposta correta é <strong>' + String.fromCharCode(65+correct) + ': ' + q.opts[correct] + '</strong>';
+      fb.innerHTML = '❌ Você escolheu <strong>'+String.fromCharCode(65+selected)+'</strong>. Correto: <strong>'+String.fromCharCode(65+correct)+': '+q.opts[correct]+'</strong>';
       fb.className = 'feedback show err';
     }
   });
-
-  const total = facil+medio+dificil;
-  const pct = Math.round(total/20*100);
-  let emoji='😔',title='Continue estudando!',msg='Revise o gabarito abaixo e tente de novo!';
+  var total = facil+medio+dificil;
+  var pct = Math.round(total/20*100);
+  var emoji='😔',title='Continue estudando!',msg='Revise o gabarito abaixo e tente de novo!';
   if(pct>=90){emoji='🏆';title='Excelente!';msg='Resultado incrível! Você está super preparada para a P2!';}
   else if(pct>=70){emoji='🌟';title='Muito bem!';msg='Ótimo resultado! Veja o gabarito abaixo para revisar os erros.';}
   else if(pct>=50){emoji='📚';title='Bom esforço!';msg='Veja o gabarito abaixo e foque nos pontos que errou!';}
-
   document.getElementById('m-emoji').textContent=emoji;
   document.getElementById('m-title').textContent=title;
   document.getElementById('m-name').textContent='👤 '+name;
@@ -213,22 +198,18 @@ function confirmAndReveal() {
   document.getElementById('m-dificil').textContent=dificil+'/'+dt;
   document.getElementById('m-msg').textContent=msg;
   document.getElementById('result-modal').classList.add('show');
-
-  // Email silencioso
-  const fd=new FormData();
+  var fd=new FormData();
   fd.append('_subject','📊 Resultado – '+SUBJECT+' | '+name);
   fd.append('_template','table');
   fd.append('Aluno(a)',name);
   fd.append('Matéria',SUBJECT);
   fd.append('Data',new Date().toLocaleDateString('pt-BR'));
   fd.append('Pontuação Total',total+'/20 ('+pct+'%)');
-  fd.append('Questões Fáceis (7)',facil+'/'+ft);
-  fd.append('Questões Médias (7)',medio+'/'+mt);
-  fd.append('Questões Difíceis (6)',dificil+'/'+dt);
-  fd.append('Desempenho',pct>=70?'✅ Aprovado(a)':'⚠️ Precisa revisar');
-  fetch('https://formsubmit.co/callegaribi@gmail.com',{method:'POST',body:fd}).catch(()=>{});
+  fd.append('Fáceis (7)',facil+'/'+ft);
+  fd.append('Médias (7)',medio+'/'+mt);
+  fd.append('Difíceis (6)',dificil+'/'+dt);
+  fetch('https://formsubmit.co/callegaribi@gmail.com',{method:'POST',body:fd}).catch(function(){});
 }
-
 buildQuestions();
 </script>
 </body>

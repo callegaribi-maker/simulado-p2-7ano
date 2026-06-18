@@ -24,7 +24,7 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
 .question-card{background:white;border-radius:16px;padding:1.3rem;margin-bottom:1rem;box-shadow:0 2px 12px rgba(0,0,0,.15)}
 .q-header{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.9rem}
 .q-num{background:#0e7490;color:white;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;flex-shrink:0;margin-top:2px}
-.q-text{font-weight:600;font-size:.95rem;line-height:1.5;color:#1e293b}
+.q-text{font-weight:500;font-size:.95rem;line-height:1.6;color:#1e293b}
 .diff-badge{display:inline-block;font-size:.7rem;font-weight:700;padding:.15rem .55rem;border-radius:50px;margin-left:.5rem;vertical-align:middle}
 .badge-facil{background:#dcfce7;color:#166534}
 .badge-medio{background:#fef3c7;color:#92400e}
@@ -40,13 +40,11 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
 .feedback.show{display:block}
 .feedback.ok{background:#dcfce7;color:#166534}
 .feedback.err{background:#fff7ed;color:#92400e;border-left:3px solid #f59e0b}
-
 #submit-section{display:none;text-align:center;padding:2rem;background:white;border-radius:20px;margin-top:2rem;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 #submit-section h2{font-size:1.3rem;color:#1e293b;margin-bottom:.5rem}
 #submit-section p{color:#64748b;margin-bottom:1.2rem;font-size:.9rem}
 .submit-btn{background:linear-gradient(135deg,#0e7490,#0369a1);color:white;border:none;padding:1rem 2.5rem;border-radius:50px;font-size:1.05rem;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.2)}
 .submit-btn:hover{transform:translateY(-2px)}
-
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center;padding:1rem}
 .modal-overlay.show{display:flex}
 .modal{background:white;border-radius:24px;padding:2rem;max-width:440px;width:100%;text-align:center;max-height:90vh;overflow-y:auto}
@@ -92,8 +90,6 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="submit-btn" onclick="openNameModal()">📊 Ver minha nota! 🚀</button>
   </div>
 </div>
-
-<!-- Modal: nome -->
 <div class="modal-overlay" id="name-modal">
   <div class="modal">
     <div class="modal-emoji">✏️</div>
@@ -103,8 +99,6 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="confirm-btn" id="confirm-btn" onclick="confirmAndReveal()" disabled>Ver minha nota! 🚀</button>
   </div>
 </div>
-
-<!-- Modal: resultado -->
 <div class="modal-overlay" id="result-modal">
   <div class="modal">
     <div class="modal-emoji" id="m-emoji"></div>
@@ -120,37 +114,36 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="modal-close" onclick="document.getElementById('result-modal').classList.remove('show')">Ver gabarito detalhado ↓</button>
   </div>
 </div>
-
 <script>
 const SUBJECT = "Ciências";
-const questions = [{"d": "facil", "q": "Os vírus são considerados seres:", "opts": ["Vivos, com células próprias", "Acelulares (sem células)", "Bactérias de tamanho reduzido", "Fungos microscópicos"], "c": 1}, {"d": "facil", "q": "A dengue é transmitida pelo mosquito:", "opts": ["Anopheles", "Culex", "Aedes aegypti", "Mansonia"], "c": 2}, {"d": "facil", "q": "A COVID-19 é causada por:", "opts": ["Bactéria", "Fungo", "Protozoário", "Vírus (SARS-CoV-2)"], "c": 3}, {"d": "facil", "q": "Vacinas servem para:", "opts": ["Curar doenças já instaladas", "Prevenir doenças estimulando o sistema imunológico", "Matar vírus diretamente no sangue", "Substituir antibióticos"], "c": 1}, {"d": "facil", "q": "A leptospirose é transmitida por:", "opts": ["Picada de mosquito", "Contato com urina de ratos em água ou solo contaminado", "Ar contaminado", "Picada de cobra"], "c": 1}, {"d": "facil", "q": "O saneamento básico inclui:", "opts": ["Apenas água tratada", "Apenas coleta de lixo", "Água tratada, esgoto, coleta de lixo e drenagem", "Apenas hospitais públicos"], "c": 2}, {"d": "facil", "q": "O HIV causa qual doença?", "opts": ["Dengue", "Gripe", "AIDS", "Zika"], "c": 2}, {"d": "medio", "q": "Os vírus se reproduzem:", "opts": ["Por divisão celular binária", "Usando as células do organismo hospedeiro", "Sozinhos no ambiente externo", "Por brotamento como leveduras"], "c": 1}, {"d": "medio", "q": "A malária é causada por:", "opts": ["Vírus", "Bactéria", "Protozoário (Plasmodium)", "Fungo"], "c": 2}, {"d": "medio", "q": "A principal diferença entre vírus e bactéria é:", "opts": ["Vírus são maiores que bactérias", "Vírus são acelulares; bactérias possuem célula própria", "Bactérias causam mais doenças", "Vírus são combatidos por antibióticos"], "c": 1}, {"d": "medio", "q": "O sarampo pode ser prevenido com a vacina:", "opts": ["BCG", "Hepatite B", "Tríplice viral", "Gripe"], "c": 2}, {"d": "medio", "q": "A OMS define saúde como:", "opts": ["Ausência total de doenças", "Bem-estar apenas físico", "Completo bem-estar físico, mental e social", "Capacidade de trabalhar sem doenças"], "c": 2}, {"d": "medio", "q": "Antibióticos funcionam contra:", "opts": ["Vírus", "Fungos", "Bactérias", "Protozoários"], "c": 2}, {"d": "medio", "q": "Além da dengue, o Aedes aegypti também transmite:", "opts": ["Malária e leptospirose", "Tuberculose e sarampo", "Zika e Febre Chikungunya", "Gripe e caxumba"], "c": 2}, {"d": "dificil", "q": "Por que antibióticos NÃO funcionam contra vírus?", "opts": ["São muito caros para o tratamento viral", "Vírus não possuem estrutura celular — alvo dos antibióticos", "Vírus desenvolveram resistência total", "Antibióticos só funcionam em animais"], "c": 1}, {"d": "dificil", "q": "A diferença entre imunidade ativa e passiva é:", "opts": ["São completamente iguais", "Ativa: o próprio organismo produz anticorpos; Passiva: recebe anticorpos prontos", "Ativa é sempre por vacinação", "Passiva é sempre mais eficaz e duradoura"], "c": 1}, {"d": "dificil", "q": "Por que o HIV é particularmente difícil de combater?", "opts": ["É um vírus muito grande", "Ataca exatamente as células de defesa (linfócitos T) do sistema imune", "É uma bactéria resistente", "Não existe nenhum tratamento disponível"], "c": 1}, {"d": "dificil", "q": "A caxumba afeta principalmente quais estruturas?", "opts": ["Pulmões e brônquios", "Fígado e vesícula", "Glândulas salivares (parótidas)", "Rins e bexiga"], "c": 2}, {"d": "dificil", "q": "O saneamento básico reduz doenças porque:", "opts": ["Aumenta a expectativa de vida por outros fatores", "Elimina as condições que favorecem vetores e agentes patogênicos", "Substitui completamente as vacinas", "Cura doenças já existentes na população"], "c": 1}, {"d": "dificil", "q": "A diferença entre endemia, epidemia e pandemia é:", "opts": ["Não existe diferença real entre elas", "Pandemia é menos grave que epidemia", "Endemia = ocorrência local constante; epidemia = aumento brusco regional; pandemia = global", "Epidemia afeta somente animais"], "c": 2}];
+const questions = [{"d": "facil", "q": "A professora explicou que os vírus são diferentes de todos os outros seres vivos porque não possuem células. Por isso, são classificados como seres:", "opts": ["Procariontes", "Eucariontes", "Acelulares", "Pluricelulares"], "c": 2}, {"d": "facil", "q": "Em 2024, várias cidades brasileiras decretaram epidemia de dengue. A dengue é transmitida pela picada do mosquito:", "opts": ["Anopheles fêmea", "Culex quinquefasciatus", "Aedes aegypti fêmea", "Mansonia titillans"], "c": 2}, {"d": "facil", "q": "Em 2020, uma doença causada por um novo coronavírus se espalhou pelo mundo inteiro, causando uma pandemia. Essa doença foi a:", "opts": ["Gripe H1N1", "Ebola", "Hepatite C", "COVID-19, causada pelo SARS-CoV-2"], "c": 3}, {"d": "facil", "q": "Uma campanha de vacinação foi lançada no Brasil para prevenir o sarampo. As vacinas funcionam porque:", "opts": ["Curam doenças que já estão instaladas no corpo", "Estimulam o sistema imunológico a produzir defesas antes da doença chegar", "Matam os vírus diretamente no sangue", "Substituem completamente os antibióticos"], "c": 1}, {"d": "facil", "q": "Após as enchentes em uma cidade, autoridades alertaram para o risco de leptospirose. Essa doença é transmitida por:", "opts": ["Picada do mosquito Aedes aegypti", "Contato com água ou solo contaminado pela urina de ratos", "Respirar o ar de lugares fechados", "Consumo de alimentos mal cozidos"], "c": 1}, {"d": "facil", "q": "Uma ONG trabalhou numa favela para construir rede de esgoto, distribuir água tratada e organizar a coleta de lixo. Essas ações fazem parte do:", "opts": ["Plano de vacinação", "Saneamento básico", "Programa de antibióticos", "Controle de vetores"], "c": 1}, {"d": "facil", "q": "Uma campanha de saúde pública informou que o HIV ataca o sistema imunológico e pode levar ao desenvolvimento da:", "opts": ["Dengue", "Gripe sazonal", "AIDS", "Zika"], "c": 2}, {"d": "medio", "q": "Um cientista observou que o vírus da gripe não consegue se reproduzir sozinho em tubos de laboratório — só multiplica quando colocado em contato com células vivas. Isso acontece porque os vírus:", "opts": ["Têm metabolismo próprio independente", "Usam a maquinaria celular do organismo hospedeiro para se reproduzir", "Se dividem por fissão binária igual às bactérias", "Se reproduzem por brotamento no ambiente externo"], "c": 1}, {"d": "medio", "q": "Pesquisadores descobriram que a malária ainda mata centenas de milhares de pessoas por ano na África. A malária é causada por um micro-organismo chamado Plasmodium, que é um:", "opts": ["Vírus", "Bactéria", "Protozoário", "Fungo"], "c": 2}, {"d": "medio", "q": "Uma mãe perguntou ao médico: 'Por que o antibiótico não funciona para a gripe do meu filho?' O médico explicou corretamente que:", "opts": ["Antibióticos só funcionam contra vírus em crianças", "Vírus são acelulares — antibióticos agem em estruturas bacterianas que vírus não possuem", "O filho precisava de uma dose maior de antibiótico", "Antibióticos funcionam apenas para doenças tropicais"], "c": 1}, {"d": "medio", "q": "O calendário nacional de vacinação inclui a tríplice viral que previne três doenças ao mesmo tempo. Uma delas é o sarampo. As outras duas são:", "opts": ["Gripe e hepatite B", "Poliomielite e tuberculose", "Caxumba e rubéola", "Dengue e febre amarela"], "c": 2}, {"d": "medio", "q": "A OMS define saúde em sua constituição de 1948 com uma visão ampla que vai além da ausência de doenças. Segundo essa definição, saúde é:", "opts": ["Apenas ausência de enfermidades físicas", "Bem-estar exclusivamente físico e mental", "Completo bem-estar físico, mental e social", "Capacidade de trabalhar sem se ausentar por doenças"], "c": 2}, {"d": "medio", "q": "Uma criança com infecção bacteriana na garganta foi ao médico. O médico receitou antibiótico. Por que antibióticos funcionam contra bactérias mas NÃO contra vírus?", "opts": ["Vírus são mais resistentes que bactérias", "Antibióticos atacam estruturas celulares das bactérias; vírus não têm essas estruturas", "Antibióticos só funcionam em infecções de pele", "Vírus e bactérias são combatidos pelos mesmos remédios"], "c": 1}, {"d": "medio", "q": "Uma nota da Secretaria de Saúde alerta: <em>\"Além da dengue, o mosquito Aedes aegypti transmite outras doenças.\"</em> Quais são elas?", "opts": ["Malária e leptospirose", "Tuberculose e sarampo", "Zika e Febre Chikungunya", "Gripe e hepatite A"], "c": 2}, {"d": "dificil", "q": "Durante a pandemia de COVID-19, muitas pessoas perguntavam por que não havia antibiótico para tratá-la. A explicação científica correta é:", "opts": ["Os antibióticos eram muito caros para o sistema de saúde", "COVID-19 é causada por vírus (SARS-CoV-2) — vírus não possuem parede celular nem ribossomos bacterianos, alvos dos antibióticos", "Os vírus desenvolveram resistência total a todos os antibióticos", "Antibióticos só funcionam em animais e não em humanos"], "c": 1}, {"d": "dificil", "q": "Uma criança vacinada com a tríplice viral não precisa receber anticorpos prontos de outro organismo — seu corpo os produz sozinho após a vacina. Isso é imunidade:", "opts": ["Passiva adquirida artificialmente", "Ativa adquirida artificialmente (pela vacina)", "Passiva natural (transmitida pela mãe)", "Inata, presente desde o nascimento"], "c": 1}, {"d": "dificil", "q": "O HIV é o vírus mais difícil de combater entre os estudados nessa unidade. Por que ele é tão perigoso para o sistema imunológico?", "opts": ["Por ser o maior vírus conhecido pela ciência", "Porque infecta e destrói os linfócitos T CD4+, que são os coordenadores da defesa imunológica", "Porque produz toxinas que envenenam o sangue", "Porque não existe nenhum tratamento ou medicamento para controlá-lo"], "c": 1}, {"d": "dificil", "q": "Um adolescente ficou com o rosto muito inchado e com dor nas bochechas durante alguns dias. O médico diagnosticou caxumba. Qual estrutura essa doença afeta principalmente?", "opts": ["Pulmões e bronquíolos", "Fígado e pâncreas", "Glândulas salivares parótidas", "Rins e bexiga"], "c": 2}, {"d": "dificil", "q": "Em países com saneamento básico universal, como Finlândia e Dinamarca, doenças como cólera, leptospirose e hepatite A são raras. Por que o saneamento básico é tão eficaz na prevenção dessas doenças?", "opts": ["Porque elimina os vírus com radiação solar", "Porque remove as condições (água contaminada, esgoto a céu aberto, lixo) que permitem a transmissão dos agentes patogênicos", "Porque substitui completamente as vacinas nessas populações", "Porque cura doenças já existentes nos moradores"], "c": 1}, {"d": "dificil", "q": "Quando uma doença ocorre constantemente numa região (como a dengue no Brasil), chama-se endemia. Quando aumenta bruscamente numa região, chama-se epidemia. Quando se espalha por vários continentes, como a COVID-19 em 2020, chama-se:", "opts": ["Surto localizado", "Infestação", "Pandemia", "Epidemia continental"], "c": 2}];
 let answered = 0;
 let userAnswers = {};
-
 function buildQuestions() {
-  ['facil','medio','dificil'].forEach(diff => {
-    const container = document.getElementById(diff + '-questions');
-    questions.filter(q => q.d === diff).forEach(q => {
-      const i = questions.indexOf(q);
-      const badge = diff==='facil'?'badge-facil':diff==='medio'?'badge-medio':'badge-dificil';
-      const label = diff==='facil'?'Fácil':diff==='medio'?'Média':'Difícil';
-      const opts = q.opts.map((o,j)=>`<button class="opt-btn" id="opt-${i}-${j}" onclick="choose(${i},${j},this)">${String.fromCharCode(65+j)}. ${o}</button>`).join('');
-      container.innerHTML += `<div class="question-card" id="card-${i}">
-        <div class="q-header"><div class="q-num">${i+1}</div><div class="q-text">${q.q} <span class="diff-badge ${badge}">${label}</span></div></div>
-        <div class="options">${opts}</div>
-        <div class="feedback" id="fb-${i}"></div>
-      </div>`;
+  ['facil','medio','dificil'].forEach(function(diff) {
+    var container = document.getElementById(diff + '-questions');
+    questions.filter(function(q){return q.d===diff;}).forEach(function(q) {
+      var i = questions.indexOf(q);
+      var badge = diff==='facil'?'badge-facil':diff==='medio'?'badge-medio':'badge-dificil';
+      var label = diff==='facil'?'Fácil':diff==='medio'?'Média':'Difícil';
+      var opts = q.opts.map(function(o,j){
+        return '<button class="opt-btn" id="opt-'+i+'-'+j+'" onclick="choose('+i+','+j+',this)">'+String.fromCharCode(65+j)+'. '+o+'</button>';
+      }).join('');
+      container.innerHTML += '<div class="question-card" id="card-'+i+'">'
+        +'<div class="q-header"><div class="q-num">'+(i+1)+'</div>'
+        +'<div class="q-text">'+q.q+' <span class="diff-badge '+badge+'">'+label+'</span></div></div>'
+        +'<div class="options">'+opts+'</div>'
+        +'<div class="feedback" id="fb-'+i+'"></div>'
+        +'</div>';
     });
   });
 }
-
 function choose(qi, oi, btn) {
   if (userAnswers[qi] !== undefined) return;
   userAnswers[qi] = oi;
   answered++;
-  // Remove seleção anterior e marca a escolhida (sem revelar certo/errado)
-  const card = document.getElementById('card-' + qi);
-  card.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  var card = document.getElementById('card-' + qi);
+  card.querySelectorAll('.opt-btn').forEach(function(b){b.classList.remove('selected');});
   btn.classList.add('selected');
   document.getElementById('prog-text').textContent = answered + ' / 20 respondidas';
   document.getElementById('prog-bar').style.width = (answered/20*100) + '%';
@@ -159,51 +152,43 @@ function choose(qi, oi, btn) {
     document.getElementById('submit-section').scrollIntoView({behavior:'smooth',block:'center'});
   }
 }
-
 function openNameModal() {
   document.getElementById('name-modal').classList.add('show');
-  setTimeout(()=>document.getElementById('name-input').focus(), 100);
+  setTimeout(function(){document.getElementById('name-input').focus();}, 100);
 }
-
 function checkName() {
   document.getElementById('confirm-btn').disabled = document.getElementById('name-input').value.trim().length < 2;
 }
-
 function confirmAndReveal() {
-  const name = document.getElementById('name-input').value.trim();
+  var name = document.getElementById('name-input').value.trim();
   if (!name) return;
   document.getElementById('name-modal').classList.remove('show');
-
-  // Revela gabarito em todas as questões
-  let facil=0,medio=0,dificil=0,ft=0,mt=0,dt=0;
-  questions.forEach((q,i) => {
+  var facil=0,medio=0,dificil=0,ft=0,mt=0,dt=0;
+  questions.forEach(function(q,i) {
     if(q.d==='facil') ft++; else if(q.d==='medio') mt++; else dt++;
-    const selected = userAnswers[i];
-    const correct = q.c;
-    const allBtns = document.getElementById('card-'+i).querySelectorAll('.opt-btn');
-    allBtns.forEach(b => b.disabled = true);
-    // Marca correto sempre verde
+    var selected = userAnswers[i];
+    var correct = q.c;
+    var allBtns = document.getElementById('card-'+i).querySelectorAll('.opt-btn');
+    allBtns.forEach(function(b){b.disabled=true;});
     allBtns[correct].classList.remove('selected');
     allBtns[correct].classList.add('correct');
-    const fb = document.getElementById('fb-'+i);
+    var fb = document.getElementById('fb-'+i);
     if (selected === correct) {
       if(q.d==='facil') facil++; else if(q.d==='medio') medio++; else dificil++;
       fb.textContent = '✅ Correto!';
       fb.className = 'feedback show ok';
     } else {
       if (selected !== undefined) allBtns[selected].classList.add('wrong');
-      fb.innerHTML = '❌ Você escolheu <strong>' + String.fromCharCode(65+selected) + '</strong>. A resposta correta é <strong>' + String.fromCharCode(65+correct) + ': ' + q.opts[correct] + '</strong>';
+      fb.innerHTML = '❌ Você escolheu <strong>'+String.fromCharCode(65+selected)+'</strong>. Correto: <strong>'+String.fromCharCode(65+correct)+': '+q.opts[correct]+'</strong>';
       fb.className = 'feedback show err';
     }
   });
-
-  const total = facil+medio+dificil;
-  const pct = Math.round(total/20*100);
-  let emoji='😔',title='Continue estudando!',msg='Revise o gabarito abaixo e tente de novo!';
+  var total = facil+medio+dificil;
+  var pct = Math.round(total/20*100);
+  var emoji='😔',title='Continue estudando!',msg='Revise o gabarito abaixo e tente de novo!';
   if(pct>=90){emoji='🏆';title='Excelente!';msg='Resultado incrível! Você está super preparada para a P2!';}
   else if(pct>=70){emoji='🌟';title='Muito bem!';msg='Ótimo resultado! Veja o gabarito abaixo para revisar os erros.';}
   else if(pct>=50){emoji='📚';title='Bom esforço!';msg='Veja o gabarito abaixo e foque nos pontos que errou!';}
-
   document.getElementById('m-emoji').textContent=emoji;
   document.getElementById('m-title').textContent=title;
   document.getElementById('m-name').textContent='👤 '+name;
@@ -213,22 +198,18 @@ function confirmAndReveal() {
   document.getElementById('m-dificil').textContent=dificil+'/'+dt;
   document.getElementById('m-msg').textContent=msg;
   document.getElementById('result-modal').classList.add('show');
-
-  // Email silencioso
-  const fd=new FormData();
+  var fd=new FormData();
   fd.append('_subject','📊 Resultado – '+SUBJECT+' | '+name);
   fd.append('_template','table');
   fd.append('Aluno(a)',name);
   fd.append('Matéria',SUBJECT);
   fd.append('Data',new Date().toLocaleDateString('pt-BR'));
   fd.append('Pontuação Total',total+'/20 ('+pct+'%)');
-  fd.append('Questões Fáceis (7)',facil+'/'+ft);
-  fd.append('Questões Médias (7)',medio+'/'+mt);
-  fd.append('Questões Difíceis (6)',dificil+'/'+dt);
-  fd.append('Desempenho',pct>=70?'✅ Aprovado(a)':'⚠️ Precisa revisar');
-  fetch('https://formsubmit.co/callegaribi@gmail.com',{method:'POST',body:fd}).catch(()=>{});
+  fd.append('Fáceis (7)',facil+'/'+ft);
+  fd.append('Médias (7)',medio+'/'+mt);
+  fd.append('Difíceis (6)',dificil+'/'+dt);
+  fetch('https://formsubmit.co/callegaribi@gmail.com',{method:'POST',body:fd}).catch(function(){});
 }
-
 buildQuestions();
 </script>
 </body>

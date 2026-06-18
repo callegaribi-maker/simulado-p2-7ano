@@ -24,7 +24,7 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
 .question-card{background:white;border-radius:16px;padding:1.3rem;margin-bottom:1rem;box-shadow:0 2px 12px rgba(0,0,0,.15)}
 .q-header{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.9rem}
 .q-num{background:#dc2626;color:white;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;flex-shrink:0;margin-top:2px}
-.q-text{font-weight:600;font-size:.95rem;line-height:1.5;color:#1e293b}
+.q-text{font-weight:500;font-size:.95rem;line-height:1.6;color:#1e293b}
 .diff-badge{display:inline-block;font-size:.7rem;font-weight:700;padding:.15rem .55rem;border-radius:50px;margin-left:.5rem;vertical-align:middle}
 .badge-facil{background:#dcfce7;color:#166534}
 .badge-medio{background:#fef3c7;color:#92400e}
@@ -40,13 +40,11 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
 .feedback.show{display:block}
 .feedback.ok{background:#dcfce7;color:#166534}
 .feedback.err{background:#fff7ed;color:#92400e;border-left:3px solid #f59e0b}
-
 #submit-section{display:none;text-align:center;padding:2rem;background:white;border-radius:20px;margin-top:2rem;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 #submit-section h2{font-size:1.3rem;color:#1e293b;margin-bottom:.5rem}
 #submit-section p{color:#64748b;margin-bottom:1.2rem;font-size:.9rem}
 .submit-btn{background:linear-gradient(135deg,#dc2626,#991b1b);color:white;border:none;padding:1rem 2.5rem;border-radius:50px;font-size:1.05rem;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.2)}
 .submit-btn:hover{transform:translateY(-2px)}
-
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center;padding:1rem}
 .modal-overlay.show{display:flex}
 .modal{background:white;border-radius:24px;padding:2rem;max-width:440px;width:100%;text-align:center;max-height:90vh;overflow-y:auto}
@@ -92,8 +90,6 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="submit-btn" onclick="openNameModal()">📊 Ver minha nota! 🚀</button>
   </div>
 </div>
-
-<!-- Modal: nome -->
 <div class="modal-overlay" id="name-modal">
   <div class="modal">
     <div class="modal-emoji">✏️</div>
@@ -103,8 +99,6 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="confirm-btn" id="confirm-btn" onclick="confirmAndReveal()" disabled>Ver minha nota! 🚀</button>
   </div>
 </div>
-
-<!-- Modal: resultado -->
 <div class="modal-overlay" id="result-modal">
   <div class="modal">
     <div class="modal-emoji" id="m-emoji"></div>
@@ -120,37 +114,36 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="modal-close" onclick="document.getElementById('result-modal').classList.remove('show')">Ver gabarito detalhado ↓</button>
   </div>
 </div>
-
 <script>
 const SUBJECT = "Matemática";
-const questions = [{"d": "facil", "q": "A área de um quadrado de lado 5 cm é:", "opts": ["10 cm²", "15 cm²", "20 cm²", "25 cm²"], "c": 3}, {"d": "facil", "q": "A translação é um movimento geométrico que:", "opts": ["Gira a figura em torno de um ponto", "Desloca a figura sem girar ou refletir", "Reflete a figura como um espelho", "Aumenta o tamanho da figura"], "c": 1}, {"d": "facil", "q": "A área de um retângulo é calculada por:", "opts": ["lado × lado", "base + altura", "(base + altura) × 2", "base × altura"], "c": 3}, {"d": "facil", "q": "Um ângulo de 90° é chamado de:", "opts": ["Obtuso", "Agudo", "Raso", "Reto"], "c": 3}, {"d": "facil", "q": "O volume de um cubo de lado 3 cm é:", "opts": ["9 cm³", "18 cm³", "27 cm³", "6 cm³"], "c": 2}, {"d": "facil", "q": "A reflexão é também conhecida como:", "opts": ["Rotação", "Translação", "Simetria ou espelhamento", "Homotetia"], "c": 2}, {"d": "facil", "q": "Um triângulo equilátero tem todos os lados:", "opts": ["Diferentes", "Dois iguais e um diferente", "Iguais", "Perpendiculares"], "c": 2}, {"d": "medio", "q": "A área de um triângulo com base 8 cm e altura 5 cm é:", "opts": ["40 cm²", "20 cm²", "13 cm²", "80 cm²"], "c": 1}, {"d": "medio", "q": "Na homotetia, a figura resultante é:", "opts": ["Idêntica em tamanho e forma", "Girada em relação ao original", "Semelhante (mesma forma, tamanho diferente)", "Refletida em relação ao eixo"], "c": 2}, {"d": "medio", "q": "Um ângulo obtuso mede:", "opts": ["Menos de 90°", "Exatamente 90°", "Entre 90° e 180°", "Exatamente 180°"], "c": 2}, {"d": "medio", "q": "O perímetro de um quadrado de lado 6 cm é:", "opts": ["12 cm", "18 cm", "24 cm", "36 cm"], "c": 2}, {"d": "medio", "q": "A fórmula da área do círculo é:", "opts": ["2πr", "πr³", "πr²", "2πr²"], "c": 2}, {"d": "medio", "q": "O volume do paralelepípedo é calculado por:", "opts": ["base × altura", "lado³", "comprimento × largura × altura", "πr²h"], "c": 2}, {"d": "medio", "q": "Na rotação, a figura:", "opts": ["É refletida em relação a um eixo", "É ampliada proporcionalmente", "É deslocada em linha reta", "Gira em torno de um ponto fixo"], "c": 3}, {"d": "dificil", "q": "Um trapézio tem bases de 5 cm e 9 cm e altura de 6 cm. Sua área é:", "opts": ["54 cm²", "28 cm²", "42 cm²", "84 cm²"], "c": 2}, {"d": "dificil", "q": "Um cilindro com raio 3 cm e altura 10 cm tem volume (use π ≈ 3):", "opts": ["90 cm³", "270 cm³", "30 cm³", "180 cm³"], "c": 1}, {"d": "dificil", "q": "Qual transformação mantém a figura CONGRUENTE (mesmo tamanho e forma)?", "opts": ["Homotetia com razão diferente de 1", "Apenas a rotação", "Translação, rotação e reflexão", "Nenhuma transformação"], "c": 2}, {"d": "dificil", "q": "Se uma figura passa por homotetia com razão 2, sua área:", "opts": ["Dobra", "Triplica", "Quadruplica", "Fica igual"], "c": 2}, {"d": "dificil", "q": "O ângulo externo de um triângulo equilátero mede:", "opts": ["60°", "90°", "120°", "180°"], "c": 2}, {"d": "dificil", "q": "Uma pirâmide de base quadrada com lado 4 cm e altura 6 cm tem volume:", "opts": ["96 cm³", "48 cm³", "32 cm³", "24 cm³"], "c": 2}];
+const questions = [{"d": "facil", "q": "Bia quer colocar piso de cerâmica no seu quarto, que tem formato quadrado com 5 metros de lado. Quantos metros quadrados de cerâmica ela precisa comprar?", "opts": ["10 m²", "15 m²", "20 m²", "25 m²"], "c": 3}, {"d": "facil", "q": "No computador, a função de mover um ícone sem girá-lo ou espelhá-lo (arrastar de um lado para outro) é um exemplo de qual transformação geométrica?", "opts": ["Rotação", "Translação", "Reflexão", "Homotetia"], "c": 1}, {"d": "facil", "q": "Uma fazenda retangular tem 8 km de comprimento e 5 km de largura. Para calcular a área total dessa fazenda, usamos a fórmula:", "opts": ["comprimento + largura", "(comprimento + largura) × 2", "comprimento × largura", "comprimento² + largura²"], "c": 2}, {"d": "facil", "q": "O canto de uma folha de papel forma um ângulo de 90°. Esse tipo de ângulo chama-se:", "opts": ["Obtuso", "Agudo", "Raso", "Reto"], "c": 3}, {"d": "facil", "q": "Uma caixa de madeira tem formato de cubo com 3 cm de aresta. Qual é o volume total dessa caixa?", "opts": ["9 cm³", "18 cm³", "27 cm³", "6 cm³"], "c": 2}, {"d": "facil", "q": "Quando você vê sua imagem no espelho, ela parece idêntica mas invertida. Isso é um exemplo de qual transformação geométrica?", "opts": ["Rotação", "Translação", "Reflexão (simetria)", "Homotetia"], "c": 2}, {"d": "facil", "q": "Um triângulo equilátero é usado em placas de trânsito no Brasil. Qual é a característica principal desse tipo de triângulo?", "opts": ["Todos os lados diferentes", "Dois lados iguais e um diferente", "Todos os três lados iguais", "Um ângulo de 90°"], "c": 2}, {"d": "medio", "q": "A professora de artes pediu que os alunos pintassem um triângulo com base de 8 cm e altura de 5 cm. Qual é a área desse triângulo?", "opts": ["40 cm²", "20 cm²", "13 cm²", "80 cm²"], "c": 1}, {"d": "medio", "q": "Numa fotocopiadora, você pode ampliar uma figura para 200% ou reduzir para 50%. Essa operação que muda o tamanho mantendo a forma é chamada de:", "opts": ["Reflexão", "Rotação", "Homotetia", "Translação"], "c": 2}, {"d": "medio", "q": "O ponteiro dos minutos de um relógio gira completamente a cada hora. Quando marca 9 horas em relação às 12 horas, o ângulo formado é de 90°. Esse ângulo é classificado como:", "opts": ["Agudo (menos de 90°)", "Reto (exatamente 90°)", "Obtuso (entre 90° e 180°)", "Raso (180°)"], "c": 1}, {"d": "medio", "q": "Uma piscina quadrada tem 6 metros de lado. Qual é o perímetro (distância total ao redor) dessa piscina?", "opts": ["12 m", "18 m", "24 m", "36 m"], "c": 2}, {"d": "medio", "q": "O arquiteto usou a fórmula da área do círculo para calcular o tamanho de uma fonte circular de raio 4m. Qual fórmula ele usou?", "opts": ["A = 2πr", "A = πr³", "A = πr²", "A = 2πr²"], "c": 2}, {"d": "medio", "q": "Uma caixa de sapato tem comprimento 30 cm, largura 15 cm e altura 12 cm. Qual é o volume total dessa caixa?", "opts": ["57 cm³", "540 cm³", "5400 cm³", "900 cm³"], "c": 2}, {"d": "medio", "q": "O ponteiro de um relógio gira em torno do parafuso central. Esse ponto fixo ao redor do qual a figura gira é característico de qual transformação geométrica?", "opts": ["Reflexão", "Homotetia", "Translação", "Rotação"], "c": 3}, {"d": "dificil", "q": "Uma mesa tem o tampo em formato de trapézio com bases de 5 cm e 9 cm e altura de 6 cm. Qual é a área desse tampo? (Fórmula: A = (B+b) × h ÷ 2)", "opts": ["54 cm²", "28 cm²", "42 cm²", "84 cm²"], "c": 2}, {"d": "dificil", "q": "Um copo cilíndrico tem raio de base 3 cm e altura de 10 cm. Usando π ≈ 3, qual é o volume de líquido que esse copo comporta?", "opts": ["90 cm³", "270 cm³", "30 cm³", "180 cm³"], "c": 1}, {"d": "dificil", "q": "Numa aula de origami, os alunos dobraram, giraram e espelharam figuras. Quais dessas transformações mantêm a figura CONGRUENTE (mesmo tamanho e mesma forma)?", "opts": ["Apenas a homotetia com qualquer razão", "Apenas a rotação", "Translação, rotação e reflexão", "Nenhuma transformação mantém a congruência"], "c": 2}, {"d": "dificil", "q": "Um arquiteto fez uma planta baixa de uma casa usando escala 1:50. Ao ampliar o projeto com razão 2, a área do terreno no desenho:", "opts": ["Dobra", "Triplica", "Quadruplica (aumenta 4×)", "Fica igual"], "c": 2}, {"d": "dificil", "q": "Um triângulo equilátero tem ângulos internos de 60° cada. Qual é a medida do ângulo EXTERNO de um triângulo equilátero?", "opts": ["60°", "90°", "120°", "180°"], "c": 2}, {"d": "dificil", "q": "Uma pirâmide de base quadrada com lado de 4 cm e altura de 6 cm. Usando a fórmula V = (Abase × h) ÷ 3, qual é o volume dessa pirâmide?", "opts": ["96 cm³", "48 cm³", "32 cm³", "24 cm³"], "c": 2}];
 let answered = 0;
 let userAnswers = {};
-
 function buildQuestions() {
-  ['facil','medio','dificil'].forEach(diff => {
-    const container = document.getElementById(diff + '-questions');
-    questions.filter(q => q.d === diff).forEach(q => {
-      const i = questions.indexOf(q);
-      const badge = diff==='facil'?'badge-facil':diff==='medio'?'badge-medio':'badge-dificil';
-      const label = diff==='facil'?'Fácil':diff==='medio'?'Média':'Difícil';
-      const opts = q.opts.map((o,j)=>`<button class="opt-btn" id="opt-${i}-${j}" onclick="choose(${i},${j},this)">${String.fromCharCode(65+j)}. ${o}</button>`).join('');
-      container.innerHTML += `<div class="question-card" id="card-${i}">
-        <div class="q-header"><div class="q-num">${i+1}</div><div class="q-text">${q.q} <span class="diff-badge ${badge}">${label}</span></div></div>
-        <div class="options">${opts}</div>
-        <div class="feedback" id="fb-${i}"></div>
-      </div>`;
+  ['facil','medio','dificil'].forEach(function(diff) {
+    var container = document.getElementById(diff + '-questions');
+    questions.filter(function(q){return q.d===diff;}).forEach(function(q) {
+      var i = questions.indexOf(q);
+      var badge = diff==='facil'?'badge-facil':diff==='medio'?'badge-medio':'badge-dificil';
+      var label = diff==='facil'?'Fácil':diff==='medio'?'Média':'Difícil';
+      var opts = q.opts.map(function(o,j){
+        return '<button class="opt-btn" id="opt-'+i+'-'+j+'" onclick="choose('+i+','+j+',this)">'+String.fromCharCode(65+j)+'. '+o+'</button>';
+      }).join('');
+      container.innerHTML += '<div class="question-card" id="card-'+i+'">'
+        +'<div class="q-header"><div class="q-num">'+(i+1)+'</div>'
+        +'<div class="q-text">'+q.q+' <span class="diff-badge '+badge+'">'+label+'</span></div></div>'
+        +'<div class="options">'+opts+'</div>'
+        +'<div class="feedback" id="fb-'+i+'"></div>'
+        +'</div>';
     });
   });
 }
-
 function choose(qi, oi, btn) {
   if (userAnswers[qi] !== undefined) return;
   userAnswers[qi] = oi;
   answered++;
-  // Remove seleção anterior e marca a escolhida (sem revelar certo/errado)
-  const card = document.getElementById('card-' + qi);
-  card.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  var card = document.getElementById('card-' + qi);
+  card.querySelectorAll('.opt-btn').forEach(function(b){b.classList.remove('selected');});
   btn.classList.add('selected');
   document.getElementById('prog-text').textContent = answered + ' / 20 respondidas';
   document.getElementById('prog-bar').style.width = (answered/20*100) + '%';
@@ -159,51 +152,43 @@ function choose(qi, oi, btn) {
     document.getElementById('submit-section').scrollIntoView({behavior:'smooth',block:'center'});
   }
 }
-
 function openNameModal() {
   document.getElementById('name-modal').classList.add('show');
-  setTimeout(()=>document.getElementById('name-input').focus(), 100);
+  setTimeout(function(){document.getElementById('name-input').focus();}, 100);
 }
-
 function checkName() {
   document.getElementById('confirm-btn').disabled = document.getElementById('name-input').value.trim().length < 2;
 }
-
 function confirmAndReveal() {
-  const name = document.getElementById('name-input').value.trim();
+  var name = document.getElementById('name-input').value.trim();
   if (!name) return;
   document.getElementById('name-modal').classList.remove('show');
-
-  // Revela gabarito em todas as questões
-  let facil=0,medio=0,dificil=0,ft=0,mt=0,dt=0;
-  questions.forEach((q,i) => {
+  var facil=0,medio=0,dificil=0,ft=0,mt=0,dt=0;
+  questions.forEach(function(q,i) {
     if(q.d==='facil') ft++; else if(q.d==='medio') mt++; else dt++;
-    const selected = userAnswers[i];
-    const correct = q.c;
-    const allBtns = document.getElementById('card-'+i).querySelectorAll('.opt-btn');
-    allBtns.forEach(b => b.disabled = true);
-    // Marca correto sempre verde
+    var selected = userAnswers[i];
+    var correct = q.c;
+    var allBtns = document.getElementById('card-'+i).querySelectorAll('.opt-btn');
+    allBtns.forEach(function(b){b.disabled=true;});
     allBtns[correct].classList.remove('selected');
     allBtns[correct].classList.add('correct');
-    const fb = document.getElementById('fb-'+i);
+    var fb = document.getElementById('fb-'+i);
     if (selected === correct) {
       if(q.d==='facil') facil++; else if(q.d==='medio') medio++; else dificil++;
       fb.textContent = '✅ Correto!';
       fb.className = 'feedback show ok';
     } else {
       if (selected !== undefined) allBtns[selected].classList.add('wrong');
-      fb.innerHTML = '❌ Você escolheu <strong>' + String.fromCharCode(65+selected) + '</strong>. A resposta correta é <strong>' + String.fromCharCode(65+correct) + ': ' + q.opts[correct] + '</strong>';
+      fb.innerHTML = '❌ Você escolheu <strong>'+String.fromCharCode(65+selected)+'</strong>. Correto: <strong>'+String.fromCharCode(65+correct)+': '+q.opts[correct]+'</strong>';
       fb.className = 'feedback show err';
     }
   });
-
-  const total = facil+medio+dificil;
-  const pct = Math.round(total/20*100);
-  let emoji='😔',title='Continue estudando!',msg='Revise o gabarito abaixo e tente de novo!';
+  var total = facil+medio+dificil;
+  var pct = Math.round(total/20*100);
+  var emoji='😔',title='Continue estudando!',msg='Revise o gabarito abaixo e tente de novo!';
   if(pct>=90){emoji='🏆';title='Excelente!';msg='Resultado incrível! Você está super preparada para a P2!';}
   else if(pct>=70){emoji='🌟';title='Muito bem!';msg='Ótimo resultado! Veja o gabarito abaixo para revisar os erros.';}
   else if(pct>=50){emoji='📚';title='Bom esforço!';msg='Veja o gabarito abaixo e foque nos pontos que errou!';}
-
   document.getElementById('m-emoji').textContent=emoji;
   document.getElementById('m-title').textContent=title;
   document.getElementById('m-name').textContent='👤 '+name;
@@ -213,22 +198,18 @@ function confirmAndReveal() {
   document.getElementById('m-dificil').textContent=dificil+'/'+dt;
   document.getElementById('m-msg').textContent=msg;
   document.getElementById('result-modal').classList.add('show');
-
-  // Email silencioso
-  const fd=new FormData();
+  var fd=new FormData();
   fd.append('_subject','📊 Resultado – '+SUBJECT+' | '+name);
   fd.append('_template','table');
   fd.append('Aluno(a)',name);
   fd.append('Matéria',SUBJECT);
   fd.append('Data',new Date().toLocaleDateString('pt-BR'));
   fd.append('Pontuação Total',total+'/20 ('+pct+'%)');
-  fd.append('Questões Fáceis (7)',facil+'/'+ft);
-  fd.append('Questões Médias (7)',medio+'/'+mt);
-  fd.append('Questões Difíceis (6)',dificil+'/'+dt);
-  fd.append('Desempenho',pct>=70?'✅ Aprovado(a)':'⚠️ Precisa revisar');
-  fetch('https://formsubmit.co/callegaribi@gmail.com',{method:'POST',body:fd}).catch(()=>{});
+  fd.append('Fáceis (7)',facil+'/'+ft);
+  fd.append('Médias (7)',medio+'/'+mt);
+  fd.append('Difíceis (6)',dificil+'/'+dt);
+  fetch('https://formsubmit.co/callegaribi@gmail.com',{method:'POST',body:fd}).catch(function(){});
 }
-
 buildQuestions();
 </script>
 </body>

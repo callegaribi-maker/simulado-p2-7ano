@@ -24,7 +24,7 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
 .question-card{background:white;border-radius:16px;padding:1.3rem;margin-bottom:1rem;box-shadow:0 2px 12px rgba(0,0,0,.15)}
 .q-header{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.9rem}
 .q-num{background:#b45309;color:white;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;flex-shrink:0;margin-top:2px}
-.q-text{font-weight:600;font-size:.95rem;line-height:1.5;color:#1e293b}
+.q-text{font-weight:500;font-size:.95rem;line-height:1.6;color:#1e293b}
 .diff-badge{display:inline-block;font-size:.7rem;font-weight:700;padding:.15rem .55rem;border-radius:50px;margin-left:.5rem;vertical-align:middle}
 .badge-facil{background:#dcfce7;color:#166534}
 .badge-medio{background:#fef3c7;color:#92400e}
@@ -40,13 +40,11 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
 .feedback.show{display:block}
 .feedback.ok{background:#dcfce7;color:#166534}
 .feedback.err{background:#fff7ed;color:#92400e;border-left:3px solid #f59e0b}
-
 #submit-section{display:none;text-align:center;padding:2rem;background:white;border-radius:20px;margin-top:2rem;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 #submit-section h2{font-size:1.3rem;color:#1e293b;margin-bottom:.5rem}
 #submit-section p{color:#64748b;margin-bottom:1.2rem;font-size:.9rem}
 .submit-btn{background:linear-gradient(135deg,#b45309,#92400e);color:white;border:none;padding:1rem 2.5rem;border-radius:50px;font-size:1.05rem;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.2)}
 .submit-btn:hover{transform:translateY(-2px)}
-
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center;padding:1rem}
 .modal-overlay.show{display:flex}
 .modal{background:white;border-radius:24px;padding:2rem;max-width:440px;width:100%;text-align:center;max-height:90vh;overflow-y:auto}
@@ -92,8 +90,6 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="submit-btn" onclick="openNameModal()">📊 Ver minha nota! 🚀</button>
   </div>
 </div>
-
-<!-- Modal: nome -->
 <div class="modal-overlay" id="name-modal">
   <div class="modal">
     <div class="modal-emoji">✏️</div>
@@ -103,8 +99,6 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="confirm-btn" id="confirm-btn" onclick="confirmAndReveal()" disabled>Ver minha nota! 🚀</button>
   </div>
 </div>
-
-<!-- Modal: resultado -->
 <div class="modal-overlay" id="result-modal">
   <div class="modal">
     <div class="modal-emoji" id="m-emoji"></div>
@@ -120,37 +114,36 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="modal-close" onclick="document.getElementById('result-modal').classList.remove('show')">Ver gabarito detalhado ↓</button>
   </div>
 </div>
-
 <script>
 const SUBJECT = "História";
-const questions = [{"d": "facil", "q": "Quem chegou à América em 1492?", "opts": ["Pedro Álvares Cabral", "Vasco da Gama", "Cristóvão Colombo", "Fernando Magalhães"], "c": 2}, {"d": "facil", "q": "Os europeus vieram à América principalmente em busca de:", "opts": ["Paz e tranquilidade", "Riquezas e novas rotas comerciais", "Conhecimento científico", "Terras frias"], "c": 1}, {"d": "facil", "q": "O Brasil foi colonizado por:", "opts": ["Espanha", "Inglaterra", "França", "Portugal"], "c": 3}, {"d": "facil", "q": "A escravidão dos africanos foi motivada principalmente pela necessidade de:", "opts": ["Acordos diplomáticos", "Mão de obra barata nas colônias", "Guerras na África", "Vontade dos próprios africanos"], "c": 1}, {"d": "facil", "q": "A resistência indígena aos colonizadores incluía:", "opts": ["Aceitação pacífica total", "Fugas e conflitos armados", "Comércio de escravos", "Aliança permanente com a Igreja"], "c": 1}, {"d": "facil", "q": "O trabalho forçado dos escravos africanos era voltado principalmente para:", "opts": ["Construção de igrejas", "Pesca artesanal", "Lavouras como a cana-de-açúcar", "Comércio marítimo"], "c": 2}, {"d": "facil", "q": "Quilombos eram:", "opts": ["Cidades portuguesas no Brasil", "Comunidades formadas por escravos fugidos", "Fortalezas militares europeias", "Aldeias indígenas tradicionais"], "c": 1}, {"d": "medio", "q": "O que foi o \"tráfico negreiro\"?", "opts": ["Comércio de especiarias da Índia", "Tráfico de africanos escravizados para as Américas", "Comércio de ouro entre Portugal e Brasil", "Troca de produtos entre tribos indígenas"], "c": 1}, {"d": "medio", "q": "As missões religiosas na América Colonial tinham como principal objetivo:", "opts": ["Enriquecer os indígenas", "Catequizar e civilizar os povos nativos", "Criar escolas públicas", "Defender os indígenas dos colonizadores"], "c": 1}, {"d": "medio", "q": "A chegada dos europeus trouxe doenças que mataram muitos indígenas porque:", "opts": ["Os indígenas eram fisicamente fracos", "As doenças eram muito recentes", "Os indígenas não tinham imunidade às doenças europeias", "Os europeus eram mais inteligentes"], "c": 2}, {"d": "medio", "q": "Qual civilização indígena foi dominada pelos espanhóis no México?", "opts": ["Inca", "Guarani", "Asteca", "Tupinambá"], "c": 2}, {"d": "medio", "q": "O Quilombo dos Palmares foi liderado por:", "opts": ["Tiradentes", "D. Pedro I", "Zumbi dos Palmares", "Chico Rei"], "c": 2}, {"d": "medio", "q": "A exploração econômica da América Colonial baseou-se no modelo:", "opts": ["Capitalismo industrial", "Feudalismo europeu", "Pacto Colonial (metrópole-colônia)", "Socialismo agrário"], "c": 2}, {"d": "medio", "q": "Por que a cana-de-açúcar foi tão importante para a colonização do Brasil?", "opts": ["Era consumida apenas pelos colonizadores", "Era muito valorizada na Europa e gerava grandes lucros", "Servia para alimentar os escravos", "Era usada em rituais indígenas"], "c": 1}, {"d": "dificil", "q": "A conquista da América pelos europeus é considerada por muitos historiadores como:", "opts": ["Uma troca cultural justa e equilibrada", "Um processo violento de dominação e genocídio", "Uma civilização pacífica dos povos nativos", "Um acordo mútuo entre europeus e indígenas"], "c": 1}, {"d": "dificil", "q": "O conceito de \"terra nullius\" foi usado pelos europeus para:", "opts": ["Proteger os territórios indígenas", "Justificar a tomada de terras dos povos nativos", "Criar reservas indígenas protegidas", "Garantir direitos aos escravos"], "c": 1}, {"d": "dificil", "q": "A resistência africana à escravidão incluía TODAS as formas abaixo, EXCETO:", "opts": ["Formação de quilombos", "Revoltas e insurreições", "Preservação da cultura africana", "Aceitação voluntária das condições de trabalho"], "c": 3}, {"d": "dificil", "q": "Qual foi o principal impacto demográfico da colonização sobre os povos indígenas?", "opts": ["Crescimento populacional acelerado", "Migração voluntária para a Europa", "Redução drástica da população por guerras e doenças", "Integração pacífica com os colonizadores"], "c": 2}, {"d": "dificil", "q": "A diferença entre colonialismo e imperialismo é:", "opts": ["São exatamente a mesma coisa", "Colonialismo = ocupação territorial direta; imperialismo = domínio político/econômico", "Imperialismo ocorreu antes do colonialismo", "Colonialismo é um fenômeno mais recente"], "c": 1}, {"d": "dificil", "q": "O que o Quilombo dos Palmares representou na história do Brasil colonial?", "opts": ["Um acordo entre escravos e senhores", "A maior resistência organizada de escravizados fugidos das Américas", "Uma comunidade indígena aliada aos portugueses", "Um centro comercial de produtos africanos"], "c": 1}];
+const questions = [{"d": "facil", "q": "Em 1492, uma expedição financiada pela Espanha chegou a terras que os europeus desconheciam. O navegador que liderou essa viagem foi:", "opts": ["Pedro Álvares Cabral", "Vasco da Gama", "Cristóvão Colombo", "Fernando Magalhães"], "c": 2}, {"d": "facil", "q": "No século XV, os europeus se arriscavam em longas viagens marítimas principalmente porque queriam:", "opts": ["Conhecer novas culturas por curiosidade", "Encontrar rotas e riquezas para enriquecer suas nações", "Fugir de guerras na Europa", "Espalhar a língua europeia"], "c": 1}, {"d": "facil", "q": "Pedro Álvares Cabral chegou às terras que hoje chamamos de Brasil em 1500. A nação europeia que colonizou o Brasil foi:", "opts": ["Espanha", "Inglaterra", "França", "Portugal"], "c": 3}, {"d": "facil", "q": "Os colonizadores precisavam de muita mão de obra barata para trabalhar nas lavouras de cana-de-açúcar. Por isso, trouxeram africanos escravizados à força. Esse processo foi motivado principalmente pela necessidade de:", "opts": ["Acordos diplomáticos entre África e Europa", "Mão de obra barata e lucrativa nas colônias", "Resolver guerras na África", "Solidariedade com povos africanos"], "c": 1}, {"d": "facil", "q": "Quando os portugueses chegaram ao Brasil, os povos indígenas que já viviam aqui reagiram de formas diversas. Uma das formas de resistência foi:", "opts": ["Aceitar pacificamente todas as ordens dos colonizadores", "Fugir para o interior e lutar contra os colonizadores", "Ajudar voluntariamente na construção das colônias", "Assinar acordos de paz permanentes"], "c": 1}, {"d": "facil", "q": "O principal produto cultivado pelos escravizados africanos nas fazendas do Brasil colonial era:", "opts": ["Trigo e centeio", "Café e cacau", "Cana-de-açúcar", "Soja e milho"], "c": 2}, {"d": "facil", "q": "Escravizados que conseguiam fugir formavam comunidades chamadas:", "opts": ["Aldeias missioneiras", "Quilombos", "Capitanias hereditárias", "Vilas reais"], "c": 1}, {"d": "medio", "q": "Entre os séculos XVI e XIX, milhões de africanos foram capturados, acorrentados e transportados em condições desumanas para trabalhar nas Américas. Esse processo histórico é chamado de:", "opts": ["Cruzadas", "Tráfico negreiro", "Colonização pacífica", "Diáspora voluntária"], "c": 1}, {"d": "medio", "q": "Os jesuítas vieram ao Brasil colonial e criaram missões onde agrupavam indígenas. O objetivo principal dessas missões era:", "opts": ["Proteger legalmente os indígenas dos colonizadores", "Catequizar os indígenas e integrá-los à cultura europeia", "Criar escolas públicas gratuitas", "Ensinar técnicas de agricultura europeia"], "c": 1}, {"d": "medio", "q": "Quando os colonizadores chegaram, as populações indígenas da América foram dizimadas. O principal motivo dessa catástrofe demográfica foi:", "opts": ["A fraqueza física dos povos indígenas", "As doenças europeias, contra as quais os indígenas não tinham imunidade", "A superioridade militar absoluta dos europeus", "A vontade dos indígenas de abandonar suas terras"], "c": 1}, {"d": "medio", "q": "No México, os espanhóis encontraram uma civilização muito desenvolvida, com grandes cidades e sistema de escrita. Qual era essa civilização?", "opts": ["Inca", "Guarani", "Asteca", "Tupinambá"], "c": 2}, {"d": "medio", "q": "Na Serra da Barriga (atual Alagoas), existiu a maior comunidade de escravizados fugidos das Américas, que resistiu por quase cem anos. Seu líder mais famoso foi:", "opts": ["Tiradentes", "D. Pedro I", "Zumbi dos Palmares", "Chico Rei"], "c": 2}, {"d": "medio", "q": "O modelo econômico da colonização determinava que a colônia produzia matéria-prima e enviava para a metrópole, que industrializava e vendia de volta. Esse sistema chama-se:", "opts": ["Capitalismo industrial", "Feudalismo europeu", "Pacto Colonial", "Socialismo agrário"], "c": 2}, {"d": "medio", "q": "O açúcar brasileiro era extremamente valorizado na Europa nos séculos XVI e XVII. Por que isso tornava a cana-de-açúcar tão importante para Portugal?", "opts": ["Porque era consumida apenas pelos colonizadores no Brasil", "Porque gerava enormes lucros para a metrópole portuguesa", "Porque servia para alimentar os escravizados", "Porque era usada em rituais indígenas"], "c": 1}, {"d": "dificil", "q": "Muitos historiadores contemporâneos usam o termo \"genocídio\" para descrever o que aconteceu com os povos indígenas após a chegada dos europeus. Com base no que você estudou, essa interpretação é:", "opts": ["Incorreta, pois foi uma troca cultural pacífica", "Correta, pois houve violência sistemática, doenças e destruição proposital de culturas", "Incorreta, pois os indígenas aceitaram a colonização", "Parcialmente correta, pois só afetou algumas tribos"], "c": 1}, {"d": "dificil", "q": "Os europeus usaram o argumento de que as terras americanas eram \"terras de ninguém\" (terra nullius) para justificar a colonização. Por que esse argumento é considerado falso e injusto?", "opts": ["Porque as terras pertenciam à Igreja Católica", "Porque os povos indígenas já habitavam e organizavam essas terras há milênios", "Porque a ONU proibiu esse tipo de argumento em 1492", "Porque a Europa precisava de terras e isso justifica a tomada"], "c": 1}, {"d": "dificil", "q": "A resistência dos africanos escravizados foi ampla e variada. Qual das alternativas abaixo NÃO foi uma forma de resistência africana?", "opts": ["Formação de quilombos", "Revoltas e insurreições nas fazendas", "Preservação de danças, rituais e línguas africanas", "Aceitar voluntariamente o trabalho escravo"], "c": 3}, {"d": "dificil", "q": "Estima-se que a América tinha entre 50 e 100 milhões de habitantes antes de 1492. Um século depois, esse número havia caído drasticamente. Qual foi o principal fator?", "opts": ["Crescimento populacional acelerado", "Migração voluntária para a Europa", "Epidemias de doenças europeias e violência colonial", "Integração pacífica com os colonizadores"], "c": 2}, {"d": "dificil", "q": "Qual é a diferença entre colonialismo (séculos XV–XIX) e imperialismo (séculos XIX–XX)?", "opts": ["São exatamente a mesma coisa", "Colonialismo = ocupação territorial física; imperialismo = domínio econômico e político sem necessariamente ocupar o território", "Imperialismo ocorreu antes do colonialismo", "Colonialismo é um fenômeno exclusivamente africano"], "c": 1}, {"d": "dificil", "q": "O Quilombo dos Palmares existiu por quase um século no Brasil colonial. O que sua existência prolongada demonstra sobre a escravidão no Brasil?", "opts": ["Que os escravizados aceitavam sua condição pacificamente", "Que havia resistência organizada e persistente dos escravizados", "Que os colonizadores apoiavam a liberdade dos africanos", "Que o quilombo era tolerado pelos senhores de engenho"], "c": 1}];
 let answered = 0;
 let userAnswers = {};
-
 function buildQuestions() {
-  ['facil','medio','dificil'].forEach(diff => {
-    const container = document.getElementById(diff + '-questions');
-    questions.filter(q => q.d === diff).forEach(q => {
-      const i = questions.indexOf(q);
-      const badge = diff==='facil'?'badge-facil':diff==='medio'?'badge-medio':'badge-dificil';
-      const label = diff==='facil'?'Fácil':diff==='medio'?'Média':'Difícil';
-      const opts = q.opts.map((o,j)=>`<button class="opt-btn" id="opt-${i}-${j}" onclick="choose(${i},${j},this)">${String.fromCharCode(65+j)}. ${o}</button>`).join('');
-      container.innerHTML += `<div class="question-card" id="card-${i}">
-        <div class="q-header"><div class="q-num">${i+1}</div><div class="q-text">${q.q} <span class="diff-badge ${badge}">${label}</span></div></div>
-        <div class="options">${opts}</div>
-        <div class="feedback" id="fb-${i}"></div>
-      </div>`;
+  ['facil','medio','dificil'].forEach(function(diff) {
+    var container = document.getElementById(diff + '-questions');
+    questions.filter(function(q){return q.d===diff;}).forEach(function(q) {
+      var i = questions.indexOf(q);
+      var badge = diff==='facil'?'badge-facil':diff==='medio'?'badge-medio':'badge-dificil';
+      var label = diff==='facil'?'Fácil':diff==='medio'?'Média':'Difícil';
+      var opts = q.opts.map(function(o,j){
+        return '<button class="opt-btn" id="opt-'+i+'-'+j+'" onclick="choose('+i+','+j+',this)">'+String.fromCharCode(65+j)+'. '+o+'</button>';
+      }).join('');
+      container.innerHTML += '<div class="question-card" id="card-'+i+'">'
+        +'<div class="q-header"><div class="q-num">'+(i+1)+'</div>'
+        +'<div class="q-text">'+q.q+' <span class="diff-badge '+badge+'">'+label+'</span></div></div>'
+        +'<div class="options">'+opts+'</div>'
+        +'<div class="feedback" id="fb-'+i+'"></div>'
+        +'</div>';
     });
   });
 }
-
 function choose(qi, oi, btn) {
   if (userAnswers[qi] !== undefined) return;
   userAnswers[qi] = oi;
   answered++;
-  // Remove seleção anterior e marca a escolhida (sem revelar certo/errado)
-  const card = document.getElementById('card-' + qi);
-  card.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  var card = document.getElementById('card-' + qi);
+  card.querySelectorAll('.opt-btn').forEach(function(b){b.classList.remove('selected');});
   btn.classList.add('selected');
   document.getElementById('prog-text').textContent = answered + ' / 20 respondidas';
   document.getElementById('prog-bar').style.width = (answered/20*100) + '%';
@@ -159,51 +152,43 @@ function choose(qi, oi, btn) {
     document.getElementById('submit-section').scrollIntoView({behavior:'smooth',block:'center'});
   }
 }
-
 function openNameModal() {
   document.getElementById('name-modal').classList.add('show');
-  setTimeout(()=>document.getElementById('name-input').focus(), 100);
+  setTimeout(function(){document.getElementById('name-input').focus();}, 100);
 }
-
 function checkName() {
   document.getElementById('confirm-btn').disabled = document.getElementById('name-input').value.trim().length < 2;
 }
-
 function confirmAndReveal() {
-  const name = document.getElementById('name-input').value.trim();
+  var name = document.getElementById('name-input').value.trim();
   if (!name) return;
   document.getElementById('name-modal').classList.remove('show');
-
-  // Revela gabarito em todas as questões
-  let facil=0,medio=0,dificil=0,ft=0,mt=0,dt=0;
-  questions.forEach((q,i) => {
+  var facil=0,medio=0,dificil=0,ft=0,mt=0,dt=0;
+  questions.forEach(function(q,i) {
     if(q.d==='facil') ft++; else if(q.d==='medio') mt++; else dt++;
-    const selected = userAnswers[i];
-    const correct = q.c;
-    const allBtns = document.getElementById('card-'+i).querySelectorAll('.opt-btn');
-    allBtns.forEach(b => b.disabled = true);
-    // Marca correto sempre verde
+    var selected = userAnswers[i];
+    var correct = q.c;
+    var allBtns = document.getElementById('card-'+i).querySelectorAll('.opt-btn');
+    allBtns.forEach(function(b){b.disabled=true;});
     allBtns[correct].classList.remove('selected');
     allBtns[correct].classList.add('correct');
-    const fb = document.getElementById('fb-'+i);
+    var fb = document.getElementById('fb-'+i);
     if (selected === correct) {
       if(q.d==='facil') facil++; else if(q.d==='medio') medio++; else dificil++;
       fb.textContent = '✅ Correto!';
       fb.className = 'feedback show ok';
     } else {
       if (selected !== undefined) allBtns[selected].classList.add('wrong');
-      fb.innerHTML = '❌ Você escolheu <strong>' + String.fromCharCode(65+selected) + '</strong>. A resposta correta é <strong>' + String.fromCharCode(65+correct) + ': ' + q.opts[correct] + '</strong>';
+      fb.innerHTML = '❌ Você escolheu <strong>'+String.fromCharCode(65+selected)+'</strong>. Correto: <strong>'+String.fromCharCode(65+correct)+': '+q.opts[correct]+'</strong>';
       fb.className = 'feedback show err';
     }
   });
-
-  const total = facil+medio+dificil;
-  const pct = Math.round(total/20*100);
-  let emoji='😔',title='Continue estudando!',msg='Revise o gabarito abaixo e tente de novo!';
+  var total = facil+medio+dificil;
+  var pct = Math.round(total/20*100);
+  var emoji='😔',title='Continue estudando!',msg='Revise o gabarito abaixo e tente de novo!';
   if(pct>=90){emoji='🏆';title='Excelente!';msg='Resultado incrível! Você está super preparada para a P2!';}
   else if(pct>=70){emoji='🌟';title='Muito bem!';msg='Ótimo resultado! Veja o gabarito abaixo para revisar os erros.';}
   else if(pct>=50){emoji='📚';title='Bom esforço!';msg='Veja o gabarito abaixo e foque nos pontos que errou!';}
-
   document.getElementById('m-emoji').textContent=emoji;
   document.getElementById('m-title').textContent=title;
   document.getElementById('m-name').textContent='👤 '+name;
@@ -213,22 +198,18 @@ function confirmAndReveal() {
   document.getElementById('m-dificil').textContent=dificil+'/'+dt;
   document.getElementById('m-msg').textContent=msg;
   document.getElementById('result-modal').classList.add('show');
-
-  // Email silencioso
-  const fd=new FormData();
+  var fd=new FormData();
   fd.append('_subject','📊 Resultado – '+SUBJECT+' | '+name);
   fd.append('_template','table');
   fd.append('Aluno(a)',name);
   fd.append('Matéria',SUBJECT);
   fd.append('Data',new Date().toLocaleDateString('pt-BR'));
   fd.append('Pontuação Total',total+'/20 ('+pct+'%)');
-  fd.append('Questões Fáceis (7)',facil+'/'+ft);
-  fd.append('Questões Médias (7)',medio+'/'+mt);
-  fd.append('Questões Difíceis (6)',dificil+'/'+dt);
-  fd.append('Desempenho',pct>=70?'✅ Aprovado(a)':'⚠️ Precisa revisar');
-  fetch('https://formsubmit.co/callegaribi@gmail.com',{method:'POST',body:fd}).catch(()=>{});
+  fd.append('Fáceis (7)',facil+'/'+ft);
+  fd.append('Médias (7)',medio+'/'+mt);
+  fd.append('Difíceis (6)',dificil+'/'+dt);
+  fetch('https://formsubmit.co/callegaribi@gmail.com',{method:'POST',body:fd}).catch(function(){});
 }
-
 buildQuestions();
 </script>
 </body>

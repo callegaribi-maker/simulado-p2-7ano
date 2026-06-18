@@ -24,7 +24,7 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
 .question-card{background:white;border-radius:16px;padding:1.3rem;margin-bottom:1rem;box-shadow:0 2px 12px rgba(0,0,0,.15)}
 .q-header{display:flex;align-items:flex-start;gap:.7rem;margin-bottom:.9rem}
 .q-num{background:#0369a1;color:white;border-radius:50%;width:28px;height:28px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.8rem;flex-shrink:0;margin-top:2px}
-.q-text{font-weight:600;font-size:.95rem;line-height:1.5;color:#1e293b}
+.q-text{font-weight:500;font-size:.95rem;line-height:1.6;color:#1e293b}
 .diff-badge{display:inline-block;font-size:.7rem;font-weight:700;padding:.15rem .55rem;border-radius:50px;margin-left:.5rem;vertical-align:middle}
 .badge-facil{background:#dcfce7;color:#166534}
 .badge-medio{background:#fef3c7;color:#92400e}
@@ -40,13 +40,11 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
 .feedback.show{display:block}
 .feedback.ok{background:#dcfce7;color:#166534}
 .feedback.err{background:#fff7ed;color:#92400e;border-left:3px solid #f59e0b}
-
 #submit-section{display:none;text-align:center;padding:2rem;background:white;border-radius:20px;margin-top:2rem;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 #submit-section h2{font-size:1.3rem;color:#1e293b;margin-bottom:.5rem}
 #submit-section p{color:#64748b;margin-bottom:1.2rem;font-size:.9rem}
 .submit-btn{background:linear-gradient(135deg,#0369a1,#0284c7);color:white;border:none;padding:1rem 2.5rem;border-radius:50px;font-size:1.05rem;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.2)}
 .submit-btn:hover{transform:translateY(-2px)}
-
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center;padding:1rem}
 .modal-overlay.show{display:flex}
 .modal{background:white;border-radius:24px;padding:2rem;max-width:440px;width:100%;text-align:center;max-height:90vh;overflow-y:auto}
@@ -92,8 +90,6 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="submit-btn" onclick="openNameModal()">📊 Ver minha nota! 🚀</button>
   </div>
 </div>
-
-<!-- Modal: nome -->
 <div class="modal-overlay" id="name-modal">
   <div class="modal">
     <div class="modal-emoji">✏️</div>
@@ -103,8 +99,6 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="confirm-btn" id="confirm-btn" onclick="confirmAndReveal()" disabled>Ver minha nota! 🚀</button>
   </div>
 </div>
-
-<!-- Modal: resultado -->
 <div class="modal-overlay" id="result-modal">
   <div class="modal">
     <div class="modal-emoji" id="m-emoji"></div>
@@ -120,37 +114,36 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
     <button class="modal-close" onclick="document.getElementById('result-modal').classList.remove('show')">Ver gabarito detalhado ↓</button>
   </div>
 </div>
-
 <script>
 const SUBJECT = "Inglês";
-const questions = [{"d": "facil", "q": "\"She has to study every day\" means:", "opts": ["She wants to study", "She must/is obligated to study", "She can study whenever she wants", "She likes studying"], "c": 1}, {"d": "facil", "q": "Which word expresses obligation (dever/ter que)?", "opts": ["Should", "Can", "Have to", "May"], "c": 2}, {"d": "facil", "q": "\"As tall as\" is used to show:", "opts": ["Difference", "Equality", "Superiority", "Inferiority"], "c": 1}, {"d": "facil", "q": "\"Ankle\" (tornozelo) refers to part of the:", "opts": ["Arm", "Head", "Leg/Foot area", "Hand"], "c": 2}, {"d": "facil", "q": "\"If it rains, I will stay home\" is a:", "opts": ["Zero conditional", "First conditional", "Second conditional", "Third conditional"], "c": 1}, {"d": "facil", "q": "\"She is old enough to drive\" means:", "opts": ["She is too young to drive", "She has the required age to drive", "She cannot drive yet", "She wants to drive soon"], "c": 1}, {"d": "facil", "q": "Which is a household chore (tarefa doméstica)?", "opts": ["Sofa", "Curtain", "Wash the dishes", "Bedroom"], "c": 2}, {"d": "medio", "q": "\"He doesn't have to wear a uniform\" means:", "opts": ["He must not wear a uniform", "He is not obligated to wear a uniform", "He cannot wear a uniform", "He refuses to wear a uniform"], "c": 1}, {"d": "medio", "q": "Complete: \"He is not ___ strong ___ his brother.\"", "opts": ["so / as", "as / as", "more / than", "too / to"], "c": 1}, {"d": "medio", "q": "\"You should rest\" expresses:", "opts": ["Strong obligation", "Permission", "Advice", "Prohibition"], "c": 2}, {"d": "medio", "q": "\"If water reaches 100°C, it boils\" is a:", "opts": ["First conditional", "Zero conditional", "Second conditional", "Imperative"], "c": 1}, {"d": "medio", "q": "\"Must not\" expresses:", "opts": ["Advice", "Ability", "Prohibition", "Suggestion"], "c": 2}, {"d": "medio", "q": "\"She is ___ tired to continue\" — fill in:", "opts": ["enough", "as", "too", "so"], "c": 2}, {"d": "medio", "q": "Furniture (móveis) belongs to which unit topic?", "opts": ["Unit 6 – Hidden Danger", "Unit 5 – Dream Houses", "Unit 4 – Daily Routines", "Unit 7 – Technology"], "c": 1}, {"d": "dificil", "q": "\"If you heat ice, it melts\" uses which conditional and why?", "opts": ["First — future possibility", "Zero — scientific/general truth", "Second — hypothetical situation", "Third — past regret"], "c": 1}, {"d": "dificil", "q": "Difference between \"must not\" and \"don't have to\":", "opts": ["They mean the same thing", "Must not = prohibition; don't have to = no obligation", "Don't have to = prohibition; must not = advice", "Must not = suggestion"], "c": 1}, {"d": "dificil", "q": "\"The room is large enough to fit 20 people\" — where does \"enough\" go?", "opts": ["Before the adjective", "After the adjective", "Before the noun only", "At the start of the sentence"], "c": 1}, {"d": "dificil", "q": "Which sentence is grammatically correct?", "opts": ["She have to goes to school", "She has to going to school", "She has to go to school", "She must to go to school"], "c": 2}, {"d": "dificil", "q": "\"Unless you study, you will fail\" is equivalent to:", "opts": ["If you study, you will fail", "Although you study, you will fail", "If you don't study, you will fail", "Because you study, you will fail"], "c": 2}, {"d": "dificil", "q": "\"You mustn't talk during the exam\" expresses:", "opts": ["Advice", "Lack of obligation", "Strong prohibition", "Permission"], "c": 2}];
+const questions = [{"d": "facil", "q": "Sofia's mother told her: <em>\"You <u>have to</u> finish your homework before watching TV.\"</em> What does \"have to\" express here?", "opts": ["Permission", "Obligation", "Ability", "Advice"], "c": 1}, {"d": "facil", "q": "Look at this sentence from a health poster: <em>\"You <u>should</u> drink at least 2 liters of water daily.\"</em> What does \"should\" express?", "opts": ["Strong obligation", "Advice/recommendation", "Prohibition", "Permission"], "c": 1}, {"d": "facil", "q": "Tom's bedroom is the same size as Ana's bedroom. Which sentence expresses this correctly?", "opts": ["Tom's room is bigger than Ana's", "Tom's room is as large as Ana's", "Tom's room is larger than Ana's", "Tom's room is too large for Ana's"], "c": 1}, {"d": "facil", "q": "João hurt himself while playing football. The doctor asked: <em>\"Where does it hurt?\"</em> He pointed to his leg near his foot. Which body part is just above the foot?", "opts": ["Elbow", "Wrist", "Ankle", "Knee"], "c": 2}, {"d": "facil", "q": "A weather app says: <em>\"<u>If it rains tomorrow</u>, the picnic will be cancelled.\"</em> This sentence is a:", "opts": ["Zero conditional", "First conditional", "Second conditional", "Third conditional"], "c": 1}, {"d": "facil", "q": "Lara is 16 years old. In Brazil, you can drive at 18. Which sentence best describes her situation?", "opts": ["She is old enough to drive", "She is too young to drive", "She is too old to drive", "She is not enough to drive"], "c": 1}, {"d": "facil", "q": "Mrs. Johnson makes a list of chores for her children: <em>wash the dishes, take out the trash, vacuum the floor.</em> These are all examples of:", "opts": ["Furniture", "Household chores", "Body parts", "Hobbies"], "c": 1}, {"d": "medio", "q": "A school notice says: <em>\"Students <u>don't have to</u> wear uniforms on Fridays.\"</em> This means:", "opts": ["Students are forbidden to wear uniforms on Fridays", "Students must not wear uniforms on Fridays", "Wearing a uniform on Fridays is optional", "Students always wear uniforms on Fridays"], "c": 2}, {"d": "medio", "q": "Carlos is 1.60m tall. His brother is also 1.60m. Complete: <em>\"Carlos is <u>___</u> tall <u>___</u> his brother.\"</em>", "opts": ["so / as", "as / as", "more / than", "too / to"], "c": 1}, {"d": "medio", "q": "A science textbook states: <em>\"<u>If you heat water to 100°C, it boils.</u>\"</em> Why is this a zero conditional?", "opts": ["It describes a future possibility", "It expresses a hypothetical situation", "It states a scientific fact that is always true", "It refers to a past event"], "c": 2}, {"d": "medio", "q": "A sign at a library reads: <em>\"You <u>must not</u> make noise in this area.\"</em> The sign expresses:", "opts": ["Advice", "Lack of obligation", "Permission", "Prohibition"], "c": 3}, {"d": "medio", "q": "Mariana is exhausted after running a marathon. She says: <em>\"I am <u>___</u> tired <u>___</u> continue.\"</em> Choose the correct words:", "opts": ["enough / to", "as / as", "too / to", "so / as"], "c": 2}, {"d": "medio", "q": "In Unit 5 — Dream Houses, students learned about rooms and items inside the house. Which of the following is a piece of <em>furniture</em>?", "opts": ["Vacuum cleaner", "Sofa", "Ankle", "Homework"], "c": 1}, {"d": "medio", "q": "Pedro read a safety poster that said: <em>\"You <u>must not</u> run near the pool.\"</em> Which sentence means the same?", "opts": ["You don't have to run near the pool", "You are not allowed to run near the pool", "You should run near the pool", "You are able to run near the pool"], "c": 1}, {"d": "dificil", "q": "Read this conversation:<br><em>Ana: \"What happens if you mix bleach and ammonia?\"<br>Teacher: \"If you mix them, they produce toxic gas.\"</em><br>Which type of conditional is the teacher's sentence and why?", "opts": ["First conditional — it is a future possibility", "Zero conditional — it is a universal scientific fact", "Second conditional — it is hypothetical", "Third conditional — it refers to the past"], "c": 1}, {"d": "dificil", "q": "Compare: <em>(A) \"You <u>must not</u> eat in the lab.\" / (B) \"You <u>don't have to</u> eat in the lab.\"</em><br>What is the difference?", "opts": ["They mean exactly the same thing", "A = prohibition (forbidden); B = no obligation (but allowed if you want)", "A = advice; B = prohibition", "B is stronger than A"], "c": 1}, {"d": "dificil", "q": "Rewrite using <em>enough</em> correctly: <em>\"The box is very big. It can hold 30 books.\"</em>", "opts": ["The box is enough big to hold 30 books", "The box is big enough to hold 30 books", "The box is too big to hold 30 books", "The box has enough to be big for 30 books"], "c": 1}, {"d": "dificil", "q": "Which sentence is grammatically correct?", "opts": ["She have to goes to school every day", "She has to going to school every day", "She has to go to school every day", "She must to go to school every day"], "c": 2}, {"d": "dificil", "q": "Read: <em>\"<u>Unless</u> you study tonight, you will fail tomorrow's test.\"</em> Which sentence means the same?", "opts": ["If you study tonight, you will fail", "Although you study, you will fail", "If you don't study tonight, you will fail", "Because you study, you will fail"], "c": 2}, {"d": "dificil", "q": "A gym rule says: <em>\"You <u>mustn't</u> use your phone during classes.\"</em> A student asks: \"Is it just a suggestion?\" The correct answer is:", "opts": ["Yes, it's just advice — you can choose to follow or not", "No, it expresses a strong prohibition — it is forbidden", "No, it means you are not obligated to use the phone", "Yes, it means it's OK to use if you want"], "c": 1}];
 let answered = 0;
 let userAnswers = {};
-
 function buildQuestions() {
-  ['facil','medio','dificil'].forEach(diff => {
-    const container = document.getElementById(diff + '-questions');
-    questions.filter(q => q.d === diff).forEach(q => {
-      const i = questions.indexOf(q);
-      const badge = diff==='facil'?'badge-facil':diff==='medio'?'badge-medio':'badge-dificil';
-      const label = diff==='facil'?'Fácil':diff==='medio'?'Média':'Difícil';
-      const opts = q.opts.map((o,j)=>`<button class="opt-btn" id="opt-${i}-${j}" onclick="choose(${i},${j},this)">${String.fromCharCode(65+j)}. ${o}</button>`).join('');
-      container.innerHTML += `<div class="question-card" id="card-${i}">
-        <div class="q-header"><div class="q-num">${i+1}</div><div class="q-text">${q.q} <span class="diff-badge ${badge}">${label}</span></div></div>
-        <div class="options">${opts}</div>
-        <div class="feedback" id="fb-${i}"></div>
-      </div>`;
+  ['facil','medio','dificil'].forEach(function(diff) {
+    var container = document.getElementById(diff + '-questions');
+    questions.filter(function(q){return q.d===diff;}).forEach(function(q) {
+      var i = questions.indexOf(q);
+      var badge = diff==='facil'?'badge-facil':diff==='medio'?'badge-medio':'badge-dificil';
+      var label = diff==='facil'?'Fácil':diff==='medio'?'Média':'Difícil';
+      var opts = q.opts.map(function(o,j){
+        return '<button class="opt-btn" id="opt-'+i+'-'+j+'" onclick="choose('+i+','+j+',this)">'+String.fromCharCode(65+j)+'. '+o+'</button>';
+      }).join('');
+      container.innerHTML += '<div class="question-card" id="card-'+i+'">'
+        +'<div class="q-header"><div class="q-num">'+(i+1)+'</div>'
+        +'<div class="q-text">'+q.q+' <span class="diff-badge '+badge+'">'+label+'</span></div></div>'
+        +'<div class="options">'+opts+'</div>'
+        +'<div class="feedback" id="fb-'+i+'"></div>'
+        +'</div>';
     });
   });
 }
-
 function choose(qi, oi, btn) {
   if (userAnswers[qi] !== undefined) return;
   userAnswers[qi] = oi;
   answered++;
-  // Remove seleção anterior e marca a escolhida (sem revelar certo/errado)
-  const card = document.getElementById('card-' + qi);
-  card.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  var card = document.getElementById('card-' + qi);
+  card.querySelectorAll('.opt-btn').forEach(function(b){b.classList.remove('selected');});
   btn.classList.add('selected');
   document.getElementById('prog-text').textContent = answered + ' / 20 respondidas';
   document.getElementById('prog-bar').style.width = (answered/20*100) + '%';
@@ -159,51 +152,43 @@ function choose(qi, oi, btn) {
     document.getElementById('submit-section').scrollIntoView({behavior:'smooth',block:'center'});
   }
 }
-
 function openNameModal() {
   document.getElementById('name-modal').classList.add('show');
-  setTimeout(()=>document.getElementById('name-input').focus(), 100);
+  setTimeout(function(){document.getElementById('name-input').focus();}, 100);
 }
-
 function checkName() {
   document.getElementById('confirm-btn').disabled = document.getElementById('name-input').value.trim().length < 2;
 }
-
 function confirmAndReveal() {
-  const name = document.getElementById('name-input').value.trim();
+  var name = document.getElementById('name-input').value.trim();
   if (!name) return;
   document.getElementById('name-modal').classList.remove('show');
-
-  // Revela gabarito em todas as questões
-  let facil=0,medio=0,dificil=0,ft=0,mt=0,dt=0;
-  questions.forEach((q,i) => {
+  var facil=0,medio=0,dificil=0,ft=0,mt=0,dt=0;
+  questions.forEach(function(q,i) {
     if(q.d==='facil') ft++; else if(q.d==='medio') mt++; else dt++;
-    const selected = userAnswers[i];
-    const correct = q.c;
-    const allBtns = document.getElementById('card-'+i).querySelectorAll('.opt-btn');
-    allBtns.forEach(b => b.disabled = true);
-    // Marca correto sempre verde
+    var selected = userAnswers[i];
+    var correct = q.c;
+    var allBtns = document.getElementById('card-'+i).querySelectorAll('.opt-btn');
+    allBtns.forEach(function(b){b.disabled=true;});
     allBtns[correct].classList.remove('selected');
     allBtns[correct].classList.add('correct');
-    const fb = document.getElementById('fb-'+i);
+    var fb = document.getElementById('fb-'+i);
     if (selected === correct) {
       if(q.d==='facil') facil++; else if(q.d==='medio') medio++; else dificil++;
       fb.textContent = '✅ Correto!';
       fb.className = 'feedback show ok';
     } else {
       if (selected !== undefined) allBtns[selected].classList.add('wrong');
-      fb.innerHTML = '❌ Você escolheu <strong>' + String.fromCharCode(65+selected) + '</strong>. A resposta correta é <strong>' + String.fromCharCode(65+correct) + ': ' + q.opts[correct] + '</strong>';
+      fb.innerHTML = '❌ Você escolheu <strong>'+String.fromCharCode(65+selected)+'</strong>. Correto: <strong>'+String.fromCharCode(65+correct)+': '+q.opts[correct]+'</strong>';
       fb.className = 'feedback show err';
     }
   });
-
-  const total = facil+medio+dificil;
-  const pct = Math.round(total/20*100);
-  let emoji='😔',title='Continue estudando!',msg='Revise o gabarito abaixo e tente de novo!';
+  var total = facil+medio+dificil;
+  var pct = Math.round(total/20*100);
+  var emoji='😔',title='Continue estudando!',msg='Revise o gabarito abaixo e tente de novo!';
   if(pct>=90){emoji='🏆';title='Excelente!';msg='Resultado incrível! Você está super preparada para a P2!';}
   else if(pct>=70){emoji='🌟';title='Muito bem!';msg='Ótimo resultado! Veja o gabarito abaixo para revisar os erros.';}
   else if(pct>=50){emoji='📚';title='Bom esforço!';msg='Veja o gabarito abaixo e foque nos pontos que errou!';}
-
   document.getElementById('m-emoji').textContent=emoji;
   document.getElementById('m-title').textContent=title;
   document.getElementById('m-name').textContent='👤 '+name;
@@ -213,22 +198,18 @@ function confirmAndReveal() {
   document.getElementById('m-dificil').textContent=dificil+'/'+dt;
   document.getElementById('m-msg').textContent=msg;
   document.getElementById('result-modal').classList.add('show');
-
-  // Email silencioso
-  const fd=new FormData();
+  var fd=new FormData();
   fd.append('_subject','📊 Resultado – '+SUBJECT+' | '+name);
   fd.append('_template','table');
   fd.append('Aluno(a)',name);
   fd.append('Matéria',SUBJECT);
   fd.append('Data',new Date().toLocaleDateString('pt-BR'));
   fd.append('Pontuação Total',total+'/20 ('+pct+'%)');
-  fd.append('Questões Fáceis (7)',facil+'/'+ft);
-  fd.append('Questões Médias (7)',medio+'/'+mt);
-  fd.append('Questões Difíceis (6)',dificil+'/'+dt);
-  fd.append('Desempenho',pct>=70?'✅ Aprovado(a)':'⚠️ Precisa revisar');
-  fetch('https://formsubmit.co/callegaribi@gmail.com',{method:'POST',body:fd}).catch(()=>{});
+  fd.append('Fáceis (7)',facil+'/'+ft);
+  fd.append('Médias (7)',medio+'/'+mt);
+  fd.append('Difíceis (6)',dificil+'/'+dt);
+  fetch('https://formsubmit.co/callegaribi@gmail.com',{method:'POST',body:fd}).catch(function(){});
 }
-
 buildQuestions();
 </script>
 </body>
