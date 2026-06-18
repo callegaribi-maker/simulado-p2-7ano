@@ -12,9 +12,9 @@ header h1{font-size:2rem;font-weight:900}
 header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
 .back-link{display:inline-block;margin-top:.8rem;color:rgba(255,255,255,.8);text-decoration:none;font-size:.85rem;border:1px solid rgba(255,255,255,.3);padding:.3rem .9rem;border-radius:50px}
 .progress-wrap{background:#1e293b;padding:1rem 1.5rem;position:sticky;top:0;z-index:100;border-bottom:1px solid #334155}
-.progress-info{display:flex;justify-content:space-between;align-items:center;margin-bottom:.5rem;color:white;font-size:.85rem}
+.progress-info{display:flex;justify-content:space-between;color:white;font-size:.85rem;margin-bottom:.5rem}
 .progress-bar-bg{background:#334155;border-radius:50px;height:8px}
-.progress-bar{background:linear-gradient(90deg,#0369a1,#0284c7);height:8px;border-radius:50px;width:0%;transition:width .4s ease}
+.progress-bar{background:linear-gradient(90deg,#0369a1,#0284c7);height:8px;border-radius:50px;width:0%;transition:width .4s}
 .container{max-width:780px;margin:0 auto;padding:1.5rem 1rem 4rem}
 .section-header{display:flex;align-items:center;gap:.8rem;margin:2rem 0 1rem;padding:.8rem 1.2rem;border-radius:12px;font-weight:800;font-size:1.1rem;color:white}
 .section-facil{background:linear-gradient(135deg,#065f46,#047857)}
@@ -32,37 +32,32 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
 .options{display:flex;flex-direction:column;gap:.5rem}
 .opt-btn{width:100%;text-align:left;padding:.7rem 1rem;border:2px solid #e2e8f0;border-radius:10px;cursor:pointer;font-size:.9rem;background:white;transition:all .2s;color:#1e293b;line-height:1.4}
 .opt-btn:hover:not(:disabled){border-color:#0369a1;background:#f8f7ff}
+.opt-btn.selected{border-color:#0369a1;background:#f5f3ff;font-weight:600}
 .opt-btn.correct{background:#dcfce7;border-color:#16a34a;color:#166534;font-weight:700}
-.opt-btn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.opt-btn.wrong{background:#fee2e2;border-color:#dc2626;color:#991b1b;font-weight:700}
 .opt-btn:disabled{cursor:default}
-.feedback{margin-top:.7rem;font-size:.85rem;font-weight:600;display:none;padding:.5rem .8rem;border-radius:8px}
+.feedback{margin-top:.7rem;font-size:.85rem;font-weight:600;display:none;padding:.6rem .9rem;border-radius:8px;line-height:1.5}
 .feedback.show{display:block}
 .feedback.ok{background:#dcfce7;color:#166534}
-.feedback.err{background:#fee2e2;color:#991b1b}
+.feedback.err{background:#fff7ed;color:#92400e;border-left:3px solid #f59e0b}
+
 #submit-section{display:none;text-align:center;padding:2rem;background:white;border-radius:20px;margin-top:2rem;box-shadow:0 4px 20px rgba(0,0,0,.15)}
 #submit-section h2{font-size:1.3rem;color:#1e293b;margin-bottom:.5rem}
 #submit-section p{color:#64748b;margin-bottom:1.2rem;font-size:.9rem}
 .submit-btn{background:linear-gradient(135deg,#0369a1,#0284c7);color:white;border:none;padding:1rem 2.5rem;border-radius:50px;font-size:1.05rem;font-weight:800;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.2)}
 .submit-btn:hover{transform:translateY(-2px)}
 
-/* Modal nome */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1000;align-items:center;justify-content:center;padding:1rem}
 .modal-overlay.show{display:flex}
-.modal{background:white;border-radius:24px;padding:2rem;max-width:440px;width:100%;text-align:center}
-
-/* Modal nome (pedir nome) */
-.name-modal .modal-emoji{font-size:3rem;margin-bottom:.5rem}
-.name-modal h2{font-size:1.3rem;font-weight:900;margin-bottom:.4rem;color:#1e293b}
-.name-modal p{color:#64748b;font-size:.9rem;margin-bottom:1.2rem}
+.modal{background:white;border-radius:24px;padding:2rem;max-width:440px;width:100%;text-align:center;max-height:90vh;overflow-y:auto}
+.modal-emoji{font-size:3rem;margin-bottom:.5rem}
+.modal h2{font-size:1.3rem;font-weight:900;margin-bottom:.4rem;color:#1e293b}
+.modal p{color:#64748b;font-size:.9rem;margin-bottom:1.2rem}
 .name-input{width:100%;padding:.85rem 1rem;border:2px solid #e2e8f0;border-radius:12px;font-size:1rem;text-align:center;outline:none;transition:border .2s}
 .name-input:focus{border-color:#0369a1}
-.name-confirm-btn{margin-top:1rem;width:100%;background:linear-gradient(135deg,#0369a1,#0284c7);color:white;border:none;padding:1rem;border-radius:50px;font-size:1.05rem;font-weight:800;cursor:pointer}
-.name-confirm-btn:disabled{opacity:.5;cursor:not-allowed}
-
-/* Modal resultado */
-.result-modal .modal-emoji{font-size:3rem;margin-bottom:.5rem}
-.result-modal h2{font-size:1.3rem;font-weight:900;color:#1e293b}
-.result-modal .student-name{font-size:1rem;color:#0369a1;font-weight:700;margin:.3rem 0}
+.confirm-btn{margin-top:1rem;width:100%;background:linear-gradient(135deg,#0369a1,#0284c7);color:white;border:none;padding:1rem;border-radius:50px;font-size:1.05rem;font-weight:800;cursor:pointer}
+.confirm-btn:disabled{opacity:.5;cursor:not-allowed}
+.student-name{font-size:1rem;color:#0369a1;font-weight:700;margin:.3rem 0}
 .score-big{font-size:3rem;font-weight:900;color:#0369a1;margin:.5rem 0}
 .score-details{display:grid;grid-template-columns:repeat(3,1fr);gap:.5rem;margin:1rem 0}
 .score-box{padding:.8rem .5rem;border-radius:12px;font-size:.8rem;font-weight:700}
@@ -71,7 +66,6 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
 .box-medio{background:#fef3c7;color:#92400e}
 .box-dificil{background:#fee2e2;color:#991b1b}
 .modal-msg{font-size:.9rem;color:#64748b;margin:.5rem 0 1rem}
-.email-status{font-size:.85rem;color:#64748b;min-height:20px;margin-bottom:.8rem}
 .modal-close{background:#f1f5f9;border:none;padding:.7rem 2rem;border-radius:50px;cursor:pointer;font-weight:700;color:#475569}
 </style>
 </head>
@@ -93,26 +87,26 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
   <div class="section-header section-dificil">🔴 Questões Difíceis <span class="section-desc">&nbsp;(6 questões)</span></div>
   <div id="dificil-questions"></div>
   <div id="submit-section">
-    <h2>🎉 Parabéns! Você respondeu tudo!</h2>
+    <h2>🎉 Você respondeu tudo!</h2>
     <p>Clique abaixo para ver sua nota!</p>
     <button class="submit-btn" onclick="openNameModal()">📊 Ver minha nota! 🚀</button>
   </div>
 </div>
 
-<!-- Modal: pedir nome -->
+<!-- Modal: nome -->
 <div class="modal-overlay" id="name-modal">
-  <div class="modal name-modal">
+  <div class="modal">
     <div class="modal-emoji">✏️</div>
     <h2>Quase lá!</h2>
-    
+    <p>Digite seu nome para ver sua nota.</p>
     <input class="name-input" id="name-input" type="text" placeholder="Seu nome aqui..." oninput="checkName()" maxlength="50">
-    <button class="name-confirm-btn" id="confirm-btn" onclick="confirmAndShow()" disabled>Ver minha nota! 🚀</button>
+    <button class="confirm-btn" id="confirm-btn" onclick="confirmAndReveal()" disabled>Ver minha nota! 🚀</button>
   </div>
 </div>
 
 <!-- Modal: resultado -->
 <div class="modal-overlay" id="result-modal">
-  <div class="modal result-modal">
+  <div class="modal">
     <div class="modal-emoji" id="m-emoji"></div>
     <h2 id="m-title"></h2>
     <div class="student-name" id="m-name"></div>
@@ -123,8 +117,7 @@ header p{opacity:.85;margin-top:.4rem;font-size:.95rem}
       <div class="score-box box-dificil">🔴 Difíceis<span class="num" id="m-dificil"></span></div>
     </div>
     <p class="modal-msg" id="m-msg"></p>
-    <div class="email-status" id="email-status"></div>
-    <button class="modal-close" onclick="document.getElementById('result-modal').classList.remove('show')">Fechar</button>
+    <button class="modal-close" onclick="document.getElementById('result-modal').classList.remove('show')">Ver gabarito detalhado ↓</button>
   </div>
 </div>
 
@@ -139,10 +132,14 @@ function buildQuestions() {
     const container = document.getElementById(diff + '-questions');
     questions.filter(q => q.d === diff).forEach(q => {
       const i = questions.indexOf(q);
-      const badge = diff === 'facil' ? 'badge-facil' : diff === 'medio' ? 'badge-medio' : 'badge-dificil';
-      const label = diff === 'facil' ? 'Fácil' : diff === 'medio' ? 'Média' : 'Difícil';
-      const opts = q.opts.map((o,j) => `<button class="opt-btn" onclick="choose(${i},${j},this)">${String.fromCharCode(65+j)}. ${o}</button>`).join('');
-      container.innerHTML += `<div class="question-card" id="card-${i}"><div class="q-header"><div class="q-num">${i+1}</div><div class="q-text">${q.q} <span class="diff-badge ${badge}">${label}</span></div></div><div class="options">${opts}</div><div class="feedback" id="fb-${i}"></div></div>`;
+      const badge = diff==='facil'?'badge-facil':diff==='medio'?'badge-medio':'badge-dificil';
+      const label = diff==='facil'?'Fácil':diff==='medio'?'Média':'Difícil';
+      const opts = q.opts.map((o,j)=>`<button class="opt-btn" id="opt-${i}-${j}" onclick="choose(${i},${j},this)">${String.fromCharCode(65+j)}. ${o}</button>`).join('');
+      container.innerHTML += `<div class="question-card" id="card-${i}">
+        <div class="q-header"><div class="q-num">${i+1}</div><div class="q-text">${q.q} <span class="diff-badge ${badge}">${label}</span></div></div>
+        <div class="options">${opts}</div>
+        <div class="feedback" id="fb-${i}"></div>
+      </div>`;
     });
   });
 }
@@ -151,21 +148,10 @@ function choose(qi, oi, btn) {
   if (userAnswers[qi] !== undefined) return;
   userAnswers[qi] = oi;
   answered++;
+  // Remove seleção anterior e marca a escolhida (sem revelar certo/errado)
   const card = document.getElementById('card-' + qi);
-  const allBtns = card.querySelectorAll('.opt-btn');
-  const fb = document.getElementById('fb-' + qi);
-  allBtns.forEach(b => b.disabled = true);
-  const correct = questions[qi].c;
-  if (oi === correct) {
-    btn.classList.add('correct');
-    fb.textContent = '✅ Correto!';
-    fb.className = 'feedback show ok';
-  } else {
-    btn.classList.add('wrong');
-    allBtns[correct].classList.add('correct');
-    fb.textContent = '❌ Errado! Resposta: ' + String.fromCharCode(65+correct) + '. ' + questions[qi].opts[correct];
-    fb.className = 'feedback show err';
-  }
+  card.querySelectorAll('.opt-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
   document.getElementById('prog-text').textContent = answered + ' / 20 respondidas';
   document.getElementById('prog-bar').style.width = (answered/20*100) + '%';
   if (answered === 20) {
@@ -176,61 +162,71 @@ function choose(qi, oi, btn) {
 
 function openNameModal() {
   document.getElementById('name-modal').classList.add('show');
-  document.getElementById('name-input').focus();
+  setTimeout(()=>document.getElementById('name-input').focus(), 100);
 }
 
 function checkName() {
-  const val = document.getElementById('name-input').value.trim();
-  document.getElementById('confirm-btn').disabled = val.length < 2;
+  document.getElementById('confirm-btn').disabled = document.getElementById('name-input').value.trim().length < 2;
 }
 
-function confirmAndShow() {
+function confirmAndReveal() {
   const name = document.getElementById('name-input').value.trim();
   if (!name) return;
   document.getElementById('name-modal').classList.remove('show');
 
+  // Revela gabarito em todas as questões
   let facil=0,medio=0,dificil=0,ft=0,mt=0,dt=0;
   questions.forEach((q,i) => {
     if(q.d==='facil') ft++; else if(q.d==='medio') mt++; else dt++;
-    if(userAnswers[i]===q.c) {
+    const selected = userAnswers[i];
+    const correct = q.c;
+    const allBtns = document.getElementById('card-'+i).querySelectorAll('.opt-btn');
+    allBtns.forEach(b => b.disabled = true);
+    // Marca correto sempre verde
+    allBtns[correct].classList.remove('selected');
+    allBtns[correct].classList.add('correct');
+    const fb = document.getElementById('fb-'+i);
+    if (selected === correct) {
       if(q.d==='facil') facil++; else if(q.d==='medio') medio++; else dificil++;
+      fb.textContent = '✅ Correto!';
+      fb.className = 'feedback show ok';
+    } else {
+      if (selected !== undefined) allBtns[selected].classList.add('wrong');
+      fb.innerHTML = '❌ Você escolheu <strong>' + String.fromCharCode(65+selected) + '</strong>. A resposta correta é <strong>' + String.fromCharCode(65+correct) + ': ' + q.opts[correct] + '</strong>';
+      fb.className = 'feedback show err';
     }
   });
+
   const total = facil+medio+dificil;
   const pct = Math.round(total/20*100);
-
-  let emoji='😔', title='Continue estudando!', msg='Revise o conteúdo e tente de novo. Você consegue!';
+  let emoji='😔',title='Continue estudando!',msg='Revise o gabarito abaixo e tente de novo!';
   if(pct>=90){emoji='🏆';title='Excelente!';msg='Resultado incrível! Você está super preparada para a P2!';}
-  else if(pct>=70){emoji='🌟';title='Muito bem!';msg='Ótimo resultado! Revise os erros e arrase na prova!';}
-  else if(pct>=50){emoji='📚';title='Bom esforço!';msg='Resultado razoável. Foque nas questões que errou!';}
+  else if(pct>=70){emoji='🌟';title='Muito bem!';msg='Ótimo resultado! Veja o gabarito abaixo para revisar os erros.';}
+  else if(pct>=50){emoji='📚';title='Bom esforço!';msg='Veja o gabarito abaixo e foque nos pontos que errou!';}
 
-  document.getElementById('m-emoji').textContent = emoji;
-  document.getElementById('m-title').textContent = title;
-  document.getElementById('m-name').textContent = '👤 ' + name;
-  document.getElementById('m-score').textContent = total+'/20 ('+pct+'%)';
-  document.getElementById('m-facil').textContent = facil+'/'+ft;
-  document.getElementById('m-medio').textContent = medio+'/'+mt;
-  document.getElementById('m-dificil').textContent = dificil+'/'+dt;
-  document.getElementById('m-msg').textContent = msg;
+  document.getElementById('m-emoji').textContent=emoji;
+  document.getElementById('m-title').textContent=title;
+  document.getElementById('m-name').textContent='👤 '+name;
+  document.getElementById('m-score').textContent=total+'/20 ('+pct+'%)';
+  document.getElementById('m-facil').textContent=facil+'/'+ft;
+  document.getElementById('m-medio').textContent=medio+'/'+mt;
+  document.getElementById('m-dificil').textContent=dificil+'/'+dt;
+  document.getElementById('m-msg').textContent=msg;
   document.getElementById('result-modal').classList.add('show');
 
-  
-  const statusEl = document.getElementById('email-status');
-  statusEl.textContent = '';
-  const fd = new FormData();
-  fd.append('_subject', '📊 Resultado Simulado – '+SUBJECT+' | '+name);
-  fd.append('_template', 'table');
-  fd.append('Aluno(a)', name);
-  fd.append('Matéria', SUBJECT);
-  fd.append('Data', new Date().toLocaleDateString('pt-BR'));
-  fd.append('Pontuação Total', total+'/20 ('+pct+'%)');
-  fd.append('Questões Fáceis (7)', facil+'/'+ft);
-  fd.append('Questões Médias (7)', medio+'/'+mt);
-  fd.append('Questões Difíceis (6)', dificil+'/'+dt);
-  fd.append('Desempenho', pct>=70?'✅ Aprovado(a)':'⚠️ Precisa revisar');
-  fetch('https://formsubmit.co/callegaribi@gmail.com',{method:'POST',body:fd})
-    .then(r=>{statusEl.textContent = "";'})
-    .catch(()=>{statusEl.textContent='';});
+  // Email silencioso
+  const fd=new FormData();
+  fd.append('_subject','📊 Resultado – '+SUBJECT+' | '+name);
+  fd.append('_template','table');
+  fd.append('Aluno(a)',name);
+  fd.append('Matéria',SUBJECT);
+  fd.append('Data',new Date().toLocaleDateString('pt-BR'));
+  fd.append('Pontuação Total',total+'/20 ('+pct+'%)');
+  fd.append('Questões Fáceis (7)',facil+'/'+ft);
+  fd.append('Questões Médias (7)',medio+'/'+mt);
+  fd.append('Questões Difíceis (6)',dificil+'/'+dt);
+  fd.append('Desempenho',pct>=70?'✅ Aprovado(a)':'⚠️ Precisa revisar');
+  fetch('https://formsubmit.co/callegaribi@gmail.com',{method:'POST',body:fd}).catch(()=>{});
 }
 
 buildQuestions();
